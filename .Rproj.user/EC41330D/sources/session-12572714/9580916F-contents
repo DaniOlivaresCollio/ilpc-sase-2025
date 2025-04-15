@@ -115,11 +115,9 @@ frq(data$b19)
 # Sindicatos en empresas
 data <- data %>%
   mutate(sindicato=case_when(
-    sit_empleo=='Empleador(a)' | sit_empleo=='Autoempleado(a)' ~ NA,
-    sit_empleo=='Empleado(a)' & b19==1 ~ 1,
-    sit_empleo=='Empleado(a)' & b19==2 ~ 0,
-    sit_empleo=='Empleado(a)' & b19==-888 ~ 0,
-    sit_empleo=='Empleado(a)' & b19==-999 ~ 0
+    sit_empleo %in% c("Empleador(a)", "Autoempleado(a)") ~ NA_real_,
+    sit_empleo == 'Empleado(a)' & b19 == 1 ~ 1,
+    sit_empleo == 'Empleado(a)' & b19 %in% c(2, -888, -999) ~ 0
     ))
 
 frq(data$sindicato)
@@ -132,17 +130,11 @@ frq(data$b21)
 
 # Afiliación sindical
 data <- data %>%
-  mutate(af_sindical = if_else(b21==1|b21==2,1,0))
-
-data <- data %>%
   mutate(af_sindical=case_when(
-    sit_empleo=='Empleador(a)' | sit_empleo=='Autoempleado(a)' ~ NA,
-    sit_empleo=='Empleado(a)' & b21==1 ~ 1,
-    sit_empleo=='Empleado(a)' & b21==2 ~ 1,
-    sit_empleo=='Empleado(a)' & b21==3 ~ 0,
-    sit_empleo=='Empleado(a)' & b21==-888 ~ 0,
-    sit_empleo=='Empleado(a)' & b21==-999 ~ 0,
-    sindicato==0 ~ 0
+    sit_empleo %in% c("Empleador(a)", "Autoempleado(a)") ~ NA_real_,
+    sit_empleo == 'Empleado(a)' & b21 %in% c(1, 2) ~ 1,
+    sit_empleo == 'Empleado(a)' & b21 %in% c(3, -888, -999) ~ 0,
+    sindicato == 0 ~ 0
     ))
 
 frq(data$af_sindical)
@@ -150,30 +142,62 @@ frq(data$af_sindical)
 
 ## V. Dependientes
 
-### participacion
+### part_firma
 
 ```{r}
+frq(data$c04_01)
+
 # Frecuencia participación: Firmar carta o petición
 data <- data %>%
-  mutate(part_firma=if_else(c04_01==1,0,1))
+  mutate(part_firma=case_when(
+    c04_01 %in% c(2, 3, 4, 5) ~ 1,
+    c04_01 %in% c(1, -888, -999) ~ 0
+    ))
 
 frq(data$part_firma)
+```
+
+### part_manifest
+
+```{r}
+frq(data$c04_02)
 
 # Frecuencia participación: Asistir a manifestaciones
 data <- data %>%
-  mutate(part_manifest=if_else(c04_02==1,0,1))
+  mutate(part_manifest=case_when(
+    c04_02 %in% c(2, 3, 4, 5) ~ 1,
+    c04_02 %in% c(1, -888, -999) ~ 0
+    ))
 
 frq(data$part_manifest)
+```
+
+### part_huelga
+
+```{r}
+frq(data$c04_03)
 
 # Frecuencia participación: Participar en huelgas
 data <- data %>%
-  mutate(part_huelga=if_else(c04_03==1,0,1))
+  mutate(part_huelga=case_when(
+    c04_03 %in% c(2, 3, 4, 5) ~ 1,
+    c04_03 %in% c(1, -888, -999) ~ 0
+    ))
 
 frq(data$part_huelga)
+```
+
+### part_opinion
+
+```{r}
+frq(data$c04_04)
 
 # Frecuencia participación: Opinar por rrss
 data <- data %>%
-  mutate(part_opinion=if_else(c04_04==1,0,1))
+  mutate(part_opinion=case_when(
+    c04_04 %in% c(2, 3, 4, 5) ~ 1,
+    c04_04 %in% c(1, -888, -999) ~ 0
+    ))
 
 frq(data$part_opinion)
 ```
@@ -181,20 +205,28 @@ frq(data$part_opinion)
 ### pol_habla
 
 ```{r,warning=FALSE,message=FALSE}
-data <- data %>%
-  mutate(pol_habla=if_else(c10_01==1,0,1))
-
 frq(data$c10_01)
+
+data <- data %>%
+  mutate(pol_habla=case_when(
+    c10_01 %in% c(2, 3, 4, 5) ~ 1,
+    c10_01 %in% c(1, -888, -999) ~ 0
+    ))
+
 frq(data$pol_habla)
 ```
 
 ### pol_convence
 
 ```{r,warning=FALSE,message=FALSE}
-data <- data %>%
-  mutate(pol_convence=if_else(c10_02==1,0,1))
-
 frq(data$c10_02)
+
+data <- data %>%
+  mutate(pol_convence=case_when(
+    c10_02 %in% c(2, 3, 4, 5) ~ 1,
+    c10_02 %in% c(1, -888, -999) ~ 0
+    ))
+
 frq(data$pol_convence)
 ```
 

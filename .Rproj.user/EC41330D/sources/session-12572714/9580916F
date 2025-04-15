@@ -3,7 +3,7 @@
     "path": "C:/Users/danie/Documents/fondecyt/ilpc-2025/my-book/01-procesamiento.qmd",
     "project_path": "my-book/01-procesamiento.qmd",
     "type": "quarto_markdown",
-    "hash": "2565031559",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1744715732070.0,
@@ -12,16 +12,16 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "209,17",
-        "scrollLine": "199",
+        "cursorPosition": "264,29",
+        "scrollLine": "250",
         "docOutlineVisible": "1"
     },
     "folds": "",
-    "lastKnownWriteTime": 1744757329,
+    "lastKnownWriteTime": 1744760370,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1744757329601,
+    "last_content_update": 1744760865921,
     "read_only": false,
     "read_only_alternatives": []
 }
