@@ -172,7 +172,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#v.-mediadoras" id="toc-v.-mediadoras" class="nav-link" data-scroll-target="#v.-mediadoras"><span class="header-section-number">1.5</span> V. Mediadoras</a>
   <ul class="collapse">
   <li><a href="#autonomia_control" id="toc-autonomia_control" class="nav-link" data-scroll-target="#autonomia_control"><span class="header-section-number">1.5.1</span> autonomia_control</a></li>
-  <li><a href="#part_trabajo-b11" id="toc-part_trabajo-b11" class="nav-link" data-scroll-target="#part_trabajo-b11"><span class="header-section-number">1.5.2</span> part_trabajo = b11</a></li>
+  <li><a href="#part_trabajo" id="toc-part_trabajo" class="nav-link" data-scroll-target="#part_trabajo"><span class="header-section-number">1.5.2</span> part_trabajo</a></li>
   <li><a href="#influye_trabajo" id="toc-influye_trabajo" class="nav-link" data-scroll-target="#influye_trabajo"><span class="header-section-number">1.5.3</span> influye_trabajo</a></li>
   </ul></li>
   <li><a href="#v.-control" id="toc-v.-control" class="nav-link" data-scroll-target="#v.-control"><span class="header-section-number">1.6</span> V. Control</a>
@@ -579,18 +579,21 @@ Value |   N | Raw % | Valid % | Cum. %
 </div>
 </div>
 </section>
-<section id="part_trabajo-b11" class="level3" data-number="1.5.2">
-<h3 data-number="1.5.2" class="anchored" data-anchor-id="part_trabajo-b11"><span class="header-section-number">1.5.2</span> part_trabajo = b11</h3>
+<section id="part_trabajo" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="part_trabajo"><span class="header-section-number">1.5.2</span> part_trabajo</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>b11)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_trabajo=</span><span class="fu">if_else</span>(b11<span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_trabajo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
-# total N=3048 valid N=1809 mean=1.54 sd=0.50
+# total N=3048 valid N=1809 mean=0.46 sd=0.50
 
 Value |    N | Raw % | Valid % | Cum. %
 ---------------------------------------
-    1 |  841 | 27.59 |   46.49 |  46.49
-    2 |  968 | 31.76 |   53.51 | 100.00
+    0 |  968 | 31.76 |   53.51 |  53.51
+    1 |  841 | 27.59 |   46.49 | 100.00
  &lt;NA&gt; | 1239 | 40.65 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
 </div>
