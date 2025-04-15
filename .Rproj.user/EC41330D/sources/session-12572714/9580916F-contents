@@ -200,8 +200,9 @@ frq(data$pol_convence)
 
 ### pol_id
 
-```{r,warning=FALSE,message=FALSE}
-# Recodficar
+```{r}
+frq(data$c08)
+
 data$pol_id <- car::recode(data$c08,
                            recodes=c("c(11,12,-888,-999)='No se identifica';
                                       c(0,1,2,3,4)='Izquierda';
@@ -350,5 +351,6 @@ frq(data$tamanio_local)
 
 ```{r}
 save(data,file="../output/datos-ilpc.Rdata")
+saveRDS(data,file="../output/datos-ilpc.rds")
 ```
 
