@@ -66,8 +66,8 @@ data <- data %>%
          e05,
          a25,
          a26,
-         a27) %>% 
-  sjlabelled::set_na(.,na=c(-999,-888,-777))
+         a27)# %>% 
+  #sjlabelled::set_na(.,na=c(-999,-888,-777))
 ```
 
 ## V. Independientes
@@ -110,9 +110,17 @@ frq(data$sit_empleo)
 ### sindicato
 
 ```{r,warning=FALSE,message=FALSE}
+frq(data$b19)
+
 # Sindicatos en empresas
 data <- data %>%
-  mutate(sindicato=if_else(b19==1,1,0))
+  mutate(sindicato=case_when(
+    sit_empleo=='Empleador(a)' | sit_empleo=='Autoempleado(a)' ~ NA,
+    sit_empleo=='Empleado(a)' & b19==1~1,
+    sit_empleo=='Empleado(a)' & b19==2~0,
+    sit_empleo=='Empleado(a)' & b19==-888 ~0,
+    sit_empleo=='Empleado(a)' & b19==-999 ~0
+    ))
 
 frq(data$sindicato)
 ```
