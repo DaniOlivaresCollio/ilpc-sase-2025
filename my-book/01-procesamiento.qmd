@@ -116,10 +116,10 @@ frq(data$b19)
 data <- data %>%
   mutate(sindicato=case_when(
     sit_empleo=='Empleador(a)' | sit_empleo=='Autoempleado(a)' ~ NA,
-    sit_empleo=='Empleado(a)' & b19==1~1,
-    sit_empleo=='Empleado(a)' & b19==2~0,
-    sit_empleo=='Empleado(a)' & b19==-888 ~0,
-    sit_empleo=='Empleado(a)' & b19==-999 ~0
+    sit_empleo=='Empleado(a)' & b19==1 ~ 1,
+    sit_empleo=='Empleado(a)' & b19==2 ~ 0,
+    sit_empleo=='Empleado(a)' & b19==-888 ~ 0,
+    sit_empleo=='Empleado(a)' & b19==-999 ~ 0
     ))
 
 frq(data$sindicato)
@@ -128,9 +128,22 @@ frq(data$sindicato)
 ### af_sindical
 
 ```{r,warning=FALSE,message=FALSE}
+frq(data$b21)
+
 # Afiliación sindical
 data <- data %>%
   mutate(af_sindical = if_else(b21==1|b21==2,1,0))
+
+data <- data %>%
+  mutate(af_sindical=case_when(
+    sit_empleo=='Empleador(a)' | sit_empleo=='Autoempleado(a)' ~ NA,
+    sit_empleo=='Empleado(a)' & b21==1 ~ 1,
+    sit_empleo=='Empleado(a)' & b21==2 ~ 1,
+    sit_empleo=='Empleado(a)' & b21==3 ~ 0,
+    sit_empleo=='Empleado(a)' & b21==-888 ~ 0,
+    sit_empleo=='Empleado(a)' & b21==-999 ~ 0,
+    sindicato==0 ~ 0
+    ))
 
 frq(data$af_sindical)
 ```

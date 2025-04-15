@@ -1,0 +1,32 @@
+"0","frq(data$b19)"
+"1","[31mx[39m[34m <numeric>[39m 
+[34m# total N=3048 valid N=2105 mean=-107.89 sd=295.65[39m
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+ -999 |   35 |  1.15 |    1.66 |   1.66
+ -888 |  220 |  7.22 |   10.45 |  12.11
+    1 |  479 | 15.72 |   22.76 |  34.87
+    2 | 1371 | 44.98 |   65.13 | 100.00
+ <NA> |  943 | 30.94 |    <NA> |   <NA>
+"
+"0","# Sindicatos en empresas"
+"0","data <- data %>%"
+"0","  mutate(sindicato=case_when("
+"0","    sit_empleo=='Empleador(a)' | sit_empleo=='Autoempleado(a)' ~ NA,"
+"0","    sit_empleo=='Empleado(a)' & b19==1 ~ 1,"
+"0","    sit_empleo=='Empleado(a)' & b19==2~0,"
+"0","    sit_empleo=='Empleado(a)' & b19==-888 ~ 0,"
+"0","    sit_empleo=='Empleado(a)' & b19==-999 ~ 0"
+"0","    ))"
+"0",""
+"0","frq(data$sindicato)"
+"1","[31mx[39m[34m <numeric>[39m 
+[34m# total N=3048 valid N=2105 mean=0.23 sd=0.42[39m
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+    0 | 1626 | 53.35 |   77.24 |  77.24
+    1 |  479 | 15.72 |   22.76 | 100.00
+ <NA> |  943 | 30.94 |    <NA> |   <NA>
+"
