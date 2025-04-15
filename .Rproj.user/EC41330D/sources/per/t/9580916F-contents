@@ -238,12 +238,39 @@ frq(data$influye_trabajo)
 
 ## V. Control
 
+### sexo
+
+```{r,warning=FALSE,message=FALSE}
+frq(data$sexo)
+```
+
+### edad
+
+```{r,warning=FALSE,message=FALSE}
+descr(data$edad)
+```
+
+### nedu
+
+```{r}
+data$nedu <- car::recode(data$e05,
+                         recodes=c("c(1,2,3)='Básica completa';
+                                    c(4,5)='Media completa';
+                                    c(6,7,8)='Universitaria incompleta';
+                                    c(9,10)='Universitaria completa'"),
+                           as.factor=TRUE, 
+                           levels=c('Básica completa', 
+                                    'Media completa',
+                                    'Universitaria incompleta',
+                                    'Universitaria completa'))
+
+frq(data$nedu)
+sum(is.na(data$e05))
+```
+
 ### rama
 
 ```{r,warning=FALSE,message=FALSE}
-sum(is.na(data$a25))  # 65 casos
-table(data$a25)
-
 data$rama <- data$a25
 
 data <- mutate(data,
@@ -260,5 +287,47 @@ data <- mutate(data,
 
 # Tabla de frecuencias y porcentajes
 frq(data$rama)
+```
+
+### tamanio_empresa
+
+```{r}
+frq(data$a26)
+data$tamanio_empresa <- car::recode(data$a26,
+                                    recodes=c("c(1,2,3)='1-9';
+                                               c(4,5)='10-49';
+                                               c(6,7)='50-199';
+                                               c(8,9)='200 o más'"),
+                                    as.factor = TRUE,
+                                    levels=c('1-9',
+                                             '10-49',
+                                             '50-199',
+                                             '200 o más'))
+
+frq(data$tamanio_empresa)
+```
+
+### tamanio_local
+
+```{r}
+frq(data$a27)
+data$tamanio_local <- car::recode(data$a27,
+                                  recodes=c("c(1,2,3)='1-9';
+                                             c(4,5)='10-49';
+                                             c(6,7)='50-199';
+                                             c(8,9)='200 o más'"),
+                                  as.factor = TRUE,
+                                  levels=c('1-9',
+                                           '10-49',
+                                           '50-199',
+                                           '200 o más'))
+
+frq(data$tamanio_local)
+```
+
+## Guardar datos
+
+```{r}
+save(data,file="../output/datos-ilpc.Rdata")
 ```
 

@@ -1,0 +1,13 @@
+"0","data <- data %>%"
+"0","  mutate(part_trabajo=if_else(b11==1,1,0))"
+"0",""
+"0","frq(data$part_trabajo)"
+"1","[31mx[39m[34m <numeric>[39m 
+[34m# total N=3048 valid N=1809 mean=0.46 sd=0.50[39m
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+    0 |  968 | 31.76 |   53.51 |  53.51
+    1 |  841 | 27.59 |   46.49 | 100.00
+ <NA> | 1239 | 40.65 |    <NA> |   <NA>
+"

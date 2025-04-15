@@ -1,0 +1,28 @@
+"0","data$nedu <- car::recode(data$e05,"
+"0","                         recodes=c(""c(1,2,3)='Básica completa';"
+"0","                                    c(4,5)='Media completa';"
+"0","                                    c(6,7,8)='Universitaria incompleta';"
+"0","                                    c(9,10)='Universitaria completa'""),"
+"0","                           as.factor=TRUE, "
+"0","                           levels=c('Básica completa', "
+"0","                                    'Media completa',"
+"0","                                    'Universitaria incompleta',"
+"0","                                    'Universitaria completa'))"
+"0",""
+"0","frq(data$nedu)"
+"1","[31mx[39m[34m <categorical>[39m 
+[34m# total N=3048 valid N=3021 mean=2.56 sd=0.93[39m
+
+Value                    |    N | Raw % | Valid % | Cum. %
+----------------------------------------------------------
+Básica completa          |  338 | 11.09 |   11.19 |  11.19
+Media completa           | 1263 | 41.44 |   41.81 |  53.00
+Universitaria incompleta |  823 | 27.00 |   27.24 |  80.24
+Universitaria completa   |  597 | 19.59 |   19.76 | 100.00
+<NA>                     |   27 |  0.89 |    <NA> |   <NA>
+"
+"0","sum(is.na(data$e05))"
+"1","[1]"
+"1"," 27"
+"1","
+"

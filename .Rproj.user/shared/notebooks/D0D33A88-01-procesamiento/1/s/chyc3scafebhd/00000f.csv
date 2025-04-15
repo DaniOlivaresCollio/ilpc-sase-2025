@@ -1,0 +1,14 @@
+"0","# Afiliación sindical"
+"0","data <- data %>%"
+"0","  mutate(af_sindical = if_else(b21==1|b21==2,1,0))"
+"0",""
+"0","frq(data$af_sindical)"
+"1","[31mx[39m[34m <numeric>[39m 
+[34m# total N=3048 valid N=467 mean=0.73 sd=0.45[39m
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+    0 |  128 |  4.20 |   27.41 |  27.41
+    1 |  339 | 11.12 |   72.59 | 100.00
+ <NA> | 2581 | 84.68 |    <NA> |   <NA>
+"

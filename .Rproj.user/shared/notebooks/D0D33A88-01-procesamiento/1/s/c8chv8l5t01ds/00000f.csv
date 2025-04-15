@@ -1,0 +1,24 @@
+"0","# Recodficar"
+"0","data$pol_id <- car::recode(data$c08,"
+"0","                           recodes=c(""c(11,12,-888,-999)='No se identifica';"
+"0","                                      c(0,1,2,3,4)='Izquierda';"
+"0","                                      c(5)='Centro';"
+"0","                                      c(6,7,8,9,10)='Derecha'""),"
+"0","                           as.factor=TRUE, "
+"0","                           levels=c('Izquierda', "
+"0","                                    'Centro',"
+"0","                                    'Derecha',"
+"0","                                    'No se identifica'))"
+"0",""
+"0","frq(data$pol_id)"
+"1","[31mx[39m[34m <categorical>[39m 
+[34m# total N=3048 valid N=2931 mean=2.57 sd=1.08[39m
+
+Value            |   N | Raw % | Valid % | Cum. %
+-------------------------------------------------
+Izquierda        | 595 | 19.52 |   20.30 |  20.30
+Centro           | 830 | 27.23 |   28.32 |  48.62
+Derecha          | 747 | 24.51 |   25.49 |  74.10
+No se identifica | 759 | 24.90 |   25.90 | 100.00
+<NA>             | 117 |  3.84 |    <NA> |   <NA>
+"
