@@ -254,14 +254,17 @@ frq(data$pol_id)
 ### autonomia_control
 
 ```{r,warning=FALSE,message=FALSE}
-colSums(is.na(data))
+frq(data$b06_01)
+frq(data$b06_02)
+frq(data$b06_03)
+frq(data$b06_04)
+frq(data$b06_05)
 
 data <- data %>% 
   rowwise() %>%
   mutate(autonomia_control = mean(c(b06_01, b06_02, b06_03, b06_04, b06_05))) %>% 
   ungroup()
 
-frq(data$autonomia_control)
 descr(data$autonomia_control)
 ```
 
