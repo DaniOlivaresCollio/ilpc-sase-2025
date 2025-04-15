@@ -331,10 +331,10 @@ Value |    N | Raw % | Valid % | Cum. %
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sindicato=</span><span class="fu">case_when</span>(</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleador(a)'</span> <span class="sc">|</span> sit_empleo<span class="sc">==</span><span class="st">'Autoempleado(a)'</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b19<span class="sc">==</span><span class="dv">1</span><span class="sc">~</span><span class="dv">1</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b19<span class="sc">==</span><span class="dv">2</span><span class="sc">~</span><span class="dv">0</span>,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b19<span class="sc">==-</span><span class="dv">888</span> <span class="sc">~</span><span class="dv">0</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b19<span class="sc">==-</span><span class="dv">999</span> <span class="sc">~</span><span class="dv">0</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b19<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b19<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b19<span class="sc">==-</span><span class="dv">888</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b19<span class="sc">==-</span><span class="dv">999</span> <span class="sc">~</span> <span class="dv">0</span></span>
 <span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    ))</span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>sindicato)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -353,20 +353,45 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="af_sindical" class="level3" data-number="1.3.3">
 <h3 data-number="1.3.3" class="anchored" data-anchor-id="af_sindical"><span class="header-section-number">1.3.3</span> af_sindical</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Afiliación sindical</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">af_sindical =</span> <span class="fu">if_else</span>(b21<span class="sc">==</span><span class="dv">1</span><span class="sc">|</span>b21<span class="sc">==</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>af_sindical)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>b21)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
-# total N=3048 valid N=479 mean=0.71 sd=0.46
+# total N=3048 valid N=479 mean=-20.82 sd=140.72
 
 Value |    N | Raw % | Valid % | Cum. %
 ---------------------------------------
-    0 |  140 |  4.59 |   29.23 |  29.23
-    1 |  339 | 11.12 |   70.77 | 100.00
+ -999 |    1 |  0.03 |    0.21 |   0.21
+ -888 |   11 |  0.36 |    2.30 |   2.51
+    1 |  270 |  8.86 |   56.37 |  58.87
+    2 |   69 |  2.26 |   14.41 |  73.28
+    3 |  128 |  4.20 |   26.72 | 100.00
  &lt;NA&gt; | 2569 | 84.28 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Afiliación sindical</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">af_sindical =</span> <span class="fu">if_else</span>(b21<span class="sc">==</span><span class="dv">1</span><span class="sc">|</span>b21<span class="sc">==</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">af_sindical=</span><span class="fu">case_when</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleador(a)'</span> <span class="sc">|</span> sit_empleo<span class="sc">==</span><span class="st">'Autoempleado(a)'</span> <span class="sc">~</span> <span class="cn">NA</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b21<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b21<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b21<span class="sc">==</span><span class="dv">3</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b21<span class="sc">==-</span><span class="dv">888</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    sit_empleo<span class="sc">==</span><span class="st">'Empleado(a)'</span> <span class="sc">&amp;</span> b21<span class="sc">==-</span><span class="dv">999</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    sindicato<span class="sc">==</span><span class="dv">0</span> <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>af_sindical)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x &lt;numeric&gt; 
+# total N=3048 valid N=2105 mean=0.16 sd=0.37
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+    0 | 1766 | 57.94 |   83.90 |  83.90
+    1 |  339 | 11.12 |   16.10 | 100.00
+ &lt;NA&gt; |  943 | 30.94 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -376,11 +401,11 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="participacion" class="level3" data-number="1.4.1">
 <h3 data-number="1.4.1" class="anchored" data-anchor-id="participacion"><span class="header-section-number">1.4.1</span> participacion</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencia participación: Firmar carta o petición</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_firma=</span><span class="fu">if_else</span>(c04_01<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_firma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencia participación: Firmar carta o petición</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_firma=</span><span class="fu">if_else</span>(c04_01<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_firma)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=0.37 sd=0.48
@@ -391,11 +416,11 @@ Value |    N | Raw % | Valid % | Cum. %
     1 | 1124 | 36.88 |   36.88 | 100.00
  &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencia participación: Asistir a manifestaciones</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_manifest=</span><span class="fu">if_else</span>(c04_02<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_manifest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencia participación: Asistir a manifestaciones</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_manifest=</span><span class="fu">if_else</span>(c04_02<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_manifest)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=0.37 sd=0.48
@@ -406,11 +431,11 @@ Value |    N | Raw % | Valid % | Cum. %
     1 | 1131 | 37.11 |   37.11 | 100.00
  &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencia participación: Participar en huelgas</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_huelga=</span><span class="fu">if_else</span>(c04_03<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_huelga)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencia participación: Participar en huelgas</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_huelga=</span><span class="fu">if_else</span>(c04_03<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_huelga)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=0.28 sd=0.45
@@ -421,11 +446,11 @@ Value |    N | Raw % | Valid % | Cum. %
     1 |  840 | 27.56 |   27.56 | 100.00
  &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencia participación: Opinar por rrss</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_opinion=</span><span class="fu">if_else</span>(c04_04<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_opinion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frecuencia participación: Opinar por rrss</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_opinion=</span><span class="fu">if_else</span>(c04_04<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_opinion)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=0.41 sd=0.49
@@ -441,10 +466,10 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="pol_habla" class="level3" data-number="1.4.2">
 <h3 data-number="1.4.2" class="anchored" data-anchor-id="pol_habla"><span class="header-section-number">1.4.2</span> pol_habla</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pol_habla=</span><span class="fu">if_else</span>(c10_01<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>c10_01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pol_habla=</span><span class="fu">if_else</span>(c10_01<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>c10_01)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=-35.46 sd=184.25
@@ -460,7 +485,7 @@ Value |    N | Raw % | Valid % | Cum. %
     5 |  159 |  5.22 |    5.22 | 100.00
  &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>pol_habla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>pol_habla)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=0.64 sd=0.48
@@ -476,10 +501,10 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="pol_convence" class="level3" data-number="1.4.3">
 <h3 data-number="1.4.3" class="anchored" data-anchor-id="pol_convence"><span class="header-section-number">1.4.3</span> pol_convence</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pol_convence=</span><span class="fu">if_else</span>(c10_02<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>c10_02)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pol_convence=</span><span class="fu">if_else</span>(c10_02<span class="sc">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>c10_02)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=-20.92 sd=145.34
@@ -495,7 +520,7 @@ Value |    N | Raw % | Valid % | Cum. %
     5 |  109 |  3.58 |    3.58 | 100.00
  &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>pol_convence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>pol_convence)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=0.52 sd=0.50
@@ -511,19 +536,42 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="pol_id" class="level3" data-number="1.4.4">
 <h3 data-number="1.4.4" class="anchored" data-anchor-id="pol_id"><span class="header-section-number">1.4.4</span> pol_id</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Recodficar</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>pol_id <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>c08,</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                           <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(11,12,-888,-999)='No se identifica';</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                      c(0,1,2,3,4)='Izquierda';</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                      c(5)='Centro';</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="st">                                      c(6,7,8,9,10)='Derecha'"</span>),</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">as.factor=</span><span class="cn">TRUE</span>, </span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>                           <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'Izquierda'</span>, </span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Centro'</span>,</span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Derecha'</span>,</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'No se identifica'</span>))</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>pol_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>c08)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x &lt;numeric&gt; 
+# total N=3048 valid N=3048 mean=-29.80 sd=184.16
+
+Value |   N | Raw % | Valid % | Cum. %
+--------------------------------------
+ -999 |  65 |  2.13 |    2.13 |   2.13
+ -888 |  52 |  1.71 |    1.71 |   3.84
+    0 | 110 |  3.61 |    3.61 |   7.45
+    1 |  35 |  1.15 |    1.15 |   8.60
+    2 |  83 |  2.72 |    2.72 |  11.32
+    3 | 155 |  5.09 |    5.09 |  16.40
+    4 | 212 |  6.96 |    6.96 |  23.36
+    5 | 830 | 27.23 |   27.23 |  50.59
+    6 | 216 |  7.09 |    7.09 |  57.68
+    7 | 233 |  7.64 |    7.64 |  65.32
+    8 | 130 |  4.27 |    4.27 |  69.59
+    9 |  54 |  1.77 |    1.77 |  71.36
+   10 | 114 |  3.74 |    3.74 |  75.10
+   11 |  90 |  2.95 |    2.95 |  78.05
+   12 | 669 | 21.95 |   21.95 | 100.00
+ &lt;NA&gt; |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>pol_id <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>c08,</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                           <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(11,12,-888,-999)='No se identifica';</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="st">                                      c(0,1,2,3,4)='Izquierda';</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                      c(5)='Centro';</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                      c(6,7,8,9,10)='Derecha'"</span>),</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">as.factor=</span><span class="cn">TRUE</span>, </span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'Izquierda'</span>, </span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Centro'</span>,</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Derecha'</span>,</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'No se identifica'</span>))</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>pol_id)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;categorical&gt; 
 # total N=3048 valid N=3048 mean=2.62 sd=1.10
@@ -544,7 +592,7 @@ No se identifica | 876 | 28.74 |   28.74 | 100.00
 <section id="autonomia_control" class="level3" data-number="1.5.1">
 <h3 data-number="1.5.1" class="anchored" data-anchor-id="autonomia_control"><span class="header-section-number">1.5.1</span> autonomia_control</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colSums</span>(<span class="fu">is.na</span>(data))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           id           a07      rake_wb2           b19           b21 
             0             0             0           943          2569 
@@ -559,16 +607,16 @@ No se identifica | 876 | 28.74 |   28.74 | 100.00
           e05           a25           a26           a27    sit_empleo 
             0             0             0             0             0 
     sindicato   af_sindical    part_firma part_manifest   part_huelga 
-          943          2569             0             0             0 
+          943           943             0             0             0 
  part_opinion     pol_habla  pol_convence        pol_id 
             0             0             0             0 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">autonomia_control =</span> <span class="fu">mean</span>(<span class="fu">c</span>(b06_01, b06_02, b06_03, b06_04, b06_05))) <span class="sc">%&gt;%</span> </span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>autonomia_control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">autonomia_control =</span> <span class="fu">mean</span>(<span class="fu">c</span>(b06_01, b06_02, b06_03, b06_04, b06_05))) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>autonomia_control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=2.68 sd=1.15
@@ -598,7 +646,7 @@ Value |   N | Raw % | Valid % | Cum. %
  5.00 | 242 |  7.94 |    7.94 | 100.00
  &lt;NA&gt; |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">descr</span>(data<span class="sc">$</span>autonomia_control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">descr</span>(data<span class="sc">$</span>autonomia_control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ## Basic descriptive statistics
@@ -611,10 +659,10 @@ Value |   N | Raw % | Valid % | Cum. %
 <section id="part_trabajo" class="level3" data-number="1.5.2">
 <h3 data-number="1.5.2" class="anchored" data-anchor-id="part_trabajo"><span class="header-section-number">1.5.2</span> part_trabajo</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_trabajo=</span><span class="fu">if_else</span>(b11<span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_trabajo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">part_trabajo=</span><span class="fu">if_else</span>(b11<span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>part_trabajo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=2105 mean=0.40 sd=0.49
@@ -630,17 +678,17 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="influye_trabajo" class="level3" data-number="1.5.3">
 <h3 data-number="1.5.3" class="anchored" data-anchor-id="influye_trabajo"><span class="header-section-number">1.5.3</span> influye_trabajo</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">influye_trabajo =</span> <span class="fu">case_when</span>(</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>      b11<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">3</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">4</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">5</span> <span class="sc">~</span> <span class="dv">5</span>))</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>influye_trabajo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">influye_trabajo =</span> <span class="fu">case_when</span>(</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>      b11<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">2</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">3</span> <span class="sc">~</span> <span class="dv">3</span>,</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">4</span> <span class="sc">~</span> <span class="dv">4</span>,</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>      b12<span class="sc">==</span><span class="dv">5</span> <span class="sc">~</span> <span class="dv">5</span>))</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>influye_trabajo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=1809 mean=1.22 sd=1.51
@@ -663,7 +711,7 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="sexo" class="level3" data-number="1.6.1">
 <h3 data-number="1.6.1" class="anchored" data-anchor-id="sexo"><span class="header-section-number">1.6.1</span> sexo</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>sexo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>sexo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=1.52 sd=0.50
@@ -679,7 +727,7 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="edad" class="level3" data-number="1.6.2">
 <h3 data-number="1.6.2" class="anchored" data-anchor-id="edad"><span class="header-section-number">1.6.2</span> edad</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">descr</span>(data<span class="sc">$</span>edad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">descr</span>(data<span class="sc">$</span>edad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 ## Basic descriptive statistics
@@ -694,18 +742,18 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="nedu" class="level3" data-number="1.6.3">
 <h3 data-number="1.6.3" class="anchored" data-anchor-id="nedu"><span class="header-section-number">1.6.3</span> nedu</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>nedu <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>e05,</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(1,2,3)='Básica completa';</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(4,5)='Media completa';</span></span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(6,7,8)='Universitaria incompleta';</span></span>
-<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(9,10)='Universitaria completa'"</span>),</span>
-<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">as.factor=</span><span class="cn">TRUE</span>, </span>
-<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'Básica completa'</span>, </span>
-<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Media completa'</span>,</span>
-<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Universitaria incompleta'</span>,</span>
-<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Universitaria completa'</span>))</span>
-<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>nedu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>nedu <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>e05,</span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(1,2,3)='Básica completa';</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(4,5)='Media completa';</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(6,7,8)='Universitaria incompleta';</span></span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(9,10)='Universitaria completa'"</span>),</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">as.factor=</span><span class="cn">TRUE</span>, </span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'Básica completa'</span>, </span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Media completa'</span>,</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Universitaria incompleta'</span>,</span>
+<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Universitaria completa'</span>))</span>
+<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>nedu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;categorical&gt; 
 # total N=3048 valid N=3021 mean=2.56 sd=0.93
@@ -718,7 +766,7 @@ Universitaria incompleta |  823 | 27.00 |   27.24 |  80.24
 Universitaria completa   |  597 | 19.59 |   19.76 | 100.00
 &lt;NA&gt;                     |   27 |  0.89 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(data<span class="sc">$</span>e05))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(data<span class="sc">$</span>e05))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -727,22 +775,22 @@ Universitaria completa   |  597 | 19.59 |   19.76 | 100.00
 <section id="rama" class="level3" data-number="1.6.4">
 <h3 data-number="1.6.4" class="anchored" data-anchor-id="rama"><span class="header-section-number">1.6.4</span> rama</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>rama <span class="ot">&lt;-</span> data<span class="sc">$</span>a25</span>
-<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(data,</span>
-<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">rama=</span><span class="fu">factor</span>(<span class="fu">case_when</span>(rama<span class="sc">==</span><span class="dv">1</span><span class="sc">~</span><span class="st">"A"</span>,</span>
-<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">2</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">3</span><span class="sc">~</span><span class="st">"BC"</span>,</span>
-<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">4</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">5</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">6</span><span class="sc">~</span><span class="st">"DEF"</span>,</span>
-<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">7</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">8</span><span class="sc">~</span><span class="st">"GI"</span>,</span>
-<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">9</span><span class="sc">~</span><span class="st">"H"</span>,</span>
-<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">10</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">11</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">12</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">13</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">14</span><span class="sc">~</span><span class="st">"JKLMN"</span>,</span>
-<span id="cb49-10"><a href="#cb49-10" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">15</span><span class="sc">~</span><span class="st">"O"</span>,</span>
-<span id="cb49-11"><a href="#cb49-11" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">16</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">17</span><span class="sc">~</span><span class="st">"PQ"</span>,</span>
-<span id="cb49-12"><a href="#cb49-12" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">18</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">19</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">20</span><span class="sc">~</span><span class="st">"RSU"</span>,</span>
-<span id="cb49-13"><a href="#cb49-13" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">21</span><span class="sc">~</span><span class="st">"T"</span>)))</span>
-<span id="cb49-14"><a href="#cb49-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb49-15"><a href="#cb49-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabla de frecuencias y porcentajes</span></span>
-<span id="cb49-16"><a href="#cb49-16" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>rama)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>rama <span class="ot">&lt;-</span> data<span class="sc">$</span>a25</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(data,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">rama=</span><span class="fu">factor</span>(<span class="fu">case_when</span>(rama<span class="sc">==</span><span class="dv">1</span><span class="sc">~</span><span class="st">"A"</span>,</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">2</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">3</span><span class="sc">~</span><span class="st">"BC"</span>,</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">4</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">5</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">6</span><span class="sc">~</span><span class="st">"DEF"</span>,</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">7</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">8</span><span class="sc">~</span><span class="st">"GI"</span>,</span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">9</span><span class="sc">~</span><span class="st">"H"</span>,</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">10</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">11</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">12</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">13</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">14</span><span class="sc">~</span><span class="st">"JKLMN"</span>,</span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">15</span><span class="sc">~</span><span class="st">"O"</span>,</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">16</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">17</span><span class="sc">~</span><span class="st">"PQ"</span>,</span>
+<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">18</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">19</span><span class="sc">|</span>rama<span class="sc">==</span><span class="dv">20</span><span class="sc">~</span><span class="st">"RSU"</span>,</span>
+<span id="cb53-13"><a href="#cb53-13" aria-hidden="true" tabindex="-1"></a>                                     rama<span class="sc">==</span><span class="dv">21</span><span class="sc">~</span><span class="st">"T"</span>)))</span>
+<span id="cb53-14"><a href="#cb53-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-15"><a href="#cb53-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabla de frecuencias y porcentajes</span></span>
+<span id="cb53-16"><a href="#cb53-16" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>rama)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;categorical&gt; 
 # total N=3048 valid N=2380 mean=5.22 sd=2.61
@@ -766,7 +814,7 @@ T     |  30 |  0.98 |    1.26 | 100.00
 <section id="tamanio_empresa" class="level3" data-number="1.6.5">
 <h3 data-number="1.6.5" class="anchored" data-anchor-id="tamanio_empresa"><span class="header-section-number">1.6.5</span> tamanio_empresa</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>a26)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>a26)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=-73.62 sd=251.41
@@ -786,18 +834,18 @@ Value |   N | Raw % | Valid % | Cum. %
     9 | 186 |  6.10 |    6.10 | 100.00
  &lt;NA&gt; |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tamanio_empresa <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>a26,</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(1,2,3)='1-9';</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="st">                                               c(4,5)='10-49';</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                               c(6,7)='50-199';</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                               c(8,9)='200 o más'"</span>),</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">as.factor =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'1-9'</span>,</span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">'10-49'</span>,</span>
-<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">'50-199'</span>,</span>
-<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">'200 o más'</span>))</span>
-<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb53-12"><a href="#cb53-12" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>tamanio_empresa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tamanio_empresa <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>a26,</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(1,2,3)='1-9';</span></span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="st">                                               c(4,5)='10-49';</span></span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                               c(6,7)='50-199';</span></span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                               c(8,9)='200 o más'"</span>),</span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">as.factor =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'1-9'</span>,</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">'10-49'</span>,</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">'50-199'</span>,</span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>                                             <span class="st">'200 o más'</span>))</span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>tamanio_empresa)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;categorical&gt; 
 # total N=3048 valid N=2785 mean=1.78 sd=1.03
@@ -815,7 +863,7 @@ Value     |    N | Raw % | Valid % | Cum. %
 <section id="tamanio_local" class="level3" data-number="1.6.6">
 <h3 data-number="1.6.6" class="anchored" data-anchor-id="tamanio_local"><span class="header-section-number">1.6.6</span> tamanio_local</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>a27)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>a27)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;numeric&gt; 
 # total N=3048 valid N=3048 mean=-15.76 sd=129.92
@@ -835,18 +883,18 @@ Value |   N | Raw % | Valid % | Cum. %
     9 |  68 |  2.23 |    2.23 | 100.00
  &lt;NA&gt; |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tamanio_local <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>a27,</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(1,2,3)='1-9';</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="st">                                             c(4,5)='10-49';</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                             c(6,7)='50-199';</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                             c(8,9)='200 o más'"</span>),</span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">as.factor =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'1-9'</span>,</span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">'10-49'</span>,</span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">'50-199'</span>,</span>
-<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">'200 o más'</span>))</span>
-<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>tamanio_local)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>tamanio_local <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>a27,</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(1,2,3)='1-9';</span></span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="st">                                             c(4,5)='10-49';</span></span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                             c(6,7)='50-199';</span></span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                             c(8,9)='200 o más'"</span>),</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">as.factor =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>                                  <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'1-9'</span>,</span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">'10-49'</span>,</span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">'50-199'</span>,</span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>                                           <span class="st">'200 o más'</span>))</span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>tamanio_local)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;categorical&gt; 
 # total N=3048 valid N=2984 mean=1.61 sd=0.87
@@ -865,7 +913,8 @@ Value     |    N | Raw % | Valid % | Cum. %
 <section id="guardar-datos" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="guardar-datos"><span class="header-section-number">1.7</span> Guardar datos</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(data,<span class="at">file=</span><span class="st">"../output/datos-ilpc.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(data,<span class="at">file=</span><span class="st">"../output/datos-ilpc.Rdata"</span>)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(data,<span class="at">file=</span><span class="st">"../output/datos-ilpc.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
