@@ -186,6 +186,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#rama" id="toc-rama" class="nav-link" data-scroll-target="#rama"><span class="header-section-number">1.6.4</span> rama</a></li>
   <li><a href="#tamanio_empresa" id="toc-tamanio_empresa" class="nav-link" data-scroll-target="#tamanio_empresa"><span class="header-section-number">1.6.5</span> tamanio_empresa</a></li>
   <li><a href="#tamanio_local" id="toc-tamanio_local" class="nav-link" data-scroll-target="#tamanio_local"><span class="header-section-number">1.6.6</span> tamanio_local</a></li>
+  <li><a href="#sector" id="toc-sector" class="nav-link" data-scroll-target="#sector"><span class="header-section-number">1.6.7</span> sector</a></li>
   </ul></li>
   <li><a href="#guardar-datos" id="toc-guardar-datos" class="nav-link" data-scroll-target="#guardar-datos"><span class="header-section-number">1.7</span> Guardar datos</a></li>
   </ul>
@@ -885,33 +886,50 @@ Value |    N | Raw % | Valid % | Cum. %
 <section id="nedu" class="level3" data-number="1.6.3">
 <h3 data-number="1.6.3" class="anchored" data-anchor-id="nedu"><span class="header-section-number">1.6.3</span> nedu</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>nedu <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>e05,</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(1,2,3)='Básica completa';</span></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(4,5)='Media completa';</span></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(6,7,8)='Universitaria incompleta';</span></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(9,10)='Universitaria completa'"</span>),</span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">as.factor=</span><span class="cn">TRUE</span>, </span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'Básica completa'</span>, </span>
-<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Media completa'</span>,</span>
-<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Universitaria incompleta'</span>,</span>
-<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Universitaria completa'</span>))</span>
-<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>nedu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>e05)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x &lt;numeric&gt; 
+# total N=3048 valid N=3048 mean=-2.37 sd=88.97
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+ -999 |   13 |  0.43 |    0.43 |   0.43
+ -888 |   14 |  0.46 |    0.46 |   0.89
+    1 |   28 |  0.92 |    0.92 |   1.80
+    2 |   95 |  3.12 |    3.12 |   4.92
+    3 |  215 |  7.05 |    7.05 |  11.98
+    4 |  201 |  6.59 |    6.59 |  18.57
+    5 | 1062 | 34.84 |   34.84 |  53.41
+    6 |  178 |  5.84 |    5.84 |  59.25
+    7 |  440 | 14.44 |   14.44 |  73.69
+    8 |  205 |  6.73 |    6.73 |  80.41
+    9 |  531 | 17.42 |   17.42 |  97.83
+   10 |   66 |  2.17 |    2.17 | 100.00
+ &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>nedu <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">recode</span>(data<span class="sc">$</span>e05,</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">recodes=</span><span class="fu">c</span>(<span class="st">"c(-888,-999,1,2,3)='Hasta Básica completa';</span></span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(4,5)='Hasta Media completa';</span></span>
+<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(6,7,8)='Hasta Universitaria incompleta';</span></span>
+<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="st">                                    c(9,10)='Universitaria completa o más'"</span>),</span>
+<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">as.factor=</span><span class="cn">TRUE</span>, </span>
+<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">levels=</span><span class="fu">c</span>(<span class="st">'Hasta Básica completa'</span>, </span>
+<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Hasta Media completa'</span>,</span>
+<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Hasta Universitaria incompleta'</span>,</span>
+<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">'Universitaria completa o más'</span>))</span>
+<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>nedu)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;categorical&gt; 
-# total N=3048 valid N=3021 mean=2.56 sd=0.93
+# total N=3048 valid N=3048 mean=2.54 sd=0.94
 
-Value                    |    N | Raw % | Valid % | Cum. %
-----------------------------------------------------------
-Básica completa          |  338 | 11.09 |   11.19 |  11.19
-Media completa           | 1263 | 41.44 |   41.81 |  53.00
-Universitaria incompleta |  823 | 27.00 |   27.24 |  80.24
-Universitaria completa   |  597 | 19.59 |   19.76 | 100.00
-&lt;NA&gt;                     |   27 |  0.89 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(data<span class="sc">$</span>e05))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0</code></pre>
+Value                          |    N | Raw % | Valid % | Cum. %
+----------------------------------------------------------------
+Hasta Básica completa          |  365 | 11.98 |   11.98 |  11.98
+Hasta Media completa           | 1263 | 41.44 |   41.44 |  53.41
+Hasta Universitaria incompleta |  823 | 27.00 |   27.00 |  80.41
+Universitaria completa o más   |  597 | 19.59 |   19.59 | 100.00
+&lt;NA&gt;                           |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -1052,12 +1070,52 @@ Value     |    N | Raw % | Valid % | Cum. %
 </div>
 </div>
 </section>
+<section id="sector" class="level3" data-number="1.6.7">
+<h3 data-number="1.6.7" class="anchored" data-anchor-id="sector"><span class="header-section-number">1.6.7</span> sector</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>a07)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x &lt;categorical&gt; 
+# total N=3048 valid N=3048 mean=3.79 sd=1.67
+
+Value |                                                                     Label |    N | Raw % | Valid % | Cum. %
+-------------------------------------------------------------------------------------------------------------------
+    1 |                                                  Patrón(a) o empleador(a) |  345 | 11.32 |   11.32 |  11.32
+    2 |                                           Trabajador(a) por cuenta propia |  598 | 19.62 |   19.62 |  30.94
+    3 | Empleado(a) u obrero(a) del sector público (Gobierno Central o Municipal) |  251 |  8.23 |    8.23 |  39.17
+    4 |                              Empleado(a) u obrero(a) de empresas públicas |  337 | 11.06 |   11.06 |  50.23
+    5 |                                Empleado(a) u obrero(a) del sector privado | 1370 | 44.95 |   44.95 |  95.18
+    6 |                                        Servicio doméstico puertas adentro |   21 |  0.69 |    0.69 |  95.87
+    7 |                                         Servicio doméstico puertas afuera |  101 |  3.31 |    3.31 |  99.18
+    8 |                                                        FF.AA. y del Orden |   13 |  0.43 |    0.43 |  99.61
+    9 |                                                    Familiar no remunerado |   12 |  0.39 |    0.39 | 100.00
+ &lt;NA&gt; |                                                                      &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">sector=</span><span class="fu">case_when</span>(</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>    a07 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">9</span>) <span class="sc">~</span> <span class="dv">1</span>,</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>    a07 <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">8</span>) <span class="sc">~</span> <span class="dv">0</span></span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>sector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>x &lt;numeric&gt; 
+# total N=3048 valid N=3048 mean=0.80 sd=0.40
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+    0 |  601 | 19.72 |   19.72 |  19.72
+    1 | 2447 | 80.28 |   80.28 | 100.00
+ &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+</div>
+</div>
+</section>
 </section>
 <section id="guardar-datos" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="guardar-datos"><span class="header-section-number">1.7</span> Guardar datos</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(data,<span class="at">file=</span><span class="st">"../output/datos-ilpc.Rdata"</span>)</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(data,<span class="at">file=</span><span class="st">"../output/datos-ilpc.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">save</span>(data,<span class="at">file=</span><span class="st">"../output/datos-ilpc.Rdata"</span>)</span>
+<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(data,<span class="at">file=</span><span class="st">"../output/datos-ilpc.rds"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

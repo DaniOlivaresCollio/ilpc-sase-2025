@@ -317,19 +317,20 @@ descr(data$edad)
 ### nedu
 
 ```{r}
+frq(data$e05)
+
 data$nedu <- car::recode(data$e05,
-                         recodes=c("c(1,2,3)='Básica completa';
-                                    c(4,5)='Media completa';
-                                    c(6,7,8)='Universitaria incompleta';
-                                    c(9,10)='Universitaria completa'"),
+                         recodes=c("c(-888,-999,1,2,3)='Hasta Básica completa';
+                                    c(4,5)='Hasta Media completa';
+                                    c(6,7,8)='Hasta Universitaria incompleta';
+                                    c(9,10)='Universitaria completa o más'"),
                            as.factor=TRUE, 
-                           levels=c('Básica completa', 
-                                    'Media completa',
-                                    'Universitaria incompleta',
-                                    'Universitaria completa'))
+                           levels=c('Hasta Básica completa', 
+                                    'Hasta Media completa',
+                                    'Hasta Universitaria incompleta',
+                                    'Universitaria completa o más'))
 
 frq(data$nedu)
-sum(is.na(data$e05))
 ```
 
 ### rama
@@ -387,6 +388,20 @@ data$tamanio_local <- car::recode(data$a27,
                                            '200 o más'))
 
 frq(data$tamanio_local)
+```
+
+### sector
+
+```{r}
+frq(data$a07)
+
+data <- data %>%
+  mutate(sector=case_when(
+    a07 %in% c(1, 2, 5, 6, 7, 9) ~ 1,
+    a07 %in% c(3, 4, 8) ~ 0
+    ))
+
+frq(data$sector)
 ```
 
 ## Guardar datos
