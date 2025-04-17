@@ -312,6 +312,9 @@ frq(data$sexo)
 
 ```{r,warning=FALSE,message=FALSE}
 descr(data$edad)
+
+data$edad <- car::recode(data$edad,
+                         recodes=c("c(-888,-999)=NA"))
 ```
 
 ### nedu
