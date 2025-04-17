@@ -237,9 +237,9 @@ frq(data$c08)
 
 data$pol_id <- car::recode(data$c08,
                            recodes=c("c(11,12,-888,-999)='No se identifica';
-                                      c(0,1,2,3,4)='Izquierda';
-                                      c(5)='Centro';
-                                      c(6,7,8,9,10)='Derecha'"),
+                                      c(0,1,2,3)='Izquierda';
+                                      c(4,5,6)='Centro';
+                                      c(7,8,9,10)='Derecha'"),
                            as.factor=TRUE, 
                            levels=c('Izquierda', 
                                     'Centro',
@@ -249,11 +249,51 @@ data$pol_id <- car::recode(data$c08,
 frq(data$pol_id)
 ```
 
+### part_vecinal
+
+```{r}
+frq(data$c11_01)
+
+# Participación vecinal rec NA
+data <- data %>%
+  mutate(part_vecinal=if_else(
+    c11_01 %in% c(-888, -999), 3, c11_01)
+    )
+
+# Participación vecinal Dummy
+data <- data %>%
+  mutate(part_vecinal2=case_when(
+    c11_01 %in% c(1, 2) ~ 1,
+    c11_01 %in% c(3, -888, -999) ~ 0
+    ))
+
+frq(data$part_vecinal)
+frq(data$part_vecinal2)
+```
+
+### part_pol_partidos
+
+```{r}
+frq(data$c11_02)
+```
+
+### part_pol_deporte
+
+```{r}
+frq(data$c11_03)
+```
+
+### part_pol_religiosa
+
+```{r}
+frq(data$c11_04)
+```
+
 ## V. Mediadoras
 
 ### autonomia_control
 
-```{r,warning=FALSE,message=FALSE}
+```{r}
 frq(data$b06_01)
 frq(data$b06_02)
 frq(data$b06_03)
