@@ -271,22 +271,70 @@ frq(data$part_vecinal)
 frq(data$part_vecinal2)
 ```
 
-### part_pol_partidos
+### part_partidos
 
 ```{r}
 frq(data$c11_02)
+
+# Participación en partidos políticos rec NA
+data <- data %>%
+  mutate(part_partidos=if_else(
+    c11_02 %in% c(-888, -999), 3, c11_02)
+    )
+
+# Participación en partidos políticos Dummy
+data <- data %>%
+  mutate(part_partidos2=case_when(
+    c11_02 %in% c(1, 2) ~ 1,
+    c11_02 %in% c(3, -888, -999) ~ 0
+    ))
+
+frq(data$part_partidos)
+frq(data$part_partidos2)
 ```
 
-### part_pol_deporte
+### part_deporte
 
 ```{r}
 frq(data$c11_03)
+
+# Participación en organizaciones deportivas rec NA
+data <- data %>%
+  mutate(part_deporte=if_else(
+    c11_03 %in% c(-888, -999), 3, c11_03)
+    )
+
+# Participación en organizaciones deportivas Dummy
+data <- data %>%
+  mutate(part_deporte2=case_when(
+    c11_03 %in% c(1, 2) ~ 1,
+    c11_03 %in% c(3, -888, -999) ~ 0
+    ))
+
+frq(data$part_deporte)
+frq(data$part_deporte2)
 ```
 
-### part_pol_religiosa
+### part_religiosa
 
 ```{r}
 frq(data$c11_04)
+
+# Participación en organizaciones religiosas rec NA
+data <- data %>%
+  mutate(part_religiosa=if_else(
+    c11_04 %in% c(-888, -999), 3, c11_04)
+    )
+
+# Participación en organizaciones religiosas Dummy
+data <- data %>%
+  mutate(part_religiosa2=case_when(
+    c11_04 %in% c(1, 2) ~ 1,
+    c11_04 %in% c(3, -888, -999) ~ 0
+    ))
+
+frq(data$part_religiosa)
+frq(data$part_religiosa2)
 ```
 
 ## V. Mediadoras
