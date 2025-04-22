@@ -34,19 +34,16 @@ p_load(tidyverse,
 ## Cargar datos
 
 ```{r datos,message=FALSE,warning=FALSE}
-data_raw <- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=3)
-data_dec <- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=2)
+# data_raw <- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=3)
+# data_dec <- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=2)
+load("../input/data/datos-conclat.Rdata")
 ```
 
 ## Selección de variables
 
 ```{r data,message=FALSE,warning=FALSE}
-# Agregar ponderador desde base decodificada
-data <- merge(data_raw,data_dec[,c("ID","rake_wb2")],by="ID",all.x=TRUE)
-
-# Selección de variables
 data <- data %>% 
-  select(id=ID,
+  select(id,
          a07,
          rake_wb2,
          # Var independientes

@@ -1,0 +1,6 @@
+"0","# data_raw <- read_excel(here::here(""input"",""data"",""Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx""),sheet=3)"
+"0","# data_dec <- read_excel(here::here(""input"",""data"",""Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx""),sheet=2)"
+"0","load(""../input/data/datos-conclat.Rdata"")"
+"2","Error in readChar(con, 5L, useBytes = TRUE) : 
+  no se puede abrir la conexión
+"

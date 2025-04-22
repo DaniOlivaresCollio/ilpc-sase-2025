@@ -219,40 +219,37 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="cargar-datos" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="cargar-datos"><span class="header-section-number">1.1</span> Cargar datos</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data_raw <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"input"</span>,<span class="st">"data"</span>,<span class="st">"Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"</span>),<span class="at">sheet=</span><span class="dv">3</span>)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>data_dec <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"input"</span>,<span class="st">"data"</span>,<span class="st">"Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"</span>),<span class="at">sheet=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># data_raw &lt;- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=3)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># data_dec &lt;- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=2)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"../input/data/datos-conclat.Rdata"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="selección-de-variables" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="selección-de-variables"><span class="header-section-number">1.2</span> Selección de variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Agregar ponderador desde base decodificada</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">merge</span>(data_raw,data_dec[,<span class="fu">c</span>(<span class="st">"ID"</span>,<span class="st">"rake_wb2"</span>)],<span class="at">by=</span><span class="st">"ID"</span>,<span class="at">all.x=</span><span class="cn">TRUE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Selección de variables</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="at">id=</span>ID,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         a07,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         rake_wb2,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Var independientes</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>         b19,</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>         b21,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Var dependientes</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>         c04_01,c04_02,c04_03,c04_04,</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>         c10_01,c10_02,</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>         c11_01,c11_02,c11_03,c11_04,</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>         c08,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Var mediadoras</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>         b06_01,b06_02,b06_03,b06_04,b06_05,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>         b11,b12,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Var control</span></span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>         <span class="at">sexo=</span>e01,</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         <span class="at">edad=</span>e02,</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>         e05,</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>         a25,a25_esp,</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>         a26,</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>         a27)<span class="co"># %&gt;% </span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="co">#sjlabelled::set_na(.,na=c(-999,-888,-777))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>         a07,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>         rake_wb2,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Var independientes</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>         b19,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>         b21,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Var dependientes</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>         c04_01,c04_02,c04_03,c04_04,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>         c10_01,c10_02,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>         c11_01,c11_02,c11_03,c11_04,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>         c08,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Var mediadoras</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>         b06_01,b06_02,b06_03,b06_04,b06_05,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>         b11,b12,</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>         <span class="co"># Var control</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">sexo=</span>e01,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">edad=</span>e02,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>         e05,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>         a25,a25_esp,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>         a26,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>         a27)<span class="co"># %&gt;% </span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">#sjlabelled::set_na(.,na=c(-999,-888,-777))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="v.-independientes" class="level2" data-number="1.3">
@@ -1197,29 +1194,445 @@ Value |   N | Raw % | Valid % | Cum. %
 </div>
 <div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>a25_esp) <span class="co"># 603 válidos</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>x &lt;numeric&gt; 
-# total N=3048 valid N=603 mean=13.25 sd=5.66
+<pre><code>x &lt;character&gt; 
+# total N=3048 valid N=603 mean=221.95 sd=126.09
 
-Value |    N | Raw % | Valid % | Cum. %
----------------------------------------
-    1 |    6 |  0.20 |    1.00 |   1.00
-    2 |    4 |  0.13 |    0.66 |   1.66
-    3 |   17 |  0.56 |    2.82 |   4.48
-    5 |    3 |  0.10 |    0.50 |   4.98
-    6 |    4 |  0.13 |    0.66 |   5.64
-    7 |  157 |  5.15 |   26.04 |  31.67
-    8 |   14 |  0.46 |    2.32 |  34.00
-    9 |   38 |  1.25 |    6.30 |  40.30
-   11 |    2 |  0.07 |    0.33 |  40.63
-   12 |    3 |  0.10 |    0.50 |  41.13
-   13 |   26 |  0.85 |    4.31 |  45.44
-   14 |   26 |  0.85 |    4.31 |  49.75
-   15 |   20 |  0.66 |    3.32 |  53.07
-   16 |   12 |  0.39 |    1.99 |  55.06
-   17 |   27 |  0.89 |    4.48 |  59.54
-   18 |   12 |  0.39 |    1.99 |  61.53
-   19 |  232 |  7.61 |   38.47 | 100.00
- &lt;NA&gt; | 2445 | 80.22 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+Value                                                                           |    N | Raw % | Valid % | Cum. %
+-----------------------------------------------------------------------------------------------------------------
+abarrotes                                                                       |    1 |  0.03 |    0.17 |   0.17
+Actividades juridicas                                                           |    1 |  0.03 |    0.17 |   0.33
+adedora                                                                         |    1 |  0.03 |    0.17 |   0.50
+administracion de edificios                                                     |    1 |  0.03 |    0.17 |   0.66
+administrativa en oficina de contabilidad                                       |    1 |  0.03 |    0.17 |   0.83
+administrativo en centro de salud                                               |    1 |  0.03 |    0.17 |   1.00
+agroindustria                                                                   |    1 |  0.03 |    0.17 |   1.16
+alimentacion                                                                    |    3 |  0.10 |    0.50 |   1.66
+almacen                                                                         |    1 |  0.03 |    0.17 |   1.82
+aluminio y pvc                                                                  |    1 |  0.03 |    0.17 |   1.99
+ama de casa                                                                     |    1 |  0.03 |    0.17 |   2.16
+ambulante, comerciante                                                          |    1 |  0.03 |    0.17 |   2.32
+apoyo contable                                                                  |    1 |  0.03 |    0.17 |   2.49
+Apoyos a programas ee la Municipalidad                                          |    1 |  0.03 |    0.17 |   2.65
+area de la construccion                                                         |    1 |  0.03 |    0.17 |   2.82
+área salud pública                                                              |    1 |  0.03 |    0.17 |   2.99
+area verdes                                                                     |    1 |  0.03 |    0.17 |   3.15
+arreglo de autos taller mecanico                                                |    1 |  0.03 |    0.17 |   3.32
+Arreglo de bicicleta                                                            |    1 |  0.03 |    0.17 |   3.48
+arreglo de computadores                                                         |    1 |  0.03 |    0.17 |   3.65
+arreglos                                                                        |    1 |  0.03 |    0.17 |   3.81
+arriendos departamentos                                                         |    1 |  0.03 |    0.17 |   3.98
+artesanía                                                                       |    2 |  0.07 |    0.33 |   4.31
+artesania en madera                                                             |    1 |  0.03 |    0.17 |   4.48
+Artesanías                                                                      |    1 |  0.03 |    0.17 |   4.64
+aseo                                                                            |    9 |  0.30 |    1.49 |   6.14
+aseo de alfombras casa                                                          |    1 |  0.03 |    0.17 |   6.30
+aseo en casas                                                                   |    1 |  0.03 |    0.17 |   6.47
+aseo y hornato                                                                  |    1 |  0.03 |    0.17 |   6.63
+Aseo y hornato.                                                                 |    1 |  0.03 |    0.17 |   6.80
+aseo y ornato                                                                   |    1 |  0.03 |    0.17 |   6.97
+asesora                                                                         |    1 |  0.03 |    0.17 |   7.13
+asesora de hogar                                                                |    3 |  0.10 |    0.50 |   7.63
+Asesora de hogar                                                                |    1 |  0.03 |    0.17 |   7.79
+asesora del hogar                                                               |    5 |  0.16 |    0.83 |   8.62
+Asesora del hogar                                                               |    2 |  0.07 |    0.33 |   8.96
+Asesora del Hogar                                                               |    1 |  0.03 |    0.17 |   9.12
+asesora hogar                                                                   |    2 |  0.07 |    0.33 |   9.45
+asesora hogar casa particular                                                   |    1 |  0.03 |    0.17 |   9.62
+asesora puetss afuera                                                           |    1 |  0.03 |    0.17 |   9.78
+asesoria comercial                                                              |    1 |  0.03 |    0.17 |   9.95
+asesorias                                                                       |    1 |  0.03 |    0.17 |  10.12
+Asesorias legales                                                               |    1 |  0.03 |    0.17 |  10.28
+atencion a público                                                              |    1 |  0.03 |    0.17 |  10.45
+Atención al cliente                                                             |    1 |  0.03 |    0.17 |  10.61
+atencion al cliente en almacen de barrio                                        |    1 |  0.03 |    0.17 |  10.78
+atencion al cliente, pub restaurante                                            |    1 |  0.03 |    0.17 |  10.95
+atención cliente                                                                |    1 |  0.03 |    0.17 |  11.11
+atención de salud mental                                                        |    1 |  0.03 |    0.17 |  11.28
+Atencion veterinaria                                                            |    1 |  0.03 |    0.17 |  11.44
+atendiendo un negocio de abarrotes                                              |    1 |  0.03 |    0.17 |  11.61
+automotriz                                                                      |    1 |  0.03 |    0.17 |  11.77
+auxiliar de aseo                                                                |    1 |  0.03 |    0.17 |  11.94
+banco                                                                           |    1 |  0.03 |    0.17 |  12.11
+bar                                                                             |    1 |  0.03 |    0.17 |  12.27
+Bar, servicios de entretención nocturna                                         |    1 |  0.03 |    0.17 |  12.44
+barrio de calles                                                                |    1 |  0.03 |    0.17 |  12.60
+bazar                                                                           |    1 |  0.03 |    0.17 |  12.77
+belleza                                                                         |    5 |  0.16 |    0.83 |  13.60
+Belleza-peluqueria                                                              |    1 |  0.03 |    0.17 |  13.76
+Beneficios Universitarios                                                       |    1 |  0.03 |    0.17 |  13.93
+botilleria                                                                      |    1 |  0.03 |    0.17 |  14.10
+cafeteria                                                                       |    2 |  0.07 |    0.33 |  14.43
+cajera                                                                          |    4 |  0.13 |    0.66 |  15.09
+cajero                                                                          |    1 |  0.03 |    0.17 |  15.26
+calzado                                                                         |    1 |  0.03 |    0.17 |  15.42
+cantante                                                                        |    1 |  0.03 |    0.17 |  15.59
+carabinero                                                                      |    1 |  0.03 |    0.17 |  15.75
+Carniceria                                                                      |    1 |  0.03 |    0.17 |  15.92
+casa particular                                                                 |    9 |  0.30 |    1.49 |  17.41
+CASA PARTICULAR                                                                 |    1 |  0.03 |    0.17 |  17.58
+casa particular para cuidar adulto mayor                                        |    1 |  0.03 |    0.17 |  17.74
+casas particulares                                                              |    1 |  0.03 |    0.17 |  17.91
+casino                                                                          |    1 |  0.03 |    0.17 |  18.08
+centro dental                                                                   |    1 |  0.03 |    0.17 |  18.24
+Centros de arreglo automotriz                                                   |    1 |  0.03 |    0.17 |  18.41
+chofer                                                                          |    3 |  0.10 |    0.50 |  18.91
+chofer uber                                                                     |    1 |  0.03 |    0.17 |  19.07
+climatizacion insustrial                                                        |    1 |  0.03 |    0.17 |  19.24
+cocinar                                                                         |    1 |  0.03 |    0.17 |  19.40
+cocineria                                                                       |    1 |  0.03 |    0.17 |  19.57
+colegio                                                                         |    1 |  0.03 |    0.17 |  19.73
+colegio basico                                                                  |    1 |  0.03 |    0.17 |  19.90
+colegio metodista                                                               |    1 |  0.03 |    0.17 |  20.07
+comercial                                                                       |    1 |  0.03 |    0.17 |  20.23
+Comercial -minimarket                                                           |    1 |  0.03 |    0.17 |  20.40
+comercio                                                                        |    5 |  0.16 |    0.83 |  21.23
+comercio al por menor y mayor.                                                  |    1 |  0.03 |    0.17 |  21.39
+comercio alimentos                                                              |    1 |  0.03 |    0.17 |  21.56
+comercio de alimentos, en supermercado                                          |    1 |  0.03 |    0.17 |  21.72
+comercio retail                                                                 |    1 |  0.03 |    0.17 |  21.89
+comercio sexual                                                                 |    1 |  0.03 |    0.17 |  22.06
+comercio, ventas                                                                |    1 |  0.03 |    0.17 |  22.22
+comida                                                                          |    2 |  0.07 |    0.33 |  22.55
+comida cafeteria                                                                |    1 |  0.03 |    0.17 |  22.72
+comida rapida                                                                   |    1 |  0.03 |    0.17 |  22.89
+comida rápida                                                                   |    1 |  0.03 |    0.17 |  23.05
+compra y venta de auto                                                          |    1 |  0.03 |    0.17 |  23.22
+compra y venta de equipaje                                                      |    1 |  0.03 |    0.17 |  23.38
+compra y venta de gasolina                                                      |    1 |  0.03 |    0.17 |  23.55
+compra y venta de productos                                                     |    1 |  0.03 |    0.17 |  23.71
+comunicaciones                                                                  |    1 |  0.03 |    0.17 |  23.88
+Conaf                                                                           |    1 |  0.03 |    0.17 |  24.05
+CONAF                                                                           |    1 |  0.03 |    0.17 |  24.21
+conductor                                                                       |    1 |  0.03 |    0.17 |  24.38
+confeccion de ropa                                                              |    1 |  0.03 |    0.17 |  24.54
+Confección de Ropa                                                              |    1 |  0.03 |    0.17 |  24.71
+consejeria                                                                      |    1 |  0.03 |    0.17 |  24.88
+conserje                                                                        |    1 |  0.03 |    0.17 |  25.04
+conserjes                                                                       |    1 |  0.03 |    0.17 |  25.21
+construcción                                                                    |    1 |  0.03 |    0.17 |  25.37
+Consultora                                                                      |    1 |  0.03 |    0.17 |  25.54
+consultorio                                                                     |    1 |  0.03 |    0.17 |  25.70
+contabilidad                                                                    |    1 |  0.03 |    0.17 |  25.87
+Contabilidad                                                                    |    1 |  0.03 |    0.17 |  26.04
+contador                                                                        |    1 |  0.03 |    0.17 |  26.20
+contratista mineria                                                             |    1 |  0.03 |    0.17 |  26.37
+contratistas de mantencion                                                      |    1 |  0.03 |    0.17 |  26.53
+corredora de propiedades                                                        |    1 |  0.03 |    0.17 |  26.70
+corté de pelo particular                                                        |    1 |  0.03 |    0.17 |  26.87
+cosmetica                                                                       |    1 |  0.03 |    0.17 |  27.03
+costuras                                                                        |    2 |  0.07 |    0.33 |  27.36
+Criancero                                                                       |    1 |  0.03 |    0.17 |  27.53
+cuiadar un adulto mallor                                                        |    1 |  0.03 |    0.17 |  27.69
+cuidado adulto mayor                                                            |    1 |  0.03 |    0.17 |  27.86
+cuidado de bebe                                                                 |    1 |  0.03 |    0.17 |  28.03
+cuidado de enfermo                                                              |    1 |  0.03 |    0.17 |  28.19
+cuidado de niño en hogar particular                                             |    1 |  0.03 |    0.17 |  28.36
+cuidado de niños                                                                |    2 |  0.07 |    0.33 |  28.69
+Cuidado de niños puertas afuera                                                 |    1 |  0.03 |    0.17 |  28.86
+cuidado de un menor                                                             |    1 |  0.03 |    0.17 |  29.02
+cuidador de un local                                                            |    1 |  0.03 |    0.17 |  29.19
+cuidadora adulto mayor                                                          |    1 |  0.03 |    0.17 |  29.35
+cuidadora de adulto mayor                                                       |    1 |  0.03 |    0.17 |  29.52
+Cuidadora de adulto mayor en su domicilio                                       |    1 |  0.03 |    0.17 |  29.68
+cuidadora de ancianos                                                           |    1 |  0.03 |    0.17 |  29.85
+Decoracion de eventos                                                           |    1 |  0.03 |    0.17 |  30.02
+diseño                                                                          |    1 |  0.03 |    0.17 |  30.18
+Distribuidora Farmacéutica                                                      |    1 |  0.03 |    0.17 |  30.35
+dulceria                                                                        |    1 |  0.03 |    0.17 |  30.51
+educacion                                                                       |    3 |  0.10 |    0.50 |  31.01
+Educacion                                                                       |    1 |  0.03 |    0.17 |  31.18
+educación                                                                       |    2 |  0.07 |    0.33 |  31.51
+educacionales                                                                   |    1 |  0.03 |    0.17 |  31.67
+electricista                                                                    |    2 |  0.07 |    0.33 |  32.01
+empleada domestica                                                              |    2 |  0.07 |    0.33 |  32.34
+Empleada domestica                                                              |    1 |  0.03 |    0.17 |  32.50
+empleada domestica puertas afuera                                               |    1 |  0.03 |    0.17 |  32.67
+empleado de un tribunal de justicia                                             |    1 |  0.03 |    0.17 |  32.84
+empresa de aseo                                                                 |    2 |  0.07 |    0.33 |  33.17
+empresa de maquinarias                                                          |    1 |  0.03 |    0.17 |  33.33
+Empresa de seguridad                                                            |    1 |  0.03 |    0.17 |  33.50
+empresa de transportes                                                          |    1 |  0.03 |    0.17 |  33.67
+Empresa de Turismo                                                              |    1 |  0.03 |    0.17 |  33.83
+Empresa independiente                                                           |    1 |  0.03 |    0.17 |  34.00
+empresa particular de ventas de plantas                                         |    1 |  0.03 |    0.17 |  34.16
+empresa privada de aeguridad                                                    |    1 |  0.03 |    0.17 |  34.33
+empresas de encomiendas y lojistica                                             |    1 |  0.03 |    0.17 |  34.49
+en la mar                                                                       |    1 |  0.03 |    0.17 |  34.66
+en un supermercado haciendo la limpieza                                         |    1 |  0.03 |    0.17 |  34.83
+en una veterinaria                                                              |    1 |  0.03 |    0.17 |  34.99
+enseño a niños a tocar piano doy clases de piano a domicilio                    |    1 |  0.03 |    0.17 |  35.16
+entretencion                                                                    |    1 |  0.03 |    0.17 |  35.32
+es independiente                                                                |    1 |  0.03 |    0.17 |  35.49
+estacionamiento                                                                 |    1 |  0.03 |    0.17 |  35.66
+estetica                                                                        |    1 |  0.03 |    0.17 |  35.82
+estilista                                                                       |    1 |  0.03 |    0.17 |  35.99
+estructura metalica                                                             |    1 |  0.03 |    0.17 |  36.15
+evaluacion salud mental psicologica                                             |    1 |  0.03 |    0.17 |  36.32
+eventos                                                                         |    1 |  0.03 |    0.17 |  36.48
+fabricacion y repatacion de instrumentos mysicales                              |    1 |  0.03 |    0.17 |  36.65
+fabricación, venta y distribución de alimentos                                  |    1 |  0.03 |    0.17 |  36.82
+farmacia                                                                        |    2 |  0.07 |    0.33 |  37.15
+feria                                                                           |    1 |  0.03 |    0.17 |  37.31
+Ferreteria                                                                      |    1 |  0.03 |    0.17 |  37.48
+FFAA                                                                            |    5 |  0.16 |    0.83 |  38.31
+finanzas                                                                        |    1 |  0.03 |    0.17 |  38.47
+floristería o venta de flores                                                   |    1 |  0.03 |    0.17 |  38.64
+frutería                                                                        |    2 |  0.07 |    0.33 |  38.97
+fundaciones                                                                     |    1 |  0.03 |    0.17 |  39.14
+galpones de zofri                                                               |    1 |  0.03 |    0.17 |  39.30
+garson en pub                                                                   |    1 |  0.03 |    0.17 |  39.47
+gasfiteria                                                                      |    2 |  0.07 |    0.33 |  39.80
+Gasfiteria                                                                      |    1 |  0.03 |    0.17 |  39.97
+Gastronomía                                                                     |    2 |  0.07 |    0.33 |  40.30
+gastronomico                                                                    |    1 |  0.03 |    0.17 |  40.46
+gorzona                                                                         |    1 |  0.03 |    0.17 |  40.63
+gruas orquillas maquinaria pesada perforaciones de enap                         |    1 |  0.03 |    0.17 |  40.80
+Guarderia canina                                                                |    1 |  0.03 |    0.17 |  40.96
+guardia                                                                         |    7 |  0.23 |    1.16 |  42.12
+guardia de seguridad                                                            |    5 |  0.16 |    0.83 |  42.95
+Hacer y vender pan y productos alimenticios                                     |    1 |  0.03 |    0.17 |  43.12
+heladeria                                                                       |    1 |  0.03 |    0.17 |  43.28
+hispital                                                                        |    1 |  0.03 |    0.17 |  43.45
+hogar mejor niñez                                                               |    1 |  0.03 |    0.17 |  43.62
+hogar particular                                                                |    2 |  0.07 |    0.33 |  43.95
+hospital regional                                                               |    1 |  0.03 |    0.17 |  44.11
+Hotel y servicios para mascotas                                                 |    1 |  0.03 |    0.17 |  44.28
+hotelería                                                                       |    1 |  0.03 |    0.17 |  44.44
+Iglesia pentecostal                                                             |    1 |  0.03 |    0.17 |  44.61
+imprenta                                                                        |    1 |  0.03 |    0.17 |  44.78
+Independiente                                                                   |    2 |  0.07 |    0.33 |  45.11
+independiente cuidado adulto mayor                                              |    1 |  0.03 |    0.17 |  45.27
+industrial                                                                      |    1 |  0.03 |    0.17 |  45.44
+inmobiliaria                                                                    |    1 |  0.03 |    0.17 |  45.61
+instalacion electriva                                                           |    1 |  0.03 |    0.17 |  45.77
+jardinera                                                                       |    1 |  0.03 |    0.17 |  45.94
+Jardinería                                                                      |    1 |  0.03 |    0.17 |  46.10
+jornalero de camión                                                             |    1 |  0.03 |    0.17 |  46.27
+juguetes                                                                        |    1 |  0.03 |    0.17 |  46.43
+junior colegio de contadores                                                    |    1 |  0.03 |    0.17 |  46.60
+junji junta nacional de jardines infantiles                                     |    1 |  0.03 |    0.17 |  46.77
+kinesiólogo                                                                     |    1 |  0.03 |    0.17 |  46.93
+kiosko                                                                          |    1 |  0.03 |    0.17 |  47.10
+labores de hogar                                                                |    3 |  0.10 |    0.50 |  47.60
+lashista                                                                        |    1 |  0.03 |    0.17 |  47.76
+lentes                                                                          |    1 |  0.03 |    0.17 |  47.93
+lider                                                                           |    1 |  0.03 |    0.17 |  48.09
+limpieza a oficinas                                                             |    1 |  0.03 |    0.17 |  48.26
+lumpieza                                                                        |    1 |  0.03 |    0.17 |  48.42
+maestro albañil                                                                 |    1 |  0.03 |    0.17 |  48.59
+Manejo de vehiculos                                                             |    1 |  0.03 |    0.17 |  48.76
+manicurista                                                                     |    3 |  0.10 |    0.50 |  49.25
+manos para hacer las uñas                                                       |    1 |  0.03 |    0.17 |  49.42
+mantenimiento de areas verdes y plazoletas                                      |    1 |  0.03 |    0.17 |  49.59
+maquillista                                                                     |    1 |  0.03 |    0.17 |  49.75
+material de malla                                                               |    1 |  0.03 |    0.17 |  49.92
+mecanica                                                                        |    4 |  0.13 |    0.66 |  50.58
+Mecanica                                                                        |    1 |  0.03 |    0.17 |  50.75
+mecanica automotriz                                                             |    1 |  0.03 |    0.17 |  50.91
+mecanico                                                                        |    3 |  0.10 |    0.50 |  51.41
+mecanico automotriz                                                             |    1 |  0.03 |    0.17 |  51.58
+mecánico independiente                                                          |    1 |  0.03 |    0.17 |  51.74
+medico veterinario                                                              |    1 |  0.03 |    0.17 |  51.91
+mercado                                                                         |    1 |  0.03 |    0.17 |  52.07
+minera                                                                          |    1 |  0.03 |    0.17 |  52.24
+mineria                                                                         |    2 |  0.07 |    0.33 |  52.57
+minería                                                                         |    2 |  0.07 |    0.33 |  52.90
+mini market                                                                     |    1 |  0.03 |    0.17 |  53.07
+minimarket                                                                      |    2 |  0.07 |    0.33 |  53.40
+moda y confección                                                               |    1 |  0.03 |    0.17 |  53.57
+modista                                                                         |    1 |  0.03 |    0.17 |  53.73
+Multitienda Paris, ventas                                                       |    1 |  0.03 |    0.17 |  53.90
+municipalidad                                                                   |    6 |  0.20 |    1.00 |  54.89
+municipio                                                                       |    1 |  0.03 |    0.17 |  55.06
+nana                                                                            |    1 |  0.03 |    0.17 |  55.22
+negocio                                                                         |    1 |  0.03 |    0.17 |  55.39
+negocio de abarrotes                                                            |    1 |  0.03 |    0.17 |  55.56
+Negocio de población                                                            |    1 |  0.03 |    0.17 |  55.72
+negocios de carnicerias                                                         |    1 |  0.03 |    0.17 |  55.89
+Night Club                                                                      |    1 |  0.03 |    0.17 |  56.05
+niñera                                                                          |    2 |  0.07 |    0.33 |  56.38
+Niñera                                                                          |    2 |  0.07 |    0.33 |  56.72
+niñera casa particular                                                          |    1 |  0.03 |    0.17 |  56.88
+niñera en casa particular                                                       |    1 |  0.03 |    0.17 |  57.05
+no perecibles                                                                   |    1 |  0.03 |    0.17 |  57.21
+obrero                                                                          |    1 |  0.03 |    0.17 |  57.38
+panaderia                                                                       |    2 |  0.07 |    0.33 |  57.71
+panadería                                                                       |    1 |  0.03 |    0.17 |  57.88
+panadero                                                                        |    2 |  0.07 |    0.33 |  58.21
+parvularia                                                                      |    1 |  0.03 |    0.17 |  58.37
+pasteleria                                                                      |    1 |  0.03 |    0.17 |  58.54
+pastelería                                                                      |    2 |  0.07 |    0.33 |  58.87
+pasteleria y panaderia                                                          |    1 |  0.03 |    0.17 |  59.04
+peluquería                                                                      |    1 |  0.03 |    0.17 |  59.20
+peluquería peinados                                                             |    1 |  0.03 |    0.17 |  59.37
+periodismo                                                                      |    1 |  0.03 |    0.17 |  59.54
+pesca                                                                           |    1 |  0.03 |    0.17 |  59.70
+pintura automotriz                                                              |    1 |  0.03 |    0.17 |  59.87
+Pintura de vehiculos                                                            |    1 |  0.03 |    0.17 |  60.03
+piscicultura                                                                    |    1 |  0.03 |    0.17 |  60.20
+prestaciones de seguridad social                                                |    1 |  0.03 |    0.17 |  60.36
+prevencion de riesgos                                                           |    1 |  0.03 |    0.17 |  60.53
+produccion de eventos                                                           |    1 |  0.03 |    0.17 |  60.70
+productos de cathering                                                          |    1 |  0.03 |    0.17 |  60.86
+profesora                                                                       |    1 |  0.03 |    0.17 |  61.03
+promotora                                                                       |    1 |  0.03 |    0.17 |  61.19
+promotora de belleza                                                            |    1 |  0.03 |    0.17 |  61.36
+Pub                                                                             |    1 |  0.03 |    0.17 |  61.53
+publicidad                                                                      |    1 |  0.03 |    0.17 |  61.69
+Pyme de venta navideña                                                          |    1 |  0.03 |    0.17 |  61.86
+Radio emisora                                                                   |    1 |  0.03 |    0.17 |  62.02
+Reciclaje de fierro y otros materiales                                          |    1 |  0.03 |    0.17 |  62.19
+reciclar                                                                        |    1 |  0.03 |    0.17 |  62.35
+recolección de frutas                                                           |    1 |  0.03 |    0.17 |  62.52
+recolección de metales                                                          |    1 |  0.03 |    0.17 |  62.69
+recolectar cartones y botellas latas                                            |    1 |  0.03 |    0.17 |  62.85
+recolector                                                                      |    1 |  0.03 |    0.17 |  63.02
+recolector de basura                                                            |    1 |  0.03 |    0.17 |  63.18
+recreacion                                                                      |    1 |  0.03 |    0.17 |  63.35
+refinamiento de harinas                                                         |    1 |  0.03 |    0.17 |  63.52
+registro civil                                                                  |    1 |  0.03 |    0.17 |  63.68
+Reparacion de articulos electronicos                                            |    1 |  0.03 |    0.17 |  63.85
+reparacion de bombas desaladora                                                 |    1 |  0.03 |    0.17 |  64.01
+Reparacion de buques                                                            |    1 |  0.03 |    0.17 |  64.18
+reparación de computadoras                                                      |    1 |  0.03 |    0.17 |  64.34
+reparacion de vehiculos                                                         |    1 |  0.03 |    0.17 |  64.51
+reponedora empresa externa                                                      |    1 |  0.03 |    0.17 |  64.68
+Reposición                                                                      |    1 |  0.03 |    0.17 |  64.84
+repostera                                                                       |    1 |  0.03 |    0.17 |  65.01
+residencias del estado                                                          |    1 |  0.03 |    0.17 |  65.17
+restaurant                                                                      |    1 |  0.03 |    0.17 |  65.34
+restaurant comida                                                               |    1 |  0.03 |    0.17 |  65.51
+restaurante                                                                     |    1 |  0.03 |    0.17 |  65.67
+Restaurante                                                                     |    1 |  0.03 |    0.17 |  65.84
+restobar cerveceria                                                             |    1 |  0.03 |    0.17 |  66.00
+retail                                                                          |   10 |  0.33 |    1.66 |  67.66
+Retail                                                                          |    2 |  0.07 |    0.33 |  67.99
+retaul                                                                          |    1 |  0.03 |    0.17 |  68.16
+rubro de aseo o limpieza                                                        |    1 |  0.03 |    0.17 |  68.33
+rubro farmaceutico                                                              |    1 |  0.03 |    0.17 |  68.49
+salud                                                                           |    9 |  0.30 |    1.49 |  69.98
+Salud Municipal                                                                 |    1 |  0.03 |    0.17 |  70.15
+salud odontologica                                                              |    1 |  0.03 |    0.17 |  70.32
+salud pública y privada                                                         |    1 |  0.03 |    0.17 |  70.48
+se dedica a la construcción de casas                                            |    1 |  0.03 |    0.17 |  70.65
+secretaria                                                                      |    1 |  0.03 |    0.17 |  70.81
+secretariado                                                                    |    1 |  0.03 |    0.17 |  70.98
+seguridad                                                                       |    8 |  0.26 |    1.33 |  72.31
+Seguridad                                                                       |    1 |  0.03 |    0.17 |  72.47
+seguridad privada                                                               |    1 |  0.03 |    0.17 |  72.64
+servicio                                                                        |    2 |  0.07 |    0.33 |  72.97
+servicio de estilista y belleza                                                 |    1 |  0.03 |    0.17 |  73.13
+servicio de peluquería                                                          |    2 |  0.07 |    0.33 |  73.47
+servicio de restobar                                                            |    1 |  0.03 |    0.17 |  73.63
+servicio de salud                                                               |    1 |  0.03 |    0.17 |  73.80
+Servicio de Salud                                                               |    1 |  0.03 |    0.17 |  73.96
+Servicio domestico                                                              |    1 |  0.03 |    0.17 |  74.13
+servicio doméstico                                                              |    1 |  0.03 |    0.17 |  74.30
+Servicio doméstico                                                              |    1 |  0.03 |    0.17 |  74.46
+Servicio doméstico puertas afuera                                               |    1 |  0.03 |    0.17 |  74.63
+servicio gastronomico                                                           |    1 |  0.03 |    0.17 |  74.79
+servicio social                                                                 |    1 |  0.03 |    0.17 |  74.96
+servicio técnico de electrónica                                                 |    1 |  0.03 |    0.17 |  75.12
+servicios a domicilio                                                           |    1 |  0.03 |    0.17 |  75.29
+servicios de aseo                                                               |    1 |  0.03 |    0.17 |  75.46
+servicios de aseo pyc                                                           |    1 |  0.03 |    0.17 |  75.62
+Servicios de costuras y modista                                                 |    1 |  0.03 |    0.17 |  75.79
+servicios de salud privada                                                      |    1 |  0.03 |    0.17 |  75.95
+servicios de seguridad privada                                                  |    1 |  0.03 |    0.17 |  76.12
+servicios domésticos                                                            |    1 |  0.03 |    0.17 |  76.29
+Servicios domésticos                                                            |    1 |  0.03 |    0.17 |  76.45
+Servicios gastronómicos                                                         |    1 |  0.03 |    0.17 |  76.62
+Servicios industriales                                                          |    1 |  0.03 |    0.17 |  76.78
+Servicios mecánicos de automóviles                                              |    1 |  0.03 |    0.17 |  76.95
+servio de aseo                                                                  |    1 |  0.03 |    0.17 |  77.11
+SERVIU                                                                          |    1 |  0.03 |    0.17 |  77.28
+servixios contables y tributarios                                               |    1 |  0.03 |    0.17 |  77.45
+Sodimac                                                                         |    1 |  0.03 |    0.17 |  77.61
+spa                                                                             |    1 |  0.03 |    0.17 |  77.78
+suministro de materiales de construccion y demás                                |    1 |  0.03 |    0.17 |  77.94
+supermercado                                                                    |   18 |  0.59 |    2.99 |  80.93
+Supermercado                                                                    |    1 |  0.03 |    0.17 |  81.09
+supermercado, venta de suministros                                              |    1 |  0.03 |    0.17 |  81.26
+supermercados                                                                   |    3 |  0.10 |    0.50 |  81.76
+taller mecanico                                                                 |    2 |  0.07 |    0.33 |  82.09
+taller mecánico                                                                 |    1 |  0.03 |    0.17 |  82.26
+tatuajes                                                                        |    1 |  0.03 |    0.17 |  82.42
+telecomunicaciones                                                              |    1 |  0.03 |    0.17 |  82.59
+temporera                                                                       |    1 |  0.03 |    0.17 |  82.75
+terapeita holistica                                                             |    1 |  0.03 |    0.17 |  82.92
+tienda de ropa                                                                  |    2 |  0.07 |    0.33 |  83.25
+tienda retail venta de ropa                                                     |    1 |  0.03 |    0.17 |  83.42
+trabaja en una tienda de ropa interior, vendiendo                               |    1 |  0.03 |    0.17 |  83.58
+trabajadora social en cesfam                                                    |    1 |  0.03 |    0.17 |  83.75
+trabajo de podólogo                                                             |    1 |  0.03 |    0.17 |  83.91
+trabajo en una tienda de vendedora                                              |    1 |  0.03 |    0.17 |  84.08
+transporte                                                                      |    3 |  0.10 |    0.50 |  84.58
+transporte de pasajeros                                                         |    2 |  0.07 |    0.33 |  84.91
+transporte de personas                                                          |    1 |  0.03 |    0.17 |  85.07
+transporte público                                                              |    1 |  0.03 |    0.17 |  85.24
+turismo                                                                         |    4 |  0.13 |    0.66 |  85.90
+Turismo                                                                         |    3 |  0.10 |    0.50 |  86.40
+ve dedor y atencion a público                                                   |    1 |  0.03 |    0.17 |  86.57
+vende ropa usada y nueva                                                        |    1 |  0.03 |    0.17 |  86.73
+vendedor                                                                        |    4 |  0.13 |    0.66 |  87.40
+vendedor ambulante                                                              |    3 |  0.10 |    0.50 |  87.89
+vendedor artesano                                                               |    1 |  0.03 |    0.17 |  88.06
+vendedor Transbank                                                              |    1 |  0.03 |    0.17 |  88.23
+vendedora                                                                       |    5 |  0.16 |    0.83 |  89.05
+vendedora de ropa                                                               |    1 |  0.03 |    0.17 |  89.22
+Vendedora de ropa                                                               |    1 |  0.03 |    0.17 |  89.39
+vendedora de ropa nueva por redes sociales.                                     |    1 |  0.03 |    0.17 |  89.55
+vendedora de ropa usada                                                         |    1 |  0.03 |    0.17 |  89.72
+vendedora particular                                                            |    1 |  0.03 |    0.17 |  89.88
+vender paño de cocina                                                           |    1 |  0.03 |    0.17 |  90.05
+vendo dulces                                                                    |    1 |  0.03 |    0.17 |  90.22
+vendo ensaladas                                                                 |    1 |  0.03 |    0.17 |  90.38
+vendo ropa de mujer                                                             |    1 |  0.03 |    0.17 |  90.55
+venta                                                                           |    2 |  0.07 |    0.33 |  90.88
+venta al detalle                                                                |    1 |  0.03 |    0.17 |  91.04
+venta al por menor de artesanías                                                |    1 |  0.03 |    0.17 |  91.21
+venta de alimento                                                               |    1 |  0.03 |    0.17 |  91.38
+Venta de alimentos por menor.                                                   |    1 |  0.03 |    0.17 |  91.54
+venta de comida                                                                 |    1 |  0.03 |    0.17 |  91.71
+venta de electrodomésticos y ropa                                               |    1 |  0.03 |    0.17 |  91.87
+Venta de huevos                                                                 |    1 |  0.03 |    0.17 |  92.04
+venta de joyas                                                                  |    1 |  0.03 |    0.17 |  92.21
+Venta de leña                                                                   |    1 |  0.03 |    0.17 |  92.37
+venta de licores                                                                |    1 |  0.03 |    0.17 |  92.54
+Venta de refrescos, polla chilena, kino, lotto, etc                             |    1 |  0.03 |    0.17 |  92.70
+venta de ropa                                                                   |    4 |  0.13 |    0.66 |  93.37
+venta de ropa y electrodomésticos                                               |    2 |  0.07 |    0.33 |  93.70
+venta de suministros para manufacturas de parabrisas                            |    1 |  0.03 |    0.17 |  93.86
+venta de tour                                                                   |    1 |  0.03 |    0.17 |  94.03
+venta de traje de novios                                                        |    1 |  0.03 |    0.17 |  94.20
+venta de verduras y tortillas                                                   |    1 |  0.03 |    0.17 |  94.36
+venta del licor                                                                 |    1 |  0.03 |    0.17 |  94.53
+venta online en casa                                                            |    1 |  0.03 |    0.17 |  94.69
+venta por catalogo                                                              |    1 |  0.03 |    0.17 |  94.86
+venta por menor joyas                                                           |    1 |  0.03 |    0.17 |  95.02
+venta y atencion publico                                                        |    1 |  0.03 |    0.17 |  95.19
+venta y distribución de detergentes                                             |    1 |  0.03 |    0.17 |  95.36
+Venta y reparación de accesorios de Bisuteria enchape de oro, piedras y joyería |    1 |  0.03 |    0.17 |  95.52
+ventas                                                                          |    5 |  0.16 |    0.83 |  96.35
+ventas  poe menor                                                               |    1 |  0.03 |    0.17 |  96.52
+ventas al por menor , no quiere especificar                                     |    1 |  0.03 |    0.17 |  96.68
+ventas de claro hogar                                                           |    1 |  0.03 |    0.17 |  96.85
+ventas de cosméticos                                                            |    1 |  0.03 |    0.17 |  97.01
+ventas de libros                                                                |    1 |  0.03 |    0.17 |  97.18
+ventas de pizzas                                                                |    1 |  0.03 |    0.17 |  97.35
+ventas de ropa de bebe                                                          |    1 |  0.03 |    0.17 |  97.51
+ventas de ropa en retail                                                        |    1 |  0.03 |    0.17 |  97.68
+ventas de verduras                                                              |    1 |  0.03 |    0.17 |  97.84
+ventas en tienda                                                                |    1 |  0.03 |    0.17 |  98.01
+Ventas minoristas en local de barrio                                            |    1 |  0.03 |    0.17 |  98.18
+ventas online de ropa                                                           |    1 |  0.03 |    0.17 |  98.34
+ventas y ate xkln de publico                                                    |    1 |  0.03 |    0.17 |  98.51
+ventas y frutas en las ferias libres                                            |    1 |  0.03 |    0.17 |  98.67
+vestuario                                                                       |    1 |  0.03 |    0.17 |  98.84
+veterinaria                                                                     |    2 |  0.07 |    0.33 |  99.17
+veterinario                                                                     |    4 |  0.13 |    0.66 |  99.83
+vidrieria                                                                       |    1 |  0.03 |    0.17 | 100.00
+&lt;NA&gt;                                                                            | 2445 | 80.22 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>rama <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(data<span class="sc">$</span>a25 <span class="sc">==</span> <span class="dv">22</span>,</span>
 <span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>                    data<span class="sc">$</span>a25_esp,  <span class="co"># Usar el valor de "a25_esp" si la categoría es 22</span></span>
@@ -1227,35 +1640,468 @@ Value |    N | Raw % | Valid % | Cum. %
 <span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>rama)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>x &lt;numeric&gt; 
-# total N=3048 valid N=3048 mean=-8.94 sd=134.91
+<pre><code>x &lt;character&gt; 
+# total N=3048 valid N=3048 mean=59.44 sd=108.00
 
-Value |   N | Raw % | Valid % | Cum. %
---------------------------------------
- -999 |  19 |  0.62 |    0.62 |   0.62
- -888 |  46 |  1.51 |    1.51 |   2.13
-    1 | 192 |  6.30 |    6.30 |   8.43
-    2 |  96 |  3.15 |    3.15 |  11.58
-    3 | 187 |  6.14 |    6.14 |  17.72
-    4 |  43 |  1.41 |    1.41 |  19.13
-    5 |  20 |  0.66 |    0.66 |  19.78
-    6 | 182 |  5.97 |    5.97 |  25.75
-    7 | 441 | 14.47 |   14.47 |  40.22
-    8 | 185 |  6.07 |    6.07 |  46.29
-    9 | 169 |  5.54 |    5.54 |  51.84
-   10 |  46 |  1.51 |    1.51 |  53.35
-   11 |  40 |  1.31 |    1.31 |  54.66
-   12 |  28 |  0.92 |    0.92 |  55.58
-   13 | 107 |  3.51 |    3.51 |  59.09
-   14 | 114 |  3.74 |    3.74 |  62.83
-   15 | 130 |  4.27 |    4.27 |  67.09
-   16 | 190 |  6.23 |    6.23 |  73.33
-   17 | 269 |  8.83 |    8.83 |  82.15
-   18 |  62 |  2.03 |    2.03 |  84.19
-   19 | 403 | 13.22 |   13.22 |  97.41
-   20 |  49 |  1.61 |    1.61 |  99.02
-   21 |  30 |  0.98 |    0.98 | 100.00
- &lt;NA&gt; |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+Value                                                                           |   N | Raw % | Valid % | Cum. %
+----------------------------------------------------------------------------------------------------------------
+-888                                                                            |  46 |  1.51 |    1.51 |   1.51
+-999                                                                            |  19 |  0.62 |    0.62 |   2.13
+1                                                                               | 186 |  6.10 |    6.10 |   8.23
+10                                                                              |  46 |  1.51 |    1.51 |   9.74
+11                                                                              |  38 |  1.25 |    1.25 |  10.99
+12                                                                              |  25 |  0.82 |    0.82 |  11.81
+13                                                                              |  81 |  2.66 |    2.66 |  14.47
+14                                                                              |  88 |  2.89 |    2.89 |  17.36
+15                                                                              | 110 |  3.61 |    3.61 |  20.96
+16                                                                              | 178 |  5.84 |    5.84 |  26.80
+17                                                                              | 242 |  7.94 |    7.94 |  34.74
+18                                                                              |  50 |  1.64 |    1.64 |  36.38
+19                                                                              | 171 |  5.61 |    5.61 |  41.99
+2                                                                               |  92 |  3.02 |    3.02 |  45.01
+20                                                                              |  49 |  1.61 |    1.61 |  46.62
+21                                                                              |  30 |  0.98 |    0.98 |  47.60
+3                                                                               | 170 |  5.58 |    5.58 |  53.18
+4                                                                               |  43 |  1.41 |    1.41 |  54.59
+5                                                                               |  17 |  0.56 |    0.56 |  55.15
+6                                                                               | 178 |  5.84 |    5.84 |  60.99
+7                                                                               | 284 |  9.32 |    9.32 |  70.31
+8                                                                               | 171 |  5.61 |    5.61 |  75.92
+9                                                                               | 131 |  4.30 |    4.30 |  80.22
+abarrotes                                                                       |   1 |  0.03 |    0.03 |  80.25
+Actividades juridicas                                                           |   1 |  0.03 |    0.03 |  80.28
+adedora                                                                         |   1 |  0.03 |    0.03 |  80.31
+administracion de edificios                                                     |   1 |  0.03 |    0.03 |  80.35
+administrativa en oficina de contabilidad                                       |   1 |  0.03 |    0.03 |  80.38
+administrativo en centro de salud                                               |   1 |  0.03 |    0.03 |  80.41
+agroindustria                                                                   |   1 |  0.03 |    0.03 |  80.45
+alimentacion                                                                    |   3 |  0.10 |    0.10 |  80.54
+almacen                                                                         |   1 |  0.03 |    0.03 |  80.58
+aluminio y pvc                                                                  |   1 |  0.03 |    0.03 |  80.61
+ama de casa                                                                     |   1 |  0.03 |    0.03 |  80.64
+ambulante, comerciante                                                          |   1 |  0.03 |    0.03 |  80.68
+apoyo contable                                                                  |   1 |  0.03 |    0.03 |  80.71
+Apoyos a programas ee la Municipalidad                                          |   1 |  0.03 |    0.03 |  80.74
+area de la construccion                                                         |   1 |  0.03 |    0.03 |  80.77
+área salud pública                                                              |   1 |  0.03 |    0.03 |  80.81
+area verdes                                                                     |   1 |  0.03 |    0.03 |  80.84
+arreglo de autos taller mecanico                                                |   1 |  0.03 |    0.03 |  80.87
+Arreglo de bicicleta                                                            |   1 |  0.03 |    0.03 |  80.91
+arreglo de computadores                                                         |   1 |  0.03 |    0.03 |  80.94
+arreglos                                                                        |   1 |  0.03 |    0.03 |  80.97
+arriendos departamentos                                                         |   1 |  0.03 |    0.03 |  81.00
+artesanía                                                                       |   2 |  0.07 |    0.07 |  81.07
+artesania en madera                                                             |   1 |  0.03 |    0.03 |  81.10
+Artesanías                                                                      |   1 |  0.03 |    0.03 |  81.14
+aseo                                                                            |   9 |  0.30 |    0.30 |  81.43
+aseo de alfombras casa                                                          |   1 |  0.03 |    0.03 |  81.46
+aseo en casas                                                                   |   1 |  0.03 |    0.03 |  81.50
+aseo y hornato                                                                  |   1 |  0.03 |    0.03 |  81.53
+Aseo y hornato.                                                                 |   1 |  0.03 |    0.03 |  81.56
+aseo y ornato                                                                   |   1 |  0.03 |    0.03 |  81.59
+asesora                                                                         |   1 |  0.03 |    0.03 |  81.63
+asesora de hogar                                                                |   3 |  0.10 |    0.10 |  81.73
+Asesora de hogar                                                                |   1 |  0.03 |    0.03 |  81.76
+asesora del hogar                                                               |   5 |  0.16 |    0.16 |  81.92
+Asesora del hogar                                                               |   2 |  0.07 |    0.07 |  81.99
+Asesora del Hogar                                                               |   1 |  0.03 |    0.03 |  82.02
+asesora hogar                                                                   |   2 |  0.07 |    0.07 |  82.09
+asesora hogar casa particular                                                   |   1 |  0.03 |    0.03 |  82.12
+asesora puetss afuera                                                           |   1 |  0.03 |    0.03 |  82.15
+asesoria comercial                                                              |   1 |  0.03 |    0.03 |  82.19
+asesorias                                                                       |   1 |  0.03 |    0.03 |  82.22
+Asesorias legales                                                               |   1 |  0.03 |    0.03 |  82.25
+atencion a público                                                              |   1 |  0.03 |    0.03 |  82.28
+Atención al cliente                                                             |   1 |  0.03 |    0.03 |  82.32
+atencion al cliente en almacen de barrio                                        |   1 |  0.03 |    0.03 |  82.35
+atencion al cliente, pub restaurante                                            |   1 |  0.03 |    0.03 |  82.38
+atención cliente                                                                |   1 |  0.03 |    0.03 |  82.41
+atención de salud mental                                                        |   1 |  0.03 |    0.03 |  82.45
+Atencion veterinaria                                                            |   1 |  0.03 |    0.03 |  82.48
+atendiendo un negocio de abarrotes                                              |   1 |  0.03 |    0.03 |  82.51
+automotriz                                                                      |   1 |  0.03 |    0.03 |  82.55
+auxiliar de aseo                                                                |   1 |  0.03 |    0.03 |  82.58
+banco                                                                           |   1 |  0.03 |    0.03 |  82.61
+bar                                                                             |   1 |  0.03 |    0.03 |  82.64
+Bar, servicios de entretención nocturna                                         |   1 |  0.03 |    0.03 |  82.68
+barrio de calles                                                                |   1 |  0.03 |    0.03 |  82.71
+bazar                                                                           |   1 |  0.03 |    0.03 |  82.74
+belleza                                                                         |   5 |  0.16 |    0.16 |  82.91
+Belleza-peluqueria                                                              |   1 |  0.03 |    0.03 |  82.94
+Beneficios Universitarios                                                       |   1 |  0.03 |    0.03 |  82.97
+botilleria                                                                      |   1 |  0.03 |    0.03 |  83.01
+cafeteria                                                                       |   2 |  0.07 |    0.07 |  83.07
+cajera                                                                          |   4 |  0.13 |    0.13 |  83.20
+cajero                                                                          |   1 |  0.03 |    0.03 |  83.23
+calzado                                                                         |   1 |  0.03 |    0.03 |  83.27
+cantante                                                                        |   1 |  0.03 |    0.03 |  83.30
+carabinero                                                                      |   1 |  0.03 |    0.03 |  83.33
+Carniceria                                                                      |   1 |  0.03 |    0.03 |  83.37
+casa particular                                                                 |   9 |  0.30 |    0.30 |  83.66
+CASA PARTICULAR                                                                 |   1 |  0.03 |    0.03 |  83.69
+casa particular para cuidar adulto mayor                                        |   1 |  0.03 |    0.03 |  83.73
+casas particulares                                                              |   1 |  0.03 |    0.03 |  83.76
+casino                                                                          |   1 |  0.03 |    0.03 |  83.79
+centro dental                                                                   |   1 |  0.03 |    0.03 |  83.83
+Centros de arreglo automotriz                                                   |   1 |  0.03 |    0.03 |  83.86
+chofer                                                                          |   3 |  0.10 |    0.10 |  83.96
+chofer uber                                                                     |   1 |  0.03 |    0.03 |  83.99
+climatizacion insustrial                                                        |   1 |  0.03 |    0.03 |  84.02
+cocinar                                                                         |   1 |  0.03 |    0.03 |  84.06
+cocineria                                                                       |   1 |  0.03 |    0.03 |  84.09
+colegio                                                                         |   1 |  0.03 |    0.03 |  84.12
+colegio basico                                                                  |   1 |  0.03 |    0.03 |  84.15
+colegio metodista                                                               |   1 |  0.03 |    0.03 |  84.19
+comercial                                                                       |   1 |  0.03 |    0.03 |  84.22
+Comercial -minimarket                                                           |   1 |  0.03 |    0.03 |  84.25
+comercio                                                                        |   5 |  0.16 |    0.16 |  84.42
+comercio al por menor y mayor.                                                  |   1 |  0.03 |    0.03 |  84.45
+comercio alimentos                                                              |   1 |  0.03 |    0.03 |  84.48
+comercio de alimentos, en supermercado                                          |   1 |  0.03 |    0.03 |  84.51
+comercio retail                                                                 |   1 |  0.03 |    0.03 |  84.55
+comercio sexual                                                                 |   1 |  0.03 |    0.03 |  84.58
+comercio, ventas                                                                |   1 |  0.03 |    0.03 |  84.61
+comida                                                                          |   2 |  0.07 |    0.07 |  84.68
+comida cafeteria                                                                |   1 |  0.03 |    0.03 |  84.71
+comida rapida                                                                   |   1 |  0.03 |    0.03 |  84.74
+comida rápida                                                                   |   1 |  0.03 |    0.03 |  84.78
+compra y venta de auto                                                          |   1 |  0.03 |    0.03 |  84.81
+compra y venta de equipaje                                                      |   1 |  0.03 |    0.03 |  84.84
+compra y venta de gasolina                                                      |   1 |  0.03 |    0.03 |  84.88
+compra y venta de productos                                                     |   1 |  0.03 |    0.03 |  84.91
+comunicaciones                                                                  |   1 |  0.03 |    0.03 |  84.94
+Conaf                                                                           |   1 |  0.03 |    0.03 |  84.97
+CONAF                                                                           |   1 |  0.03 |    0.03 |  85.01
+conductor                                                                       |   1 |  0.03 |    0.03 |  85.04
+confeccion de ropa                                                              |   1 |  0.03 |    0.03 |  85.07
+Confección de Ropa                                                              |   1 |  0.03 |    0.03 |  85.10
+consejeria                                                                      |   1 |  0.03 |    0.03 |  85.14
+conserje                                                                        |   1 |  0.03 |    0.03 |  85.17
+conserjes                                                                       |   1 |  0.03 |    0.03 |  85.20
+construcción                                                                    |   1 |  0.03 |    0.03 |  85.24
+Consultora                                                                      |   1 |  0.03 |    0.03 |  85.27
+consultorio                                                                     |   1 |  0.03 |    0.03 |  85.30
+contabilidad                                                                    |   1 |  0.03 |    0.03 |  85.33
+Contabilidad                                                                    |   1 |  0.03 |    0.03 |  85.37
+contador                                                                        |   1 |  0.03 |    0.03 |  85.40
+contratista mineria                                                             |   1 |  0.03 |    0.03 |  85.43
+contratistas de mantencion                                                      |   1 |  0.03 |    0.03 |  85.47
+corredora de propiedades                                                        |   1 |  0.03 |    0.03 |  85.50
+corté de pelo particular                                                        |   1 |  0.03 |    0.03 |  85.53
+cosmetica                                                                       |   1 |  0.03 |    0.03 |  85.56
+costuras                                                                        |   2 |  0.07 |    0.07 |  85.63
+Criancero                                                                       |   1 |  0.03 |    0.03 |  85.66
+cuiadar un adulto mallor                                                        |   1 |  0.03 |    0.03 |  85.70
+cuidado adulto mayor                                                            |   1 |  0.03 |    0.03 |  85.73
+cuidado de bebe                                                                 |   1 |  0.03 |    0.03 |  85.76
+cuidado de enfermo                                                              |   1 |  0.03 |    0.03 |  85.79
+cuidado de niño en hogar particular                                             |   1 |  0.03 |    0.03 |  85.83
+cuidado de niños                                                                |   2 |  0.07 |    0.07 |  85.89
+Cuidado de niños puertas afuera                                                 |   1 |  0.03 |    0.03 |  85.93
+cuidado de un menor                                                             |   1 |  0.03 |    0.03 |  85.96
+cuidador de un local                                                            |   1 |  0.03 |    0.03 |  85.99
+cuidadora adulto mayor                                                          |   1 |  0.03 |    0.03 |  86.02
+cuidadora de adulto mayor                                                       |   1 |  0.03 |    0.03 |  86.06
+Cuidadora de adulto mayor en su domicilio                                       |   1 |  0.03 |    0.03 |  86.09
+cuidadora de ancianos                                                           |   1 |  0.03 |    0.03 |  86.12
+Decoracion de eventos                                                           |   1 |  0.03 |    0.03 |  86.15
+diseño                                                                          |   1 |  0.03 |    0.03 |  86.19
+Distribuidora Farmacéutica                                                      |   1 |  0.03 |    0.03 |  86.22
+dulceria                                                                        |   1 |  0.03 |    0.03 |  86.25
+educacion                                                                       |   3 |  0.10 |    0.10 |  86.35
+Educacion                                                                       |   1 |  0.03 |    0.03 |  86.38
+educación                                                                       |   2 |  0.07 |    0.07 |  86.45
+educacionales                                                                   |   1 |  0.03 |    0.03 |  86.48
+electricista                                                                    |   2 |  0.07 |    0.07 |  86.55
+empleada domestica                                                              |   2 |  0.07 |    0.07 |  86.61
+Empleada domestica                                                              |   1 |  0.03 |    0.03 |  86.65
+empleada domestica puertas afuera                                               |   1 |  0.03 |    0.03 |  86.68
+empleado de un tribunal de justicia                                             |   1 |  0.03 |    0.03 |  86.71
+empresa de aseo                                                                 |   2 |  0.07 |    0.07 |  86.78
+empresa de maquinarias                                                          |   1 |  0.03 |    0.03 |  86.81
+Empresa de seguridad                                                            |   1 |  0.03 |    0.03 |  86.84
+empresa de transportes                                                          |   1 |  0.03 |    0.03 |  86.88
+Empresa de Turismo                                                              |   1 |  0.03 |    0.03 |  86.91
+Empresa independiente                                                           |   1 |  0.03 |    0.03 |  86.94
+empresa particular de ventas de plantas                                         |   1 |  0.03 |    0.03 |  86.98
+empresa privada de aeguridad                                                    |   1 |  0.03 |    0.03 |  87.01
+empresas de encomiendas y lojistica                                             |   1 |  0.03 |    0.03 |  87.04
+en la mar                                                                       |   1 |  0.03 |    0.03 |  87.07
+en un supermercado haciendo la limpieza                                         |   1 |  0.03 |    0.03 |  87.11
+en una veterinaria                                                              |   1 |  0.03 |    0.03 |  87.14
+enseño a niños a tocar piano doy clases de piano a domicilio                    |   1 |  0.03 |    0.03 |  87.17
+entretencion                                                                    |   1 |  0.03 |    0.03 |  87.20
+es independiente                                                                |   1 |  0.03 |    0.03 |  87.24
+estacionamiento                                                                 |   1 |  0.03 |    0.03 |  87.27
+estetica                                                                        |   1 |  0.03 |    0.03 |  87.30
+estilista                                                                       |   1 |  0.03 |    0.03 |  87.34
+estructura metalica                                                             |   1 |  0.03 |    0.03 |  87.37
+evaluacion salud mental psicologica                                             |   1 |  0.03 |    0.03 |  87.40
+eventos                                                                         |   1 |  0.03 |    0.03 |  87.43
+fabricacion y repatacion de instrumentos mysicales                              |   1 |  0.03 |    0.03 |  87.47
+fabricación, venta y distribución de alimentos                                  |   1 |  0.03 |    0.03 |  87.50
+farmacia                                                                        |   2 |  0.07 |    0.07 |  87.57
+feria                                                                           |   1 |  0.03 |    0.03 |  87.60
+Ferreteria                                                                      |   1 |  0.03 |    0.03 |  87.63
+FFAA                                                                            |   5 |  0.16 |    0.16 |  87.80
+finanzas                                                                        |   1 |  0.03 |    0.03 |  87.83
+floristería o venta de flores                                                   |   1 |  0.03 |    0.03 |  87.86
+frutería                                                                        |   2 |  0.07 |    0.07 |  87.93
+fundaciones                                                                     |   1 |  0.03 |    0.03 |  87.96
+galpones de zofri                                                               |   1 |  0.03 |    0.03 |  87.99
+garson en pub                                                                   |   1 |  0.03 |    0.03 |  88.02
+gasfiteria                                                                      |   2 |  0.07 |    0.07 |  88.09
+Gasfiteria                                                                      |   1 |  0.03 |    0.03 |  88.12
+Gastronomía                                                                     |   2 |  0.07 |    0.07 |  88.19
+gastronomico                                                                    |   1 |  0.03 |    0.03 |  88.22
+gorzona                                                                         |   1 |  0.03 |    0.03 |  88.25
+gruas orquillas maquinaria pesada perforaciones de enap                         |   1 |  0.03 |    0.03 |  88.29
+Guarderia canina                                                                |   1 |  0.03 |    0.03 |  88.32
+guardia                                                                         |   7 |  0.23 |    0.23 |  88.55
+guardia de seguridad                                                            |   5 |  0.16 |    0.16 |  88.71
+Hacer y vender pan y productos alimenticios                                     |   1 |  0.03 |    0.03 |  88.75
+heladeria                                                                       |   1 |  0.03 |    0.03 |  88.78
+hispital                                                                        |   1 |  0.03 |    0.03 |  88.81
+hogar mejor niñez                                                               |   1 |  0.03 |    0.03 |  88.85
+hogar particular                                                                |   2 |  0.07 |    0.07 |  88.91
+hospital regional                                                               |   1 |  0.03 |    0.03 |  88.94
+Hotel y servicios para mascotas                                                 |   1 |  0.03 |    0.03 |  88.98
+hotelería                                                                       |   1 |  0.03 |    0.03 |  89.01
+Iglesia pentecostal                                                             |   1 |  0.03 |    0.03 |  89.04
+imprenta                                                                        |   1 |  0.03 |    0.03 |  89.07
+Independiente                                                                   |   2 |  0.07 |    0.07 |  89.14
+independiente cuidado adulto mayor                                              |   1 |  0.03 |    0.03 |  89.17
+industrial                                                                      |   1 |  0.03 |    0.03 |  89.21
+inmobiliaria                                                                    |   1 |  0.03 |    0.03 |  89.24
+instalacion electriva                                                           |   1 |  0.03 |    0.03 |  89.27
+jardinera                                                                       |   1 |  0.03 |    0.03 |  89.30
+Jardinería                                                                      |   1 |  0.03 |    0.03 |  89.34
+jornalero de camión                                                             |   1 |  0.03 |    0.03 |  89.37
+juguetes                                                                        |   1 |  0.03 |    0.03 |  89.40
+junior colegio de contadores                                                    |   1 |  0.03 |    0.03 |  89.44
+junji junta nacional de jardines infantiles                                     |   1 |  0.03 |    0.03 |  89.47
+kinesiólogo                                                                     |   1 |  0.03 |    0.03 |  89.50
+kiosko                                                                          |   1 |  0.03 |    0.03 |  89.53
+labores de hogar                                                                |   3 |  0.10 |    0.10 |  89.63
+lashista                                                                        |   1 |  0.03 |    0.03 |  89.67
+lentes                                                                          |   1 |  0.03 |    0.03 |  89.70
+lider                                                                           |   1 |  0.03 |    0.03 |  89.73
+limpieza a oficinas                                                             |   1 |  0.03 |    0.03 |  89.76
+lumpieza                                                                        |   1 |  0.03 |    0.03 |  89.80
+maestro albañil                                                                 |   1 |  0.03 |    0.03 |  89.83
+Manejo de vehiculos                                                             |   1 |  0.03 |    0.03 |  89.86
+manicurista                                                                     |   3 |  0.10 |    0.10 |  89.96
+manos para hacer las uñas                                                       |   1 |  0.03 |    0.03 |  89.99
+mantenimiento de areas verdes y plazoletas                                      |   1 |  0.03 |    0.03 |  90.03
+maquillista                                                                     |   1 |  0.03 |    0.03 |  90.06
+material de malla                                                               |   1 |  0.03 |    0.03 |  90.09
+mecanica                                                                        |   4 |  0.13 |    0.13 |  90.22
+Mecanica                                                                        |   1 |  0.03 |    0.03 |  90.26
+mecanica automotriz                                                             |   1 |  0.03 |    0.03 |  90.29
+mecanico                                                                        |   3 |  0.10 |    0.10 |  90.39
+mecanico automotriz                                                             |   1 |  0.03 |    0.03 |  90.42
+mecánico independiente                                                          |   1 |  0.03 |    0.03 |  90.45
+medico veterinario                                                              |   1 |  0.03 |    0.03 |  90.49
+mercado                                                                         |   1 |  0.03 |    0.03 |  90.52
+minera                                                                          |   1 |  0.03 |    0.03 |  90.55
+mineria                                                                         |   2 |  0.07 |    0.07 |  90.62
+minería                                                                         |   2 |  0.07 |    0.07 |  90.68
+mini market                                                                     |   1 |  0.03 |    0.03 |  90.72
+minimarket                                                                      |   2 |  0.07 |    0.07 |  90.78
+moda y confección                                                               |   1 |  0.03 |    0.03 |  90.81
+modista                                                                         |   1 |  0.03 |    0.03 |  90.85
+Multitienda Paris, ventas                                                       |   1 |  0.03 |    0.03 |  90.88
+municipalidad                                                                   |   6 |  0.20 |    0.20 |  91.08
+municipio                                                                       |   1 |  0.03 |    0.03 |  91.11
+nana                                                                            |   1 |  0.03 |    0.03 |  91.14
+negocio                                                                         |   1 |  0.03 |    0.03 |  91.17
+negocio de abarrotes                                                            |   1 |  0.03 |    0.03 |  91.21
+Negocio de población                                                            |   1 |  0.03 |    0.03 |  91.24
+negocios de carnicerias                                                         |   1 |  0.03 |    0.03 |  91.27
+Night Club                                                                      |   1 |  0.03 |    0.03 |  91.31
+niñera                                                                          |   2 |  0.07 |    0.07 |  91.37
+Niñera                                                                          |   2 |  0.07 |    0.07 |  91.44
+niñera casa particular                                                          |   1 |  0.03 |    0.03 |  91.47
+niñera en casa particular                                                       |   1 |  0.03 |    0.03 |  91.50
+no perecibles                                                                   |   1 |  0.03 |    0.03 |  91.54
+obrero                                                                          |   1 |  0.03 |    0.03 |  91.57
+panaderia                                                                       |   2 |  0.07 |    0.07 |  91.63
+panadería                                                                       |   1 |  0.03 |    0.03 |  91.67
+panadero                                                                        |   2 |  0.07 |    0.07 |  91.73
+parvularia                                                                      |   1 |  0.03 |    0.03 |  91.77
+pasteleria                                                                      |   1 |  0.03 |    0.03 |  91.80
+pastelería                                                                      |   2 |  0.07 |    0.07 |  91.86
+pasteleria y panaderia                                                          |   1 |  0.03 |    0.03 |  91.90
+peluquería                                                                      |   1 |  0.03 |    0.03 |  91.93
+peluquería peinados                                                             |   1 |  0.03 |    0.03 |  91.96
+periodismo                                                                      |   1 |  0.03 |    0.03 |  91.99
+pesca                                                                           |   1 |  0.03 |    0.03 |  92.03
+pintura automotriz                                                              |   1 |  0.03 |    0.03 |  92.06
+Pintura de vehiculos                                                            |   1 |  0.03 |    0.03 |  92.09
+piscicultura                                                                    |   1 |  0.03 |    0.03 |  92.13
+prestaciones de seguridad social                                                |   1 |  0.03 |    0.03 |  92.16
+prevencion de riesgos                                                           |   1 |  0.03 |    0.03 |  92.19
+produccion de eventos                                                           |   1 |  0.03 |    0.03 |  92.22
+productos de cathering                                                          |   1 |  0.03 |    0.03 |  92.26
+profesora                                                                       |   1 |  0.03 |    0.03 |  92.29
+promotora                                                                       |   1 |  0.03 |    0.03 |  92.32
+promotora de belleza                                                            |   1 |  0.03 |    0.03 |  92.36
+Pub                                                                             |   1 |  0.03 |    0.03 |  92.39
+publicidad                                                                      |   1 |  0.03 |    0.03 |  92.42
+Pyme de venta navideña                                                          |   1 |  0.03 |    0.03 |  92.45
+Radio emisora                                                                   |   1 |  0.03 |    0.03 |  92.49
+Reciclaje de fierro y otros materiales                                          |   1 |  0.03 |    0.03 |  92.52
+reciclar                                                                        |   1 |  0.03 |    0.03 |  92.55
+recolección de frutas                                                           |   1 |  0.03 |    0.03 |  92.59
+recolección de metales                                                          |   1 |  0.03 |    0.03 |  92.62
+recolectar cartones y botellas latas                                            |   1 |  0.03 |    0.03 |  92.65
+recolector                                                                      |   1 |  0.03 |    0.03 |  92.68
+recolector de basura                                                            |   1 |  0.03 |    0.03 |  92.72
+recreacion                                                                      |   1 |  0.03 |    0.03 |  92.75
+refinamiento de harinas                                                         |   1 |  0.03 |    0.03 |  92.78
+registro civil                                                                  |   1 |  0.03 |    0.03 |  92.81
+Reparacion de articulos electronicos                                            |   1 |  0.03 |    0.03 |  92.85
+reparacion de bombas desaladora                                                 |   1 |  0.03 |    0.03 |  92.88
+Reparacion de buques                                                            |   1 |  0.03 |    0.03 |  92.91
+reparación de computadoras                                                      |   1 |  0.03 |    0.03 |  92.95
+reparacion de vehiculos                                                         |   1 |  0.03 |    0.03 |  92.98
+reponedora empresa externa                                                      |   1 |  0.03 |    0.03 |  93.01
+Reposición                                                                      |   1 |  0.03 |    0.03 |  93.04
+repostera                                                                       |   1 |  0.03 |    0.03 |  93.08
+residencias del estado                                                          |   1 |  0.03 |    0.03 |  93.11
+restaurant                                                                      |   1 |  0.03 |    0.03 |  93.14
+restaurant comida                                                               |   1 |  0.03 |    0.03 |  93.18
+restaurante                                                                     |   1 |  0.03 |    0.03 |  93.21
+Restaurante                                                                     |   1 |  0.03 |    0.03 |  93.24
+restobar cerveceria                                                             |   1 |  0.03 |    0.03 |  93.27
+retail                                                                          |  10 |  0.33 |    0.33 |  93.60
+Retail                                                                          |   2 |  0.07 |    0.07 |  93.67
+retaul                                                                          |   1 |  0.03 |    0.03 |  93.70
+rubro de aseo o limpieza                                                        |   1 |  0.03 |    0.03 |  93.73
+rubro farmaceutico                                                              |   1 |  0.03 |    0.03 |  93.77
+salud                                                                           |   9 |  0.30 |    0.30 |  94.06
+Salud Municipal                                                                 |   1 |  0.03 |    0.03 |  94.09
+salud odontologica                                                              |   1 |  0.03 |    0.03 |  94.13
+salud pública y privada                                                         |   1 |  0.03 |    0.03 |  94.16
+se dedica a la construcción de casas                                            |   1 |  0.03 |    0.03 |  94.19
+secretaria                                                                      |   1 |  0.03 |    0.03 |  94.23
+secretariado                                                                    |   1 |  0.03 |    0.03 |  94.26
+seguridad                                                                       |   8 |  0.26 |    0.26 |  94.52
+Seguridad                                                                       |   1 |  0.03 |    0.03 |  94.55
+seguridad privada                                                               |   1 |  0.03 |    0.03 |  94.59
+servicio                                                                        |   2 |  0.07 |    0.07 |  94.65
+servicio de estilista y belleza                                                 |   1 |  0.03 |    0.03 |  94.69
+servicio de peluquería                                                          |   2 |  0.07 |    0.07 |  94.75
+servicio de restobar                                                            |   1 |  0.03 |    0.03 |  94.78
+servicio de salud                                                               |   1 |  0.03 |    0.03 |  94.82
+Servicio de Salud                                                               |   1 |  0.03 |    0.03 |  94.85
+Servicio domestico                                                              |   1 |  0.03 |    0.03 |  94.88
+servicio doméstico                                                              |   1 |  0.03 |    0.03 |  94.91
+Servicio doméstico                                                              |   1 |  0.03 |    0.03 |  94.95
+Servicio doméstico puertas afuera                                               |   1 |  0.03 |    0.03 |  94.98
+servicio gastronomico                                                           |   1 |  0.03 |    0.03 |  95.01
+servicio social                                                                 |   1 |  0.03 |    0.03 |  95.05
+servicio técnico de electrónica                                                 |   1 |  0.03 |    0.03 |  95.08
+servicios a domicilio                                                           |   1 |  0.03 |    0.03 |  95.11
+servicios de aseo                                                               |   1 |  0.03 |    0.03 |  95.14
+servicios de aseo pyc                                                           |   1 |  0.03 |    0.03 |  95.18
+Servicios de costuras y modista                                                 |   1 |  0.03 |    0.03 |  95.21
+servicios de salud privada                                                      |   1 |  0.03 |    0.03 |  95.24
+servicios de seguridad privada                                                  |   1 |  0.03 |    0.03 |  95.28
+servicios domésticos                                                            |   1 |  0.03 |    0.03 |  95.31
+Servicios domésticos                                                            |   1 |  0.03 |    0.03 |  95.34
+Servicios gastronómicos                                                         |   1 |  0.03 |    0.03 |  95.37
+Servicios industriales                                                          |   1 |  0.03 |    0.03 |  95.41
+Servicios mecánicos de automóviles                                              |   1 |  0.03 |    0.03 |  95.44
+servio de aseo                                                                  |   1 |  0.03 |    0.03 |  95.47
+SERVIU                                                                          |   1 |  0.03 |    0.03 |  95.51
+servixios contables y tributarios                                               |   1 |  0.03 |    0.03 |  95.54
+Sodimac                                                                         |   1 |  0.03 |    0.03 |  95.57
+spa                                                                             |   1 |  0.03 |    0.03 |  95.60
+suministro de materiales de construccion y demás                                |   1 |  0.03 |    0.03 |  95.64
+supermercado                                                                    |  18 |  0.59 |    0.59 |  96.23
+Supermercado                                                                    |   1 |  0.03 |    0.03 |  96.26
+supermercado, venta de suministros                                              |   1 |  0.03 |    0.03 |  96.29
+supermercados                                                                   |   3 |  0.10 |    0.10 |  96.39
+taller mecanico                                                                 |   2 |  0.07 |    0.07 |  96.46
+taller mecánico                                                                 |   1 |  0.03 |    0.03 |  96.49
+tatuajes                                                                        |   1 |  0.03 |    0.03 |  96.52
+telecomunicaciones                                                              |   1 |  0.03 |    0.03 |  96.56
+temporera                                                                       |   1 |  0.03 |    0.03 |  96.59
+terapeita holistica                                                             |   1 |  0.03 |    0.03 |  96.62
+tienda de ropa                                                                  |   2 |  0.07 |    0.07 |  96.69
+tienda retail venta de ropa                                                     |   1 |  0.03 |    0.03 |  96.72
+trabaja en una tienda de ropa interior, vendiendo                               |   1 |  0.03 |    0.03 |  96.75
+trabajadora social en cesfam                                                    |   1 |  0.03 |    0.03 |  96.78
+trabajo de podólogo                                                             |   1 |  0.03 |    0.03 |  96.82
+trabajo en una tienda de vendedora                                              |   1 |  0.03 |    0.03 |  96.85
+transporte                                                                      |   3 |  0.10 |    0.10 |  96.95
+transporte de pasajeros                                                         |   2 |  0.07 |    0.07 |  97.01
+transporte de personas                                                          |   1 |  0.03 |    0.03 |  97.05
+transporte público                                                              |   1 |  0.03 |    0.03 |  97.08
+turismo                                                                         |   4 |  0.13 |    0.13 |  97.21
+Turismo                                                                         |   3 |  0.10 |    0.10 |  97.31
+ve dedor y atencion a público                                                   |   1 |  0.03 |    0.03 |  97.34
+vende ropa usada y nueva                                                        |   1 |  0.03 |    0.03 |  97.38
+vendedor                                                                        |   4 |  0.13 |    0.13 |  97.51
+vendedor ambulante                                                              |   3 |  0.10 |    0.10 |  97.60
+vendedor artesano                                                               |   1 |  0.03 |    0.03 |  97.64
+vendedor Transbank                                                              |   1 |  0.03 |    0.03 |  97.67
+vendedora                                                                       |   5 |  0.16 |    0.16 |  97.83
+vendedora de ropa                                                               |   1 |  0.03 |    0.03 |  97.87
+Vendedora de ropa                                                               |   1 |  0.03 |    0.03 |  97.90
+vendedora de ropa nueva por redes sociales.                                     |   1 |  0.03 |    0.03 |  97.93
+vendedora de ropa usada                                                         |   1 |  0.03 |    0.03 |  97.97
+vendedora particular                                                            |   1 |  0.03 |    0.03 |  98.00
+vender paño de cocina                                                           |   1 |  0.03 |    0.03 |  98.03
+vendo dulces                                                                    |   1 |  0.03 |    0.03 |  98.06
+vendo ensaladas                                                                 |   1 |  0.03 |    0.03 |  98.10
+vendo ropa de mujer                                                             |   1 |  0.03 |    0.03 |  98.13
+venta                                                                           |   2 |  0.07 |    0.07 |  98.20
+venta al detalle                                                                |   1 |  0.03 |    0.03 |  98.23
+venta al por menor de artesanías                                                |   1 |  0.03 |    0.03 |  98.26
+venta de alimento                                                               |   1 |  0.03 |    0.03 |  98.29
+Venta de alimentos por menor.                                                   |   1 |  0.03 |    0.03 |  98.33
+venta de comida                                                                 |   1 |  0.03 |    0.03 |  98.36
+venta de electrodomésticos y ropa                                               |   1 |  0.03 |    0.03 |  98.39
+Venta de huevos                                                                 |   1 |  0.03 |    0.03 |  98.43
+venta de joyas                                                                  |   1 |  0.03 |    0.03 |  98.46
+Venta de leña                                                                   |   1 |  0.03 |    0.03 |  98.49
+venta de licores                                                                |   1 |  0.03 |    0.03 |  98.52
+Venta de refrescos, polla chilena, kino, lotto, etc                             |   1 |  0.03 |    0.03 |  98.56
+venta de ropa                                                                   |   4 |  0.13 |    0.13 |  98.69
+venta de ropa y electrodomésticos                                               |   2 |  0.07 |    0.07 |  98.75
+venta de suministros para manufacturas de parabrisas                            |   1 |  0.03 |    0.03 |  98.79
+venta de tour                                                                   |   1 |  0.03 |    0.03 |  98.82
+venta de traje de novios                                                        |   1 |  0.03 |    0.03 |  98.85
+venta de verduras y tortillas                                                   |   1 |  0.03 |    0.03 |  98.88
+venta del licor                                                                 |   1 |  0.03 |    0.03 |  98.92
+venta online en casa                                                            |   1 |  0.03 |    0.03 |  98.95
+venta por catalogo                                                              |   1 |  0.03 |    0.03 |  98.98
+venta por menor joyas                                                           |   1 |  0.03 |    0.03 |  99.02
+venta y atencion publico                                                        |   1 |  0.03 |    0.03 |  99.05
+venta y distribución de detergentes                                             |   1 |  0.03 |    0.03 |  99.08
+Venta y reparación de accesorios de Bisuteria enchape de oro, piedras y joyería |   1 |  0.03 |    0.03 |  99.11
+ventas                                                                          |   5 |  0.16 |    0.16 |  99.28
+ventas  poe menor                                                               |   1 |  0.03 |    0.03 |  99.31
+ventas al por menor , no quiere especificar                                     |   1 |  0.03 |    0.03 |  99.34
+ventas de claro hogar                                                           |   1 |  0.03 |    0.03 |  99.38
+ventas de cosméticos                                                            |   1 |  0.03 |    0.03 |  99.41
+ventas de libros                                                                |   1 |  0.03 |    0.03 |  99.44
+ventas de pizzas                                                                |   1 |  0.03 |    0.03 |  99.48
+ventas de ropa de bebe                                                          |   1 |  0.03 |    0.03 |  99.51
+ventas de ropa en retail                                                        |   1 |  0.03 |    0.03 |  99.54
+ventas de verduras                                                              |   1 |  0.03 |    0.03 |  99.57
+ventas en tienda                                                                |   1 |  0.03 |    0.03 |  99.61
+Ventas minoristas en local de barrio                                            |   1 |  0.03 |    0.03 |  99.64
+ventas online de ropa                                                           |   1 |  0.03 |    0.03 |  99.67
+ventas y ate xkln de publico                                                    |   1 |  0.03 |    0.03 |  99.70
+ventas y frutas en las ferias libres                                            |   1 |  0.03 |    0.03 |  99.74
+vestuario                                                                       |   1 |  0.03 |    0.03 |  99.77
+veterinaria                                                                     |   2 |  0.07 |    0.07 |  99.84
+veterinario                                                                     |   4 |  0.13 |    0.13 |  99.97
+vidrieria                                                                       |   1 |  0.03 |    0.03 | 100.00
+&lt;NA&gt;                                                                            |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">mutate</span>(data,</span>
 <span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>               <span class="at">rama=</span><span class="fu">factor</span>(<span class="fu">case_when</span>(rama<span class="sc">==</span><span class="dv">1</span><span class="sc">~</span><span class="st">"A"</span>,</span>
@@ -1272,21 +2118,21 @@ Value |   N | Raw % | Valid % | Cum. %
 <span id="cb102-13"><a href="#cb102-13" aria-hidden="true" tabindex="-1"></a><span class="fu">frq</span>(data<span class="sc">$</span>rama)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>x &lt;categorical&gt; 
-# total N=3048 valid N=2983 mean=5.48 sd=2.62
+# total N=3048 valid N=2380 mean=5.22 sd=2.61
 
 Value |   N | Raw % | Valid % | Cum. %
 --------------------------------------
-A     | 192 |  6.30 |    6.44 |   6.44
-BC    | 283 |  9.28 |    9.49 |  15.92
-DEF   | 245 |  8.04 |    8.21 |  24.14
-GI    | 626 | 20.54 |   20.99 |  45.12
-H     | 169 |  5.54 |    5.67 |  50.79
-JKLMN | 335 | 10.99 |   11.23 |  62.02
-O     | 130 |  4.27 |    4.36 |  66.38
-PQ    | 459 | 15.06 |   15.39 |  81.76
-RSU   | 514 | 16.86 |   17.23 |  98.99
-T     |  30 |  0.98 |    1.01 | 100.00
-&lt;NA&gt;  |  65 |  2.13 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
+A     | 186 |  6.10 |    7.82 |   7.82
+BC    | 262 |  8.60 |   11.01 |  18.82
+DEF   | 238 |  7.81 |   10.00 |  28.82
+GI    | 455 | 14.93 |   19.12 |  47.94
+H     | 131 |  4.30 |    5.50 |  53.45
+JKLMN | 278 |  9.12 |   11.68 |  65.13
+O     | 110 |  3.61 |    4.62 |  69.75
+PQ    | 420 | 13.78 |   17.65 |  87.39
+RSU   | 270 |  8.86 |   11.34 |  98.74
+T     |  30 |  0.98 |    1.26 | 100.00
+&lt;NA&gt;  | 668 | 21.92 |    &lt;NA&gt; |   &lt;NA&gt;</code></pre>
 </div>
 </div>
 </section>
