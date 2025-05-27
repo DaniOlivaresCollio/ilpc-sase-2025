@@ -1,0 +1,4 @@
+"0","save(data,file=""../output/datos-ilpc.Rdata"")"
+"2","Warning: cannot open compressed file '../output/datos-ilpc.Rdata', probable reason 'No such file or directory'"
+"2","Error in gzfile(file, ""wb"") : no se puede abrir la conexión
+"

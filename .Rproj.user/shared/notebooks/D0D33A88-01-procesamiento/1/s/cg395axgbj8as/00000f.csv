@@ -1,0 +1,43 @@
+"0","frq(data$e05)"
+"1","[31mx[39m[34m <numeric>[39m 
+[34m# total N=3048 valid N=3048 mean=-2.37 sd=88.97[39m
+
+Value |    N | Raw % | Valid % | Cum. %
+---------------------------------------
+ -999 |   13 |  0.43 |    0.43 |   0.43
+ -888 |   14 |  0.46 |    0.46 |   0.89
+    1 |   28 |  0.92 |    0.92 |   1.80
+    2 |   95 |  3.12 |    3.12 |   4.92
+    3 |  215 |  7.05 |    7.05 |  11.98
+    4 |  201 |  6.59 |    6.59 |  18.57
+    5 | 1062 | 34.84 |   34.84 |  53.41
+    6 |  178 |  5.84 |    5.84 |  59.25
+    7 |  440 | 14.44 |   14.44 |  73.69
+    8 |  205 |  6.73 |    6.73 |  80.41
+    9 |  531 | 17.42 |   17.42 |  97.83
+   10 |   66 |  2.17 |    2.17 | 100.00
+ <NA> |    0 |  0.00 |    <NA> |   <NA>
+"
+"0","data$nedu <- car::recode(data$e05,"
+"0","                         recodes=c(""c(-888,-999,1,2,3)='Hasta Básica completa';"
+"0","                                    c(4,5)='Hasta Media completa';"
+"0","                                    c(6,7,8)='Hasta Universitaria incompleta';"
+"0","                                    c(9,10)='Universitaria completa o más'""),"
+"0","                           as.factor=TRUE, "
+"0","                           levels=c('Hasta Básica completa', "
+"0","                                    'Hasta Media completa',"
+"0","                                    'Hasta Universitaria incompleta',"
+"0","                                    'Universitaria completa o más'))"
+"0",""
+"0","frq(data$nedu)"
+"1","[31mx[39m[34m <categorical>[39m 
+[34m# total N=3048 valid N=3048 mean=2.54 sd=0.94[39m
+
+Value                          |    N | Raw % | Valid % | Cum. %
+----------------------------------------------------------------
+Hasta Básica completa          |  365 | 11.98 |   11.98 |  11.98
+Hasta Media completa           | 1263 | 41.44 |   41.44 |  53.41
+Hasta Universitaria incompleta |  823 | 27.00 |   27.00 |  80.41
+Universitaria completa o más   |  597 | 19.59 |   19.59 | 100.00
+<NA>                           |    0 |  0.00 |    <NA> |   <NA>
+"
