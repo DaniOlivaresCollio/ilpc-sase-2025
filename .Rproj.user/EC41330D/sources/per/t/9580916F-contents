@@ -49,11 +49,14 @@ data <- data %>%
          # Var independientes
          b19,
          b21,
+         b29,
          # Var dependientes
          c04_01,c04_02,c04_03,c04_04,
          c10_01,c10_02,
          c11_01,c11_02,c11_03,c11_04,
          c08,
+         c09,c09_esp,
+         c12_01,c12_02,
          # Var mediadoras
          b06_01,b06_02,b06_03,b06_04,b06_05,
          b11,b12,
@@ -61,6 +64,7 @@ data <- data %>%
          sexo=e01,
          edad=e02,
          e05,
+         a15,
          a25,a25_esp,
          a26,
          a27)# %>% 
@@ -135,6 +139,23 @@ data <- data %>%
     ))
 
 frq(data$af_sindical)
+```
+
+### int_sindical
+
+```{r}
+frq(data$b29)
+
+# Afiliación sindical
+data <- data %>%
+  mutate(int_sindical=case_when(
+    sit_empleo %in% c("Empleador(a)", "Autoempleado(a)") ~ NA_real_,
+    af_sindical == 1 ~ 1,
+    af_sindical == 0 & b29 %in% c(4,5) ~ 2,
+    af_sindical == 0 & b29 %in% c(1,2,3,-888,-999) ~ 3
+    ))
+
+frq(data$int_sindical)
 ```
 
 ## V. Dependientes
@@ -244,6 +265,19 @@ data$pol_id <- car::recode(data$c08,
                                     'No se identifica'))
 
 frq(data$pol_id)
+```
+
+### pol_left_id
+
+```{r}
+frq(data$c09)
+
+data <- data %>% 
+  mutate(pol_left_id=if_else(
+    c09 %in% c(1, 2, 3, 13),1,0
+  ))
+
+frq(data$pol_left_id)
 ```
 
 ### part_vecinal
@@ -498,6 +532,22 @@ data <- data %>%
     ))
 
 frq(data$sector)
+```
+
+### supervisa
+
+```{r}
+frq(data$a15)
+
+data <- data %>% 
+  mutate(supervisa=case_when(
+    sit_empleo %in% c("Empleador(a)", "Autoempleado(a)") ~ NA_real_,
+    a15 %in% c(1,2) ~ 1,
+    a15 == 3 ~ 2,
+    a15 == 4 ~ 3
+  ))
+
+frq(data$supervisa)
 ```
 
 ## Guardar datos
