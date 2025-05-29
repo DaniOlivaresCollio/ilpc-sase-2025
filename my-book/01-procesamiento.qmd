@@ -36,7 +36,7 @@ p_load(tidyverse,
 ```{r datos,message=FALSE,warning=FALSE}
 # data_raw <- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=3)
 # data_dec <- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=2)
-load("../input/data/datos-conclat.Rdata")
+load("input/data/datos-conclat.Rdata")
 ```
 
 ## Variables
@@ -79,31 +79,40 @@ data <- data %>%
 # Situación empleo
 data <- data %>%
   mutate(
-    a07 = data$a07 %>%
-      set_labels(label = "Situación de empleo", 
-                 labels = c(
-                   "Patrón(a) o empleador(a)" = 1,
-                   "Trabajador(a) por cuenta propia" = 2,
-                   "Empleado(a) u obrero(a) del sector público (Gobierno Central o Municipal)" = 3,
-                   "Empleado(a) u obrero(a) de empresas públicas" = 4,
-                   "Empleado(a) u obrero(a) del sector privado" = 5,
-                   "Servicio doméstico puertas adentro" = 6,
-                   "Servicio doméstico puertas afuera" = 7,
-                   "FF.AA. y del Orden" = 8,
-                   "Familiar no remunerado" = 9)) %>%
+    a07 = a07 %>%
+      set_variable_labels(label = "Situación de empleo") %>%
+      set_value_labels(
+        "Patrón(a) o empleador(a)" = 1,
+        "Trabajador(a) por cuenta propia" = 2,
+        "Empleado(a) u obrero(a) del sector público (Gobierno Central o Municipal)" = 3,
+        "Empleado(a) u obrero(a) de empresas públicas" = 4,
+        "Empleado(a) u obrero(a) del sector privado" = 5,
+        "Servicio doméstico puertas adentro" = 6,
+        "Servicio doméstico puertas afuera" = 7,
+        "FF.AA. y del Orden" = 8,
+        "Familiar no remunerado" = 9
+      ) %>%
       as_factor(ref = "labels"))
 
 frq(data$a07)
 
 data <- data %>%
   mutate(
-    sit_empleo = factor(
-      case_when(
-        as_numeric(a07) == 1 ~ "Empleador(a)",
-        as_numeric(a07) == 2 ~ "Autoempleado(a)",
-        as_numeric(a07) >= 3 ~ "Empleado(a)",
-        TRUE ~ NA_character_),
-      levels = c("Empleador(a)","Autoempleado(a)","Empleado(a)")))
+    sit_empleo = case_when(
+      as_numeric(a07) == 1 ~ 1,
+      as_numeric(a07) == 2 ~ 2,
+      as_numeric(a07) >= 3 ~ 3,
+      TRUE ~ NA_real_
+    )) %>% 
+      mutate(
+        sit_empleo = sit_empleo %>% 
+          set_variable_labels(label = "Situación de empleo 2") %>% 
+          set_value_labels(
+            "Empleador(a)" = 1,
+            "Autoempleado(a)" = 2,
+            "Empleado(a)" = 3
+          ) %>% 
+          as_factor(ref = "labels"))
 
 frq(data$sit_empleo)
 ```
@@ -148,12 +157,23 @@ frq(data$b29)
 
 # Afiliación sindical
 data <- data %>%
-  mutate(int_sindical=case_when(
-    sit_empleo %in% c("Empleador(a)", "Autoempleado(a)") ~ NA_real_,
-    af_sindical == 1 ~ 1,
-    af_sindical == 0 & b29 %in% c(4,5) ~ 2,
-    af_sindical == 0 & b29 %in% c(1,2,3,-888,-999) ~ 3
-    ))
+  mutate(
+    int_sindical = case_when(
+      sit_empleo %in% c("Empleador(a)", "Autoempleado(a)") ~ NA_real_,
+      af_sindical == 1 ~ 1,
+      af_sindical == 0 & b29 %in% c(4,5) ~ 2,
+      af_sindical == 0 & b29 %in% c(1, 2, 3, -888, -999) ~ 3
+    ),
+    int_sindical = labelled(
+      int_sindical,
+      labels = c(
+        "union member" = 1,
+        "probably member" = 2,
+        "not member" = 3
+      )
+    ),
+    int_sindical = as_factor(int_sindical, ref = "labels")
+  )
 
 frq(data$int_sindical)
 ```
@@ -267,18 +287,18 @@ data$pol_id <- car::recode(data$c08,
 frq(data$pol_id)
 ```
 
-### pol_left_id
+### left_party_id
 
 ```{r}
 frq(data$c09)
 frq(data$c09_esp)
 
 data <- data %>% 
-  mutate(pol_left_id=if_else(
+  mutate(left_party_id=if_else(
     c09 %in% c(1, 2, 3, 13) | c09_esp %in% c("frente amplio","anarquismo","PC(AC)"),1,0
   ))
 
-frq(data$pol_left_id)
+frq(data$left_party_id)
 ```
 
 ### part_vecinal
