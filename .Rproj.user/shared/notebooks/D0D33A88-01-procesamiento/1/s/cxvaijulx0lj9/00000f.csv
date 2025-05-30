@@ -13,18 +13,28 @@ Value |    N | Raw % | Valid % | Cum. %
 "
 "0","# Afiliación sindical"
 "0","data <- data %>%"
-"0","  mutate(af_sindical=case_when("
-"0","    sit_empleo %in% c(""Empleador(a)"", ""Autoempleado(a)"") ~ NA_real_,"
-"0","    sit_empleo == 'Empleado(a)' & b21 %in% c(1, 2) ~ 1,"
-"0","    sit_empleo == 'Empleado(a)' & b21 %in% c(3, -888, -999) ~ 0,"
-"0","    sindicato == 0 ~ 0"
-"0","    ))"
+"0","  mutate("
+"0","    af_sindical = case_when("
+"0","      as.numeric(sit_empleo) %in% c(1, 2) ~ NA_real_,"
+"0","      as.numeric(sit_empleo) == 3 & b21 %in% c(1, 2) ~ 1,"
+"0","      as.numeric(sit_empleo) == 3 & b21 %in% c(3, -888, -999) ~ 0,"
+"0","      sindicato == 0 ~ 0,"
+"0","      TRUE ~ NA_real_"
+"0","    )"
+"0","  ) %>%"
+"0","  set_variable_labels(af_sindical = ""Afiliación sindical"") %>%"
+"0","  set_value_labels(af_sindical = c("
+"0","    ""Sí"" = 1,"
+"0","    ""No"" = 0"
+"0","  ))"
 "0",""
 "0","frq(data$af_sindical)"
-"1","[31mx[39m[34m <numeric>[39m 
-[34m# total N=3048 valid N=0 mean=NaN sd=NA[39m
+"1","[31mAfiliación sindical (x)[39m[34m <numeric>[39m 
+[34m# total N=3048 valid N=2105 mean=0.16 sd=0.37[39m
 
-Value |    N | Raw % | Valid % | Cum. %
----------------------------------------
- <NA> | 3048 |   100 |    <NA> |   <NA>
+Value | Label |    N | Raw % | Valid % | Cum. %
+-----------------------------------------------
+    0 |    No | 1766 | 57.94 |   83.90 |  83.90
+    1 |    Sí |  339 | 11.12 |   16.10 | 100.00
+ <NA> |  <NA> |  943 | 30.94 |    <NA> |   <NA>
 "

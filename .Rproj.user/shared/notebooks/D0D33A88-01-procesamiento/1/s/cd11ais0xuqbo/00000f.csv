@@ -17,19 +17,30 @@ Value |   N | Raw % | Valid % | Cum. %
     9 |  68 |  2.23 |    2.23 | 100.00
  <NA> |   0 |  0.00 |    <NA> |   <NA>
 "
-"0","data$tamanio_local <- car::recode(data$a27,"
-"0","                                  recodes=c(""c(1,2,3)='1-9';"
-"0","                                             c(4,5)='10-49';"
-"0","                                             c(6,7)='50-199';"
-"0","                                             c(8,9)='200 o más'""),"
-"0","                                  as.factor = TRUE,"
-"0","                                  levels=c('1-9',"
-"0","                                           '10-49',"
-"0","                                           '50-199',"
-"0","                                           '200 o más'))"
+"0","data <- data %>%"
+"0","  mutate("
+"0","    tamanio_local = case_when("
+"0","      a27 %in% c(1, 2, 3) ~ 1,"
+"0","      a27 %in% c(4, 5) ~ 2,"
+"0","      a27 %in% c(6, 7) ~ 3,"
+"0","      a27 %in% c(8, 9) ~ 4,"
+"0","      TRUE ~ NA_real_"
+"0","    ),"
+"0","    tamanio_local = factor("
+"0","      tamanio_local, "
+"0","      levels = 1:4, "
+"0","      labels = c("
+"0","        ""1-9"","
+"0","        ""10-49"","
+"0","        ""50-199"","
+"0","        ""200 o más""),"
+"0","      ordered = TRUE"
+"0","    )"
+"0","  ) %>%"
+"0","  set_variable_labels(tamanio_local = ""Tamaño del local"")"
 "0",""
 "0","frq(data$tamanio_local)"
-"1","[31mx[39m[34m <categorical>[39m 
+"1","[31mTamaño del local (x)[39m[34m <ordinal>[39m 
 [34m# total N=3048 valid N=2984 mean=1.61 sd=0.87[39m
 
 Value     |    N | Raw % | Valid % | Cum. %
