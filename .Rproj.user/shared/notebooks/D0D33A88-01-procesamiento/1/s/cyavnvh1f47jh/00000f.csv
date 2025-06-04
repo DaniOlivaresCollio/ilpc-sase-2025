@@ -11,9 +11,10 @@ Value |   N | Raw % | Valid % | Cum. %
  <NA> | 943 | 30.94 |    <NA> |   <NA>
 "
 "0","data <- data %>%"
-"0","  mutate(part_trabajo=case_when("
-"0","    b11 == 1 ~ 1,"
-"0","    b11 %in% c(2, -888, -999) ~ 0"
+"0","  mutate("
+"0","    part_trabajo=case_when("
+"0","      b11 == 1 ~ 1,"
+"0","      b11 %in% c(2, -888, -999) ~ 0"
 "0","    ))"
 "0",""
 "0","frq(data$part_trabajo)"

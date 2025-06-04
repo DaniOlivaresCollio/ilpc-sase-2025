@@ -66,7 +66,7 @@ data <- data %>%
          edad=e02,
          e05,
          a15,
-         a25,a25_esp,
+         a25,a25_esp,a25_esp_rec,
          a26,
          a27)# %>% 
   #sjlabelled::set_na(.,na=c(-999,-888,-777))
@@ -514,9 +514,10 @@ descr(data$autonomia_control)
 frq(data$b11)
 
 data <- data %>%
-  mutate(part_trabajo=case_when(
-    b11 == 1 ~ 1,
-    b11 %in% c(2, -888, -999) ~ 0
+  mutate(
+    part_trabajo=case_when(
+      b11 == 1 ~ 1,
+      b11 %in% c(2, -888, -999) ~ 0
     ))
 
 frq(data$part_trabajo)
@@ -571,12 +572,16 @@ data <- data %>%
       e05 %in% c(9, 10) ~ 4,
       TRUE ~ NA_real_
     ),
-    nedu = factor(nedu, levels = 1:4, labels = c(
-      "Hasta Básica completa",
-      "Hasta Media completa",
-      "Hasta Universitaria incompleta",
-      "Universitaria completa o más"
-    ))
+    nedu = factor(
+      nedu, 
+      levels = 1:4, 
+      labels = c(
+        "Hasta Básica completa",
+        "Hasta Media completa",
+        "Hasta Universitaria incompleta",
+        "Universitaria completa o más"
+      )
+    )
   ) %>%
   set_variable_labels(nedu = "Nivel educacional")
 
@@ -586,11 +591,11 @@ frq(data$nedu)
 ### rama
 
 ```{r,warning=FALSE,message=FALSE}
-# frq(data$a25) # 19 + 46 NS/NR y 603 otro
-# frq(data$a25_esp) # 603 válidos
+frq(data$a25) # 19 + 46 NS/NR y 603 otro
+frq(data$a25_esp_rec) # 603 válidos
 
 data$rama <- ifelse(data$a25 == 22,
-                    data$a25_esp,  # Usar el valor de "a25_esp" si la categoría es 22
+                    data$a25_esp_rec,  # Usar el valor de "a25_esp" si la categoría es 22
                     data$a25)      # En los demás casos, mantener el valor original de "a25"
 
 # frq(data$rama)
