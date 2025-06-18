@@ -1,9 +1,8 @@
 project:
   type: book
-  output-dir: ../docs
 
 book:
-  title: "ILPC 2025"
+  title: "ilpc-sase-2025"
   author: "Pablo Pérez-Ahumada, Daniela Olivares-Collío"
   date: today
   chapters:
@@ -20,5 +19,5 @@ format:
   pdf:
     documentclass: scrreprt
 
-
+editor: visual
 

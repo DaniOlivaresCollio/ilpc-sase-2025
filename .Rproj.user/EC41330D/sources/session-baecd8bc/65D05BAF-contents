@@ -37,7 +37,7 @@ p_load(bookdown,
 ```{r datos,message=FALSE,warning=FALSE}
 # data_raw <- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=3)
 # data_dec <- read_excel(here::here("input","data","Fondecyt Prof Pablo Pérez-Conclat, ultima version - 31-03-2025.xlsx"),sheet=2)
-load("../input/data/datos-conclat.Rdata")
+load("input/data/datos-conclat.Rdata")
 ```
 
 ## Variables
@@ -508,7 +508,7 @@ data <- data %>%
 descr(data$autonomia_control)
 ```
 
-### part_trabajo 
+### part_trabajo
 
 ```{r,warning=FALSE,message=FALSE}
 frq(data$b11)
@@ -759,7 +759,6 @@ data <- data %>%
 ```
 
 ```{r}
-save(data,file="../output/datos-ilpc.Rdata")
-saveRDS(data,file="../output/datos-ilpc.rds")
+save(data,file="output/datos-ilpc.Rdata")
+saveRDS(data,file="output/datos-ilpc.rds")
 ```
-
