@@ -1,1 +1,0 @@
-{"frames":[{"func":"save(data, file = \"../output/datos-ilpc.Rdata\")","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0},{"func":"gzfile(file, \"wb\")","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in gzfile(file, \"wb\") : no se puede abrir la conexión\n"}

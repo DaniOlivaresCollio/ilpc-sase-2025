@@ -3,7 +3,7 @@
     "path": "C:/Users/danie/Documents/fondecyt/ilpc-sase-2025/01-procesamiento.qmd",
     "project_path": "01-procesamiento.qmd",
     "type": "quarto_markdown",
-    "hash": "888349091",
+    "hash": "2595739102",
     "contents": "",
     "dirty": false,
     "created": 1750205317376.0,
@@ -15,17 +15,18 @@
         "source_window_id": "",
         "Source": "Source",
         "docOutlineVisible": "1",
-        "cursorPosition": "762,19",
-        "scrollLine": "744",
+        "cursorPosition": "227,48",
+        "scrollLine": "211",
         "rmdVisualModeLocation": "2:0",
-        "rmdVisualCollapsedChunks": ""
+        "rmdVisualCollapsedChunks": "",
+        "docOutlineSize": "239"
     },
     "folds": "",
-    "lastKnownWriteTime": 1750205357,
+    "lastKnownWriteTime": 1750258943,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1750205357037,
+    "last_content_update": 1750258943525,
     "read_only": false,
     "read_only_alternatives": []
 }

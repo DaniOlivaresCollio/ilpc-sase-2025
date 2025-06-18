@@ -1,0 +1,33 @@
+"0","# Vinculo sindical"
+"0","data <- data %>%"
+"0","  mutate("
+"0","    vinculo_sindicato = case_when("
+"0","      as.numeric(sit_empleo) %in% c(1, 2) ~ NA_real_,"
+"0","      af_sindical == 1 ~ 3,"
+"0","      af_sindical == 0 & sindicato == 1 ~ 2,"
+"0","      af_sindical == 0 & sindicato == 0 ~ 1,"
+"0","      TRUE ~ NA_real_"
+"0","    ),"
+"0","    vinculo_sindicato = factor("
+"0","      vinculo_sindicato,"
+"0","      levels= 1:3,"
+"0","      labels = c("
+"0","        ""1. Not member"","
+"0","        ""2. Not member (unionized workplace)"","
+"0","        ""3. Union member"""
+"0","      )"
+"0","    )"
+"0","  ) %>% "
+"0","  set_variable_labels(vinculo_sindicato=""Intención de sindicalización"")"
+"0",""
+"0","frq(data$vinculo_sindicato)"
+"1","[31mIntención de sindicalización (x)[39m[34m <categorical>[39m 
+[34m# total N=3048 valid N=2105 mean=1.39 sd=0.75[39m
+
+Value                               |    N | Raw % | Valid % | Cum. %
+---------------------------------------------------------------------
+1. Not member                       | 1626 | 53.35 |   77.24 |  77.24
+2. Not member (unionized workplace) |  140 |  4.59 |    6.65 |  83.90
+3. Union member                     |  339 | 11.12 |   16.10 | 100.00
+<NA>                                |  943 | 30.94 |    <NA> |   <NA>
+"

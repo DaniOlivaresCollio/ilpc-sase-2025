@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "ilpc-sase-2025"
+  title: "Preparación datos ilpc-sase 2025"
   author: "Pablo Pérez-Ahumada, Daniela Olivares-Collío"
   date: today
   chapters:
@@ -16,6 +16,7 @@ bibliography: references.bib
 format:
   html:
     theme: cosmo
+    lang: es
   pdf:
     documentclass: scrreprt
 

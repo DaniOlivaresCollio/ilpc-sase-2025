@@ -177,7 +177,7 @@ frq(data$af_sindical)
 ```{r}
 frq(data$b29)
 
-# Afiliación sindical
+# Intención sindical
 data <- data %>%
   mutate(
     int_sindical = case_when(
@@ -191,15 +191,43 @@ data <- data %>%
       int_sindical,
       levels= 1:3,
       labels = c(
-        "Not member",
-        "Probably member",
-        "Union member"
+        "1. Not member",
+        "2. Probably member",
+        "3. Union member"
       )
     )
   ) %>% 
   set_variable_labels(int_sindical="Intención de sindicalización")
 
 frq(data$int_sindical)
+```
+
+### vinculo_sindicato
+
+```{r}
+# Vinculo sindical
+data <- data %>%
+  mutate(
+    vinculo_sindicato = case_when(
+      as.numeric(sit_empleo) %in% c(1, 2) ~ NA_real_,
+      af_sindical == 1 ~ 3,
+      af_sindical == 0 & sindicato == 1 ~ 2,
+      af_sindical == 0 & sindicato == 0 ~ 1,
+      TRUE ~ NA_real_
+    ),
+    vinculo_sindicato = factor(
+      vinculo_sindicato,
+      levels= 1:3,
+      labels = c(
+        "1. Not member",
+        "2. Not member (unionized workplace)",
+        "3. Union member"
+      )
+    )
+  ) %>% 
+  set_variable_labels(vinculo_sindicato="Vínculo de sindicalización")
+
+frq(data$vinculo_sindicato)
 ```
 
 ## V. Dependientes
@@ -576,10 +604,10 @@ data <- data %>%
       nedu, 
       levels = 1:4, 
       labels = c(
-        "Hasta Básica completa",
-        "Hasta Media completa",
-        "Hasta Universitaria incompleta",
-        "Universitaria completa o más"
+        "1. Hasta Básica completa",
+        "2. Hasta Media completa",
+        "3. Hasta Universitaria incompleta",
+        "4. Universitaria completa o más"
       )
     )
   ) %>%
@@ -598,7 +626,7 @@ data$rama <- ifelse(data$a25 == 22,
                     data$a25_esp_rec,  # Usar el valor de "a25_esp" si la categoría es 22
                     data$a25)      # En los demás casos, mantener el valor original de "a25"
 
-# frq(data$rama)
+frq(data$rama)
 
 data <- data %>% 
   mutate(
@@ -686,9 +714,10 @@ frq(data$a07)
 data <- data %>%
   mutate(
     sector=case_when(
-      a07 %in% c(1, 2, 5, 6, 7, 9) ~ 1,
-      a07 %in% c(3, 4, 8) ~ 0
-    ))
+      as.numeric(a07) %in% c(1, 2, 5, 6, 7, 9) ~ 1,
+      as.numeric(a07) %in% c(3, 4, 8) ~ 0
+    ))%>% 
+  set_variable_labels(sector = "Sector (1 = Privado)")
 
 frq(data$sector)
 ```
@@ -711,9 +740,9 @@ data <- data %>%
       supervisa, 
       levels = 1:3,
       labels = c(
-        "Managers",
-        "Supervisor",
-        "Non-managers"
+        "1. Managers",
+        "2. Supervisor",
+        "3. Non-managers"
       )
     )
   ) %>% 
