@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Pablo Pérez-Ahumada, Daniela Olivares-Collío">
 
-<title>Preparación datos ilpc-sase 2025</title>
+<title>Preparación datos ilpc-sase 2025 - 2&nbsp; Metodología: Descripción de variables</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01-procesamiento.html" rel="next">
+<link href="./01-procesamiento.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -74,7 +73,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Presentación</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./03-metodologia.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metodología: Descripción de variables</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -101,7 +100,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Presentación</span></a>
   </div>
 </li>
@@ -113,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03-metodologia.html" class="sidebar-item-text sidebar-link">
+  <a href="./03-metodologia.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metodología: Descripción de variables</span></span></a>
   </div>
 </li>
@@ -127,7 +126,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#presentación" id="toc-presentación" class="nav-link active" data-scroll-target="#presentación">Presentación</a></li>
+  <li><a href="#dependent-variable" id="toc-dependent-variable" class="nav-link active" data-scroll-target="#dependent-variable"><span class="header-section-number">2.1</span> Dependent variable</a></li>
+  <li><a href="#independent-variables" id="toc-independent-variables" class="nav-link" data-scroll-target="#independent-variables"><span class="header-section-number">2.2</span> Independent variables</a></li>
+  <li><a href="#mediating-variables" id="toc-mediating-variables" class="nav-link" data-scroll-target="#mediating-variables"><span class="header-section-number">2.3</span> Mediating variables</a></li>
+  <li><a href="#controls" id="toc-controls" class="nav-link" data-scroll-target="#controls"><span class="header-section-number">2.4</span> Controls</a></li>
   </ul>
 </nav>
     </div>
@@ -136,26 +138,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Preparación datos ilpc-sase 2025</h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Metodología: Descripción de variables</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor/a</div>
-    <div class="quarto-title-meta-contents">
-             <p>Pablo Pérez-Ahumada, Daniela Olivares-Collío </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Fecha de publicación</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">24 de junio de 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -163,21 +153,40 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p><img src="img/conclat_LIn_banner_1.png" class="img-fluid" style="width:100.0%"></p>
-<section id="presentación" class="level1 unnumbered">
-<h1 class="unnumbered">Presentación</h1>
-<div style="display: flex; align-items: center; justify-content: space-between; gap: 2em; margin-top: 2em;">
-<div style="flex: 1;">
-<p>
-Este libro corresponde al repositorio de procesamiento y análisis de la base de datos de la <a href="https://www.conclat.org/encuesta/">Encuesta CONCLAT</a> aplicada en Chile, para ser presentado en <a href="https://www.ilpc.org.uk/">ILPC 2025</a>. Y posteriormente en SASE.
-</p>
-</div>
-<div style="flex: 0 0 300px;">
-<p><img src="img/BannerILPC2025.png" alt="Logo Congreso" style="width: 100%;"></p>
-</div>
-</div>
-<p>La Encuesta Conclat se aplica en el marco del Proyecto CONCLAT, que busca estudiar cómo se percibe el conflicto laboral y político en Argentina y Chile. Particularmente, analiza cómo las personas de distintas clases y con distinto estatus sindical (por ejemplo, afiliados/as y no afiliados/as a sindicatos) perciben el conflicto dentro y fuera del lugar de trabajo.</p>
-<p><a href="https://www.conclat.org/">CONCLAT</a> es el Proyecto FONDECYT Regular (No 1230056) “Clases sociales, movimientos sindicales y conflicto en tiempos de crisis: un estudio comparativo de Argentina y Chile”. Patrocinado por la <a href="https://uchile.cl/">Universidad de Chile</a> y el Centro de Estudios de Conflicto y Cohesión Social (<a href="https://coes.cl/">COES</a>). Tiene como propósito contribuir a la investigación internacional sobre clases, trabajo y conflicto produciendo datos cuantitativos originales y un instrumento de investigación comparable a nivel internacional.</p>
+<section id="dependent-variable" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="dependent-variable"><span class="header-section-number">2.1</span> Dependent variable</h2>
+<p>We measured <em>political participation</em> through the variable <strong>c11_02</strong>. <em>I’m going to read you a list of voluntary organizations. For each one, could you tell me whether you are an active member, an inactive member, or not a member of that organization? Political party</em>. The variable was coded 1 for “Active”, and 0 for “Inactive” or “Not a member”.</p>
+</section>
+<section id="independent-variables" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="independent-variables"><span class="header-section-number">2.2</span> Independent variables</h2>
+<p>The first independent variable is <em>workplace autonomy</em>, which corresponds to the average of items <strong>b06</strong>. <em>Now, thinking about your current job, please tell me how much influence you have over the following aspects:</em></p>
+<ul>
+<li><strong>b06_01</strong>. <em>The methods or ways in which you carry out your tasks during the workday.</em></li>
+<li><strong>b06_02</strong>. <em>The policies your company adopts regarding your working conditions.</em></li>
+<li><strong>b06_03</strong>. <em>The time you start and finish your workday.</em></li>
+<li><strong>b06_04</strong>. <em>The time you are allowed to take a break.</em></li>
+<li><strong>b06_05</strong>. <em>The possibility of taking one or two hours off per week to attend to personal or family matters.</em></li>
+</ul>
+<p>Each item uses a response scale ranging from “No influence” = 1 to “A lot of influence” = 5.</p>
+<p>The second independent variable is <em>union membership</em>. This was measured through a dichotomous variable (1 = union members, 0 = not member).</p>
+</section>
+<section id="mediating-variables" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="mediating-variables"><span class="header-section-number">2.3</span> Mediating variables</h2>
+<p>We use three mediating variables. The first is <em>political confidence</em>, which corresponds to the average of the following items…</p>
+<p>The second mediating variable is <em>political skills</em>, which corresponds to the average of the following items…</p>
+<p>The third mediating variable is <em>identification with political parties</em>, where 1 = left-wing parties, and 0 = does not identify with a party or identifies with right-wing parties. The parties classified as left-wing are those with a presence in the labor union sphere.</p>
+</section>
+<section id="controls" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="controls"><span class="header-section-number">2.4</span> Controls</h2>
+<p>Our analyses included the following sociodemographic controls:</p>
+<ul>
+<li>gender (1 = female);</li>
+<li>age (as a numeric variable);</li>
+<li>education level, measured in four groups: 1. Lower (up to completed primary education), 2. Middle (up to completed secondary education), 3. High (incomplete university education), 4. Upper level (completed university education or higher).</li>
+<li>sector (1 = private sector; 0 = public sector);</li>
+<li>political interest, measured by the item <em>Frequency: Talks about politics</em> (1 = At least once”, 0 = Never);</li>
+<li>workplace size, measured in four groups: 1. 1 to 9 employees, 2. 10 to 49 employees, 3. 50 to 199 employees, 4. 200 employees or more.</li>
+</ul>
 
 
 </section>
@@ -418,11 +427,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./01-procesamiento.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Procesamiento</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01-procesamiento.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Procesamiento</span></span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

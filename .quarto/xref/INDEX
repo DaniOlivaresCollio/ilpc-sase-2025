@@ -4,5 +4,14 @@
   },
   "01-procesamiento.qmd": {
     "01-procesamiento.html": "1ed7609c"
+  },
+  "02-metodologia.qmd": {
+    "02-metodologia.html": "50c92341"
+  },
+  "02-analisis.qmd": {
+    "02-analisis.html": "dfa15437"
+  },
+  "03-metodologia.qmd": {
+    "03-metodologia.html": "af40476a"
   }
 }

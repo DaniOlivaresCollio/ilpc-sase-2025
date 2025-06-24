@@ -1,0 +1,79 @@
+# Metodología: Descripción de variables
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+# rm(list=ls())
+# options(scipen = 999)
+# 
+# library(pacman)
+# p_load(bookdown,
+#        car,
+#        ggalluvial,
+#        ggplot2,
+#        ggrepel,
+#        gridExtra,
+#        kableExtra,
+#        knitr,
+#        labelled,
+#        lubridate,
+#        psych,
+#        readr,
+#        readxl,
+#        shadowtext,
+#        sjmisc,
+#        sjPlot,
+#        sjlabelled,
+#        statar,
+#        stringr,
+#        survey,
+#        tidyverse,
+#        tinytex,
+#        viridis,
+#        httr
+#        )
+```
+
+## Dependent variable
+
+We measured *political participation* through the variable **c11_02**. *I’m going to read you a list of voluntary organizations. For each one, could you tell me whether you are an active member, an inactive member, or not a member of that organization? Political party*. The variable was coded 1 for "Active", and 0 for "Inactive" or "Not a member".
+
+## Independent variables
+
+The first independent variable is *workplace autonomy*, which corresponds to the average of items **b06**. *Now, thinking about your current job, please tell me how much influence you have over the following aspects:*
+
+- **b06_01**. *The methods or ways in which you carry out your tasks during the workday.*
+- **b06_02**. *The policies your company adopts regarding your working conditions.*
+- **b06_03**. *The time you start and finish your workday.*
+- **b06_04**. *The time you are allowed to take a break.*
+- **b06_05**. *The possibility of taking one or two hours off per week to attend to personal or family matters.*
+
+Each item uses a response scale ranging from "No influence" = 1 to "A lot of influence" = 5.
+
+The second independent variable is *union membership*. This was measured through a dichotomous variable (1 = union members, 0 = not member).
+
+## Mediating variables
+
+var mediadora 1
+political confidence
+promedio de dos
+
+var mediadora 2
+political skills 2 
+promedio de dos 
+
+var mediadora 3 
+identificación part izq
+1 = izq, 0 = no se identifica o derecha
+se eligen porque son los partidos que tienen presencia en el mundo sindical
+    
+## Controls
+
+Our analyses included the following sociodemographic controls:
+
+- gender (1 = female);
+- age (as a numeric variable);
+- education level, measured in four groups: 1. Lower (up to completed primary education), 2. Middle (up to completed secondary education), 3. High (incomplete university education), 4. Upper level (completed university education or higher).
+- sector (1 = private sector; 0 = public sector);
+- political interest, measured by the item *Frequency: Talks about politics* (1 = At least once", 0 = Never);
+- workplace size, measured in four groups: 1. 1 to 9 employees, 2. 10 to 49 employees, 3. 50 to 199 employees, 4. 200 employees or more. 
+
+
