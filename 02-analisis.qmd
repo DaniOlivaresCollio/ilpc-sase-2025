@@ -6,7 +6,6 @@ options(scipen = 999)
 
 library(pacman)
 p_load(bookdown,
-       ggforce,
        ggplot2,
        readr,
        readxl,
@@ -26,30 +25,50 @@ data <- data %>%
 ```
 
 
-## Plot
+## Plot Job Control y Labur Union Power
 
 ```{r}
 # Calcular la correlación de Pearson
 correlacion <- cor(data$job_control, data$union_power, use = "complete.obs")
 
 # Crear el gráfico
-ggplot(data, aes(x = job_control, y = union_power)) +
+p <- ggplot(data, aes(x = job_control, y = union_power)) +
   geom_point(size = 2) +
   geom_smooth(method = "lm", se = FALSE, color = "blue", linewidth = 0.6) +  # línea de tendencia
   geom_text(aes(label = name), vjust = -1.1, size = 3) +  # etiquetas con los países
   geom_point(data = subset(data, name == "Chile"), color = "red", size = 3) +  # destacar Chile
-  geom_circle(data = subset(data, name == "Chile"),
-              aes(x0 = job_control, y0 = union_power, r = 1.8),  # ← aquí ajustas el tamaño del círculo
-              inherit.aes = FALSE,
-              color = "red", linewidth = 0.5) +
-  annotate("text", x = Inf, y = -Inf,
-           label = paste0("r = ", round(correlacion, 2)),
-           hjust = 1.1, vjust = -1.1, size = 4, fontface = "bold") +
   theme_minimal() +
+  theme(
+    panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5),  # borde del gráfico
+    plot.caption = element_text(hjust = 0, size = 8, face = "italic")  # estilo del pie
+  ) +
   labs(
     x = "Job control",
-    y = "Union Power",
-    title = "Correlation between Job Control and Union Power scores"
+    y = "Labour Union Power", 
+    caption = "Note: Pearson's r = 0.458. 
+    \nSource: Own elaboration based on data from OECD/AIAS ICTWSS (2015), except for the case of Chile, where the data on \ncollective bargaining coverage was obtained from Durán and Gamonal (2019).
+    \nLabour Union Power: Was calculated as the average between the union density rate and the collective bargaining coverage rate.
+    \nJob control: This scale was constructed based on the simple sum of four variables:"
   )
+
+p 
+
+# Guardar como imagen PNG
+ggsave("output/union_vs_jobcontrol.png", plot = p, width = 7, height = 5, dpi = 300)
 ```
+
+
+
+## Plot
+
+Latinobarómetro
+- mucho o algo de confianza 
+- 2010 en adelante
+- todos los países 
+- buscar resultados compilados latinobarometro
+
+
+## Tabla
+
+Tabla con base de datos y variables, como la del minicoes
 

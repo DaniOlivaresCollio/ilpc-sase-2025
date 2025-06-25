@@ -63,11 +63,25 @@
     "text": "2.1 Cargar datos\n\ndata &lt;- read_excel(\"input/data/ISSP2015_Data.xlsx\")\n\n\ndata &lt;- data %&gt;% \n  select(c_alphan, name = Name , union_power = `Union power`, job_control = `Job control` )"
   },
   {
+    "objectID": "02-analisis.html#plot-job-control-y-labur-union-power",
+    "href": "02-analisis.html#plot-job-control-y-labur-union-power",
+    "title": "2  Análisis",
+    "section": "2.2 Plot Job Control y Labur Union Power",
+    "text": "2.2 Plot Job Control y Labur Union Power\n\n# Calcular la correlación de Pearson\ncorrelacion &lt;- cor(data$job_control, data$union_power, use = \"complete.obs\")\n\n# Crear el gráfico\np &lt;- ggplot(data, aes(x = job_control, y = union_power)) +\n  geom_point(size = 2) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"blue\", linewidth = 0.6) +  # línea de tendencia\n  geom_text(aes(label = name), vjust = -1.1, size = 3) +  # etiquetas con los países\n  geom_point(data = subset(data, name == \"Chile\"), color = \"red\", size = 3) +  # destacar Chile\n  theme_minimal() +\n  theme(\n    panel.border = element_rect(colour = \"black\", fill = NA, linewidth = 0.5),  # borde del gráfico\n    plot.caption = element_text(hjust = 0, size = 8, face = \"italic\")  # estilo del pie\n  ) +\n  labs(\n    x = \"Job control\",\n    y = \"Labour Union Power\", \n    caption = \"Note: Pearson's r = 0.458. \n    \\nSource: Own elaboration based on data from OECD/AIAS ICTWSS (2015), except for the case of Chile, where the data on \\ncollective bargaining coverage was obtained from Durán and Gamonal (2019).\n    \\nLabour Union Power: Was calculated as the average between the union density rate and the collective bargaining coverage rate.\n    \\nJob control: This scale was constructed based on the simple sum of four variables:\"\n  )\n\np \n\n`geom_smooth()` using formula = 'y ~ x'\n\n\n\n\n# Guardar como imagen PNG\nggsave(\"output/union_vs_jobcontrol.png\", plot = p, width = 7, height = 5, dpi = 300)\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
     "objectID": "02-analisis.html#plot",
     "href": "02-analisis.html#plot",
     "title": "2  Análisis",
-    "section": "2.2 Plot",
-    "text": "2.2 Plot\n\n# Calcular la correlación de Pearson\ncorrelacion &lt;- cor(data$job_control, data$union_power, use = \"complete.obs\")\n\n# Crear el gráfico\nggplot(data, aes(x = job_control, y = union_power)) +\n  geom_point(size = 2) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"blue\", linewidth = 0.6) +  # línea de tendencia\n  geom_text(aes(label = name), vjust = -1.1, size = 3) +  # etiquetas con los países\n  geom_point(data = subset(data, name == \"Chile\"), color = \"red\", size = 3) +  # destacar Chile\n  geom_circle(data = subset(data, name == \"Chile\"),\n              aes(x0 = job_control, y0 = union_power, r = 1.8),  # ← aquí ajustas el tamaño del círculo\n              inherit.aes = FALSE,\n              color = \"red\", linewidth = 0.5) +\n  annotate(\"text\", x = Inf, y = -Inf,\n           label = paste0(\"r = \", round(correlacion, 2)),\n           hjust = 1.1, vjust = -1.1, size = 4, fontface = \"bold\") +\n  theme_minimal() +\n  labs(\n    x = \"Job control\",\n    y = \"Union Power\",\n    title = \"Correlation between Job Control and Union Power scores\"\n  )\n\n`geom_smooth()` using formula = 'y ~ x'"
+    "section": "2.3 Plot",
+    "text": "2.3 Plot\nLatinobarómetro - mucho o algo de confianza - 2010 en adelante - todos los países - buscar resultados compilados latinobarometro"
+  },
+  {
+    "objectID": "02-analisis.html#tabla",
+    "href": "02-analisis.html#tabla",
+    "title": "2  Análisis",
+    "section": "2.4 Tabla",
+    "text": "2.4 Tabla\nTabla con base de datos y variables, como la del minicoes"
   },
   {
     "objectID": "03-metodologia.html#dependent-variable",
