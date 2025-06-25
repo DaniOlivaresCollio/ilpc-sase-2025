@@ -3,7 +3,7 @@
     "path": "C:/Users/danie/Documents/fondecyt/ilpc-sase-2025/02-analisis.qmd",
     "project_path": "02-analisis.qmd",
     "type": "quarto_markdown",
-    "hash": "638546795",
+    "hash": "3230986369",
     "contents": "",
     "dirty": false,
     "created": 1750777020806.0,
@@ -17,15 +17,16 @@
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
         "rmdVisualModeLocation": "2:0",
-        "cursorPosition": "37,51",
-        "scrollLine": "0"
+        "cursorPosition": "52,3",
+        "scrollLine": "38",
+        "docOutlineSize": "92"
     },
     "folds": "",
-    "lastKnownWriteTime": 1750777845,
+    "lastKnownWriteTime": 1750878280,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1750777845238,
+    "last_content_update": 1750878280817,
     "read_only": false,
     "read_only_alternatives": []
 }

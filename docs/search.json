@@ -56,31 +56,45 @@
     "text": "1.7 Guardar datos\n\ndata &lt;- data %&gt;% \n  filter(as.numeric(sit_empleo) == 3)\n\n\nsave(data,file=\"output/datos-ilpc.Rdata\")\nsaveRDS(data,file=\"output/datos-ilpc.rds\")"
   },
   {
+    "objectID": "02-analisis.html#cargar-datos",
+    "href": "02-analisis.html#cargar-datos",
+    "title": "2  Análisis",
+    "section": "2.1 Cargar datos",
+    "text": "2.1 Cargar datos\n\ndata &lt;- read_excel(\"input/data/ISSP2015_Data.xlsx\")\n\n\ndata &lt;- data %&gt;% \n  select(c_alphan, name = Name , union_power = `Union power`, job_control = `Job control` )"
+  },
+  {
+    "objectID": "02-analisis.html#plot",
+    "href": "02-analisis.html#plot",
+    "title": "2  Análisis",
+    "section": "2.2 Plot",
+    "text": "2.2 Plot\n\n# Calcular la correlación de Pearson\ncorrelacion &lt;- cor(data$job_control, data$union_power, use = \"complete.obs\")\n\n# Crear el gráfico\nggplot(data, aes(x = job_control, y = union_power)) +\n  geom_point(size = 2) +\n  geom_smooth(method = \"lm\", se = FALSE, color = \"blue\", linewidth = 0.6) +  # línea de tendencia\n  geom_text(aes(label = name), vjust = -1.1, size = 3) +  # etiquetas con los países\n  geom_point(data = subset(data, name == \"Chile\"), color = \"red\", size = 3) +  # destacar Chile\n  geom_circle(data = subset(data, name == \"Chile\"),\n              aes(x0 = job_control, y0 = union_power, r = 1.8),  # ← aquí ajustas el tamaño del círculo\n              inherit.aes = FALSE,\n              color = \"red\", linewidth = 0.5) +\n  annotate(\"text\", x = Inf, y = -Inf,\n           label = paste0(\"r = \", round(correlacion, 2)),\n           hjust = 1.1, vjust = -1.1, size = 4, fontface = \"bold\") +\n  theme_minimal() +\n  labs(\n    x = \"Job control\",\n    y = \"Union Power\",\n    title = \"Correlation between Job Control and Union Power scores\"\n  )\n\n`geom_smooth()` using formula = 'y ~ x'"
+  },
+  {
     "objectID": "03-metodologia.html#dependent-variable",
     "href": "03-metodologia.html#dependent-variable",
-    "title": "2  Metodología: Descripción de variables",
-    "section": "2.1 Dependent variable",
-    "text": "2.1 Dependent variable\nWe measured political participation through the variable c11_02. I’m going to read you a list of voluntary organizations. For each one, could you tell me whether you are an active member, an inactive member, or not a member of that organization? Political party. The variable was coded “Active” = 1, and “Inactive” or “Not a member” = 0."
+    "title": "3  Metodología: Descripción de variables",
+    "section": "3.1 Dependent variable",
+    "text": "3.1 Dependent variable\nWe measured political participation through the variable c11_02. I’m going to read you a list of voluntary organizations. For each one, could you tell me whether you are an active member, an inactive member, or not a member of that organization? Political party. The variable was coded “Active” = 1, and “Inactive” or “Not a member” = 0."
   },
   {
     "objectID": "03-metodologia.html#independent-variables",
     "href": "03-metodologia.html#independent-variables",
-    "title": "2  Metodología: Descripción de variables",
-    "section": "2.2 Independent variables",
-    "text": "2.2 Independent variables\nThe first independent variable is workplace autonomy, which corresponds to the average of items b06. Now, thinking about your current job, please tell me how much influence you have over the following aspects:\n\nb06_01. The methods or ways in which you carry out your tasks during the workday.\nb06_02. The policies your company adopts regarding your working conditions.\nb06_03. The time you start and finish your workday.\nb06_04. The time you are allowed to take a break.\nb06_05. The possibility of taking one or two hours off per week to attend to personal or family matters.\n\nEach item uses a response scale ranging from “No influence” = 1 to “A lot of influence” = 5.\nThe second independent variable is union membership. This was measured through the variable b21. Are you affiliated with a labor union (either company or inter-company) or a public employees’ association?, coded as “Union members” = 1, and “Not member” = 0."
+    "title": "3  Metodología: Descripción de variables",
+    "section": "3.2 Independent variables",
+    "text": "3.2 Independent variables\nThe first independent variable is workplace autonomy, which corresponds to the average of items b06. Now, thinking about your current job, please tell me how much influence you have over the following aspects:\n\nb06_01. The methods or ways in which you carry out your tasks during the workday.\nb06_02. The policies your company adopts regarding your working conditions.\nb06_03. The time you start and finish your workday.\nb06_04. The time you are allowed to take a break.\nb06_05. The possibility of taking one or two hours off per week to attend to personal or family matters.\n\nEach item uses a response scale ranging from “No influence” = 1 to “A lot of influence” = 5.\nThe second independent variable is union membership. This was measured through the variable b21. Are you affiliated with a labor union (either company or inter-company) or a public employees’ association?, coded as “Union members” = 1, and “Not member” = 0."
   },
   {
     "objectID": "03-metodologia.html#mediating-variables",
     "href": "03-metodologia.html#mediating-variables",
-    "title": "2  Metodología: Descripción de variables",
-    "section": "2.3 Mediating variables",
-    "text": "2.3 Mediating variables\nWe use three mediating variables. The first is political confidence, which corresponds to the average of the following items c10. How often do you do each of the following activities?\n\nc10_01. Talks about politics with friends.\nc10_01. Tries to convince someone of your political views.\n\nEach item uses a response scale ranging from “Never” = 1 to “Very frequently” = 5.\nThe second mediating variable is political skills, which corresponds to the average of the following items c12. Imagine that in your community or neighborhood there is a problem with the electricity supply (the power has been out for three days), and the neighbors want to meet to solve the problem. Now I would like you to answer the following:\n\nc12_01. I would feel comfortable organizing and leading the meeting with my neighbors.\nc12_02. I would feel comfortable leading some form of protest so that the authorities listen to our demands.\n\nEach item uses a response scale ranging from “Strongly disagree” = 1 to “Strongly agree” = 5.\nThe third mediating variable is identification with political parties, measured through the item c09. Which of the following political parties best represents your interests, beliefs, and values?. The variable was coded as “Left-wing parties” = 1, which includes Communist Party, Socialist Party, Frente Amplio, Partido Humanista; and 0 = “Does not identify with a party” or “Identifies with right-wing parties”. The parties classified as left-wing are those with a presence in the labor union sphere."
+    "title": "3  Metodología: Descripción de variables",
+    "section": "3.3 Mediating variables",
+    "text": "3.3 Mediating variables\nWe use three mediating variables. The first is political confidence, which corresponds to the average of the following items c10. How often do you do each of the following activities?\n\nc10_01. Talks about politics with friends.\nc10_01. Tries to convince someone of your political views.\n\nEach item uses a response scale ranging from “Never” = 1 to “Very frequently” = 5.\nThe second mediating variable is political skills, which corresponds to the average of the following items c12. Imagine that in your community or neighborhood there is a problem with the electricity supply (the power has been out for three days), and the neighbors want to meet to solve the problem. Now I would like you to answer the following:\n\nc12_01. I would feel comfortable organizing and leading the meeting with my neighbors.\nc12_02. I would feel comfortable leading some form of protest so that the authorities listen to our demands.\n\nEach item uses a response scale ranging from “Strongly disagree” = 1 to “Strongly agree” = 5.\nThe third mediating variable is identification with political parties, measured through the item c09. Which of the following political parties best represents your interests, beliefs, and values?. The variable was coded as “Left-wing parties” = 1, which includes Communist Party, Socialist Party, Frente Amplio, Partido Humanista; and 0 = “Does not identify with a party” or “Identifies with right-wing parties”. The parties classified as left-wing are those with a presence in the labor union sphere."
   },
   {
     "objectID": "03-metodologia.html#controls",
     "href": "03-metodologia.html#controls",
-    "title": "2  Metodología: Descripción de variables",
-    "section": "2.4 Controls",
-    "text": "2.4 Controls\nOur analyses included the following sociodemographic controls:\n\ngender (1 = “Female”);\nage (as a numeric variable);\neducation level, measured in four groups: 1. Lower (up to completed primary education), 2. Middle (up to completed secondary education), 3. High (incomplete university education), 4. Upper level (completed university education or higher).\nsector (1 = private sector; 0 = public sector);\npolitical interest, measured by the item c10_01. How often do you do each of the following activities? Talks about politics with friends (1 = “At least once”, 0 = “Never”);\nworkplace size, measured in four groups: 1. 1 to 9 employees, 2. 10 to 49 employees, 3. 50 to 199 employees, 4. 200 employees or more."
+    "title": "3  Metodología: Descripción de variables",
+    "section": "3.4 Controls",
+    "text": "3.4 Controls\nOur analyses included the following sociodemographic controls:\n\ngender (1 = “Female”);\nage (as a numeric variable);\neducation level, measured in four groups: 1. Lower (up to completed primary education), 2. Middle (up to completed secondary education), 3. High (incomplete university education), 4. Upper level (completed university education or higher).\nsector (1 = private sector; 0 = public sector);\npolitical interest, measured by the item c10_01. How often do you do each of the following activities? Talks about politics with friends (1 = “At least once”, 0 = “Never”);\nworkplace size, measured in four groups: 1. 1 to 9 employees, 2. 10 to 49 employees, 3. 50 to 199 employees, 4. 200 employees or more."
   }
 ]

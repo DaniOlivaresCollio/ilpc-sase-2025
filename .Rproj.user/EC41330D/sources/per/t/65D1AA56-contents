@@ -9,7 +9,7 @@ book:
   chapters:
     - index.qmd
     - 01-procesamiento.qmd
-    # - 02-analisis.qmd
+    - 02-analisis.qmd
     - 03-metodologia.qmd
     # - summary.qmd
     # - references.qmd
