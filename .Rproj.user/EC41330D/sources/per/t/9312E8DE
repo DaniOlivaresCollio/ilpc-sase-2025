@@ -1,14 +1,14 @@
 {
-    "id": "3D53A2BB",
-    "path": "C:/Users/danie/Documents/fondecyt/ilpc-sase-2025/02-analisis.qmd",
-    "project_path": "02-analisis.qmd",
+    "id": "9312E8DE",
+    "path": "C:/Users/danie/Documents/fondecyt/ilpc-sase-2025/03-metodologia.qmd",
+    "project_path": "03-metodologia.qmd",
     "type": "quarto_markdown",
-    "hash": "638546795",
+    "hash": "2263149722",
     "contents": "",
     "dirty": false,
-    "created": 1750777020806.0,
+    "created": 1750777041349.0,
     "source_on_save": false,
-    "relative_order": 3,
+    "relative_order": 5,
     "properties": {
         "rmdVisualMode": "false",
         "rmdVisualWrapConfigured": "true",
@@ -16,16 +16,16 @@
         "Source": "Source",
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
-        "rmdVisualModeLocation": "2:0",
-        "cursorPosition": "37,51",
-        "scrollLine": "25"
+        "cursorPosition": "27,51",
+        "scrollLine": "19",
+        "rmdVisualModeLocation": "2:0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1750777845,
+    "lastKnownWriteTime": 1750811275,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1750777845238,
+    "last_content_update": 1750811275153,
     "read_only": false,
     "read_only_alternatives": []
 }
