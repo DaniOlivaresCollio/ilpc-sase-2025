@@ -226,22 +226,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Labour Union Power"</span>, </span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Note: Pearson's r = 0.458. </span></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="st">    </span><span class="sc">\n</span><span class="st">Source: Own elaboration based on data from OECD/AIAS ICTWSS (2015), except for the case of Chile, where the data on </span><span class="sc">\n</span><span class="st">collective bargaining coverage was obtained from Durán and Gamonal (2019).</span></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="st">    </span><span class="sc">\n</span><span class="st">Labour Union Power: Was calculated as the average between the union density rate and the collective bargaining coverage rate.</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="st">    </span><span class="sc">\n</span><span class="st">Job control: This scale was constructed based on the simple sum of four variables:"</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>p </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="st">    "</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>p </span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="02-analisis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Guardar como imagen PNG</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/union_vs_jobcontrol.png"</span>, <span class="at">plot =</span> p, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
 </div>
+<p><strong>Labour Union Power</strong>: Was calculated as the average between the union density rate and the collective bargaining coverage rate.</p>
+<p><strong>Job control</strong>: This scale was constructed based on the simple sum of four variables:</p>
+<ol type="1">
+<li><p>Please indicate to what extent you agree or disagree with the following statement about your job: I can work independently (1. Strongly agree… 5. Strongly disagree);</p></li>
+<li><p>Which of the following statements best describes how your work schedule is decided?</p>
+<ul>
+<li><p>My employer decides when I start and finish work, and I cannot change it myself</p></li>
+<li><p>I can decide my start and finish time within certain limits</p></li>
+<li><p>I am completely free to decide when I start and finish work</p></li>
+</ul></li>
+<li><p>Which of the following statements best describes how your daily workday is organized?</p>
+<ul>
+<li><p>I am free to decide how my daily workday is organized</p></li>
+<li><p>I can decide how my workday is organized within certain limits</p></li>
+<li><p>I am not free to decide how my daily workday is organized</p></li>
+</ul></li>
+<li><p>How difficult would it be for you to take one or two hours off during working hours to attend to personal or family matters? (1. Not difficult at all… 5. Very difficult).</p></li>
+</ol>
+<p>All these variables were recoded and transformed into a score from 0 to 4, where higher scores indicate greater perceived autonomy/control. The items were then summed, and the final scale was transformed into a 0-to-100 score. The scale is unidimensional (Principal Axis Factor Analysis: Eigenvalue = 1.45; 39% of explained variance) and internally consistent (Cronbach’s Alpha = 0.70).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Guardar como imagen PNG</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/union_vs_jobcontrol.png"</span>, <span class="at">plot =</span> p, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="plot" class="level2" data-number="2.3">

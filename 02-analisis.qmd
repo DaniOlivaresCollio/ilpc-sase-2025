@@ -27,7 +27,7 @@ data <- data %>%
 
 ## Plot Job Control y Labur Union Power
 
-```{r}
+```{r,message=FALSE,warning=FALSE}
 # Calcular la correlación de Pearson
 correlacion <- cor(data$job_control, data$union_power, use = "complete.obs")
 
@@ -47,16 +47,42 @@ p <- ggplot(data, aes(x = job_control, y = union_power)) +
     y = "Labour Union Power", 
     caption = "Note: Pearson's r = 0.458. 
     \nSource: Own elaboration based on data from OECD/AIAS ICTWSS (2015), except for the case of Chile, where the data on \ncollective bargaining coverage was obtained from Durán and Gamonal (2019).
-    \nLabour Union Power: Was calculated as the average between the union density rate and the collective bargaining coverage rate.
-    \nJob control: This scale was constructed based on the simple sum of four variables:"
+    "
   )
 
 p 
+```
 
+**Labour Union Power**: This index was calculated as the average between the union density rate and the collective bargaining coverage rate.
+
+**Job control**: This scale was constructed based on the simple sum of four variables:
+        
+1. Please indicate to what extent you agree or disagree with the following statement about your job: I can work independently (1. Strongly agree... 5. Strongly disagree);
+
+2. Which of the following statements best describes how your work schedule is decided?
+
+    - My employer decides when I start and finish work, and I cannot change it myself
+
+    - I can decide my start and finish time within certain limits
+
+    - I am completely free to decide when I start and finish work
+
+3. Which of the following statements best describes how your daily workday is organized?
+
+    - I am free to decide how my daily workday is organized
+
+    - I can decide how my workday is organized within certain limits
+
+    - I am not free to decide how my daily workday is organized
+
+4. How difficult would it be for you to take one or two hours off during working hours to attend to personal or family matters? (1. Not difficult at all... 5. Very difficult).
+
+All these variables were recoded and transformed into a score from 0 to 4, where higher scores indicate greater perceived autonomy/control. The items were then summed, and the final scale was transformed into a 0-to-100 score. The scale is unidimensional (Principal Axis Factor Analysis: Eigenvalue = 1.45; 39% of explained variance) and internally consistent (Cronbach’s Alpha = 0.70).
+
+```{r,message=FALSE,warning=FALSE}
 # Guardar como imagen PNG
 ggsave("output/union_vs_jobcontrol.png", plot = p, width = 7, height = 5, dpi = 300)
 ```
-
 
 
 ## Plot
