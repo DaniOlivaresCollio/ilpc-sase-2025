@@ -12,13 +12,13 @@
     "properties": {
         "expression": "data",
         "caption": "data",
-        "totalObservations": "28",
-        "displayedObservations": "28",
-        "variables": "4",
-        "cacheKey": "70CFBA23",
+        "totalObservations": "2050",
+        "displayedObservations": "2050",
+        "variables": "89",
+        "cacheKey": "CD8B74CF",
         "object": "data",
         "environment": "",
-        "contentUrl": "grid_resource/gridviewer.html?env=&obj=data&cache_key=70CFBA23&max_display_columns=50",
+        "contentUrl": "grid_resource/gridviewer.html?env=&obj=data&cache_key=CD8B74CF&max_display_columns=50",
         "preview": "0",
         "source_window_id": "",
         "Source": "Source"

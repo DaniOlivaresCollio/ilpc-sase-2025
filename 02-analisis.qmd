@@ -6,14 +6,21 @@ options(scipen = 999)
 
 library(pacman)
 p_load(bookdown,
+       dplyr,
        ggplot2,
+       haven,
+       knitr,
        readr,
        readxl,
+       sjlabelled,
+       summarytools,
        tidyverse
        )
 ```
 
-## Cargar datos
+## Plot Job Control y Labor Union Power
+
+### Cargar datos
 
 ```{r datos,message=FALSE,warning=FALSE}
 data <- read_excel("input/data/ISSP2015_Data.xlsx")
@@ -24,8 +31,7 @@ data <- data %>%
   select(c_alphan, name = Name , union_power = `Union power`, job_control = `Job control` )
 ```
 
-
-## Plot Job Control y Labur Union Power
+### Plot
 
 ```{r,message=FALSE,warning=FALSE}
 # Calcular la correlación de Pearson
@@ -43,8 +49,8 @@ p <- ggplot(data, aes(x = job_control, y = union_power)) +
     plot.caption = element_text(hjust = 0, size = 8, face = "italic")  # estilo del pie
   ) +
   labs(
-    x = "Job control",
-    y = "Labour Union Power", 
+    x = "Job control-autonomy",
+    y = "Labor Union Power", 
     caption = "Note: Pearson's r = 0.458. 
     \nSource: Own elaboration based on data from OECD/AIAS ICTWSS (2015), except for the case of Chile, where the data on \ncollective bargaining coverage was obtained from Durán and Gamonal (2019).
     "
@@ -53,9 +59,9 @@ p <- ggplot(data, aes(x = job_control, y = union_power)) +
 p 
 ```
 
-**Labour Union Power**: This index was calculated as the average between the union density rate and the collective bargaining coverage rate.
+**Labor Union Power**: This index was calculated as the average between the union density rate and the collective bargaining coverage rate.
 
-**Job control**: This scale was constructed based on the simple sum of four variables:
+**Job control-autonomy**: This scale was constructed based on the simple sum of four variables:
         
 1. Please indicate to what extent you agree or disagree with the following statement about your job: I can work independently (1. Strongly agree... 5. Strongly disagree);
 
@@ -84,8 +90,7 @@ All these variables were recoded and transformed into a score from 0 to 4, where
 ggsave("output/union_vs_jobcontrol.png", plot = p, width = 7, height = 5, dpi = 300)
 ```
 
-
-## Plot
+## Plot Latinobarómetro
 
 Latinobarómetro
 - mucho o algo de confianza 
@@ -96,5 +101,78 @@ Latinobarómetro
 
 ## Tabla
 
-Tabla con base de datos y variables, como la del minicoes
+### Data
+
+```{r}
+data <- readRDS("input/data/Conclat_data.rds")
+```
+
+```{r}
+# Seleccionar variables
+data <- data %>% 
+  select(
+    # numericas
+    "pol_confidence","autonomia_control","edad","pol_talk_1to5","political_skills2",
+    # categoricas
+    "sexo","nedu","sector","af_sindical","left_party_id","tamanio_local")
+
+# Convertir a tipo factor y numérico
+vars_numericas <- c("pol_confidence","autonomia_control","edad","pol_talk_1to5","political_skills2")
+
+vars_categoricas <- c("sexo","nedu","sector","af_sindical","left_party_id","tamanio_local")
+
+data[vars_numericas] <- lapply(data[vars_numericas], as.numeric)
+data[vars_categoricas] <- lapply(data[vars_categoricas], as.factor)
+
+# Etiquetar variables 
+data <- set_label(data, label = c(
+  pol_confidence = "Political confidence",
+  autonomia_control = "Job control-autonomy",
+  edad = "Age",
+  pol_talk_1to5 = "Political discussion",
+  political_skills2 = "Political skills",
+  sexo = "Gender",
+  nedu = "Educational level",
+  sector = "Sector (1 = Private)",
+  af_sindical = "Union membership",
+  left_party_id = "Left-wing party Identification",
+  tamanio_local = "Workplace size"
+))
+```
+
+### Table
+
+```{r}
+#| label: tbl-summary-todas
+#| tbl-cap: "Descriptive summary of the variables of interest"
+#| tbl-cap-location: top
+#| results: asis
+#| echo: true
+
+# Crear tabla resumen para todas las variables seleccionadas
+df_summary <- dfSummary(
+  data,
+  round.digits = 2,
+  plain.ascii = FALSE,
+  style = "multiline",
+  tmp.img.dir = "/tmp",       # Necesario para gráficos mini en HTML
+  graph.magnif = 0.75,
+  headings = FALSE,
+  varnumbers = FALSE,
+  labels.col = TRUE,          # Mostrar etiquetas en vez de nombres
+  na.col = TRUE,
+  graph.col = FALSE,
+  valid.col = TRUE,
+  col.widths = c(20, 10, 10, 10, 10)
+)
+
+# Eliminar columna de nombre técnico si quieres
+df_summary$Variable <- NULL
+
+# Imprimir
+print(df_summary)
+
+# Guardar en HTML
+print(df_summary, file = "output/tabla_resumen.html")
+```
 

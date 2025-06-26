@@ -167,10 +167,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#cargar-datos" id="toc-cargar-datos" class="nav-link active" data-scroll-target="#cargar-datos"><span class="header-section-number">2.1</span> Cargar datos</a></li>
-  <li><a href="#plot-job-control-y-labur-union-power" id="toc-plot-job-control-y-labur-union-power" class="nav-link" data-scroll-target="#plot-job-control-y-labur-union-power"><span class="header-section-number">2.2</span> Plot Job Control y Labur Union Power</a></li>
-  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot"><span class="header-section-number">2.3</span> Plot</a></li>
-  <li><a href="#tabla" id="toc-tabla" class="nav-link" data-scroll-target="#tabla"><span class="header-section-number">2.4</span> Tabla</a></li>
+  <li><a href="#plot-job-control-y-labor-union-power" id="toc-plot-job-control-y-labor-union-power" class="nav-link active" data-scroll-target="#plot-job-control-y-labor-union-power"><span class="header-section-number">2.1</span> Plot Job Control y Labor Union Power</a>
+  <ul class="collapse">
+  <li><a href="#cargar-datos" id="toc-cargar-datos" class="nav-link" data-scroll-target="#cargar-datos"><span class="header-section-number">2.1.1</span> Cargar datos</a></li>
+  <li><a href="#plot" id="toc-plot" class="nav-link" data-scroll-target="#plot"><span class="header-section-number">2.1.2</span> Plot</a></li>
+  </ul></li>
+  <li><a href="#plot-latinobarómetro" id="toc-plot-latinobarómetro" class="nav-link" data-scroll-target="#plot-latinobarómetro"><span class="header-section-number">2.2</span> Plot Latinobarómetro</a></li>
+  <li><a href="#tabla" id="toc-tabla" class="nav-link" data-scroll-target="#tabla"><span class="header-section-number">2.3</span> Tabla</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data"><span class="header-section-number">2.3.1</span> Data</a></li>
+  <li><a href="#table" id="toc-table" class="nav-link" data-scroll-target="#table"><span class="header-section-number">2.3.2</span> Table</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -194,8 +201,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<section id="cargar-datos" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="cargar-datos"><span class="header-section-number">2.1</span> Cargar datos</h2>
+<section id="plot-job-control-y-labor-union-power" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="plot-job-control-y-labor-union-power"><span class="header-section-number">2.1</span> Plot Job Control y Labor Union Power</h2>
+<section id="cargar-datos" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="cargar-datos"><span class="header-section-number">2.1.1</span> Cargar datos</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"input/data/ISSP2015_Data.xlsx"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -204,8 +213,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(c_alphan, <span class="at">name =</span> Name , <span class="at">union_power =</span> <span class="st">`</span><span class="at">Union power</span><span class="st">`</span>, <span class="at">job_control =</span> <span class="st">`</span><span class="at">Job control</span><span class="st">`</span> )</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="plot-job-control-y-labur-union-power" class="level2" data-number="2.2">
-<h2 data-number="2.2" class="anchored" data-anchor-id="plot-job-control-y-labur-union-power"><span class="header-section-number">2.2</span> Plot Job Control y Labur Union Power</h2>
+<section id="plot" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="plot"><span class="header-section-number">2.1.2</span> Plot</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular la correlación de Pearson</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>correlacion <span class="ot">&lt;-</span> <span class="fu">cor</span>(data<span class="sc">$</span>job_control, data<span class="sc">$</span>union_power, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span>
@@ -222,8 +231,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">"italic"</span>)  <span class="co"># estilo del pie</span></span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Job control"</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Labour Union Power"</span>, </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Job control-autonomy"</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Labor Union Power"</span>, </span>
 <span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Note: Pearson's r = 0.458. </span></span>
 <span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="st">    </span><span class="sc">\n</span><span class="st">Source: Own elaboration based on data from OECD/AIAS ICTWSS (2015), except for the case of Chile, where the data on </span><span class="sc">\n</span><span class="st">collective bargaining coverage was obtained from Durán and Gamonal (2019).</span></span>
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="st">    "</span></span>
@@ -234,8 +243,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="02-analisis_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p><strong>Labour Union Power</strong>: Was calculated as the average between the union density rate and the collective bargaining coverage rate.</p>
-<p><strong>Job control</strong>: This scale was constructed based on the simple sum of four variables:</p>
+<p><strong>Labor Union Power</strong>: This index was calculated as the average between the union density rate and the collective bargaining coverage rate.</p>
+<p><strong>Job control-autonomy</strong>: This scale was constructed based on the simple sum of four variables:</p>
 <ol type="1">
 <li><p>Please indicate to what extent you agree or disagree with the following statement about your job: I can work independently (1. Strongly agree… 5. Strongly disagree);</p></li>
 <li><p>Which of the following statements best describes how your work schedule is decided?</p>
@@ -258,15 +267,260 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/union_vs_jobcontrol.png"</span>, <span class="at">plot =</span> p, <span class="at">width =</span> <span class="dv">7</span>, <span class="at">height =</span> <span class="dv">5</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="plot" class="level2" data-number="2.3">
-<h2 data-number="2.3" class="anchored" data-anchor-id="plot"><span class="header-section-number">2.3</span> Plot</h2>
+</section>
+<section id="plot-latinobarómetro" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="plot-latinobarómetro"><span class="header-section-number">2.2</span> Plot Latinobarómetro</h2>
 <p>Latinobarómetro - mucho o algo de confianza - 2010 en adelante - todos los países - buscar resultados compilados latinobarometro</p>
 </section>
-<section id="tabla" class="level2" data-number="2.4">
-<h2 data-number="2.4" class="anchored" data-anchor-id="tabla"><span class="header-section-number">2.4</span> Tabla</h2>
-<p>Tabla con base de datos y variables, como la del minicoes</p>
+<section id="tabla" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="tabla"><span class="header-section-number">2.3</span> Tabla</h2>
+<section id="data" class="level3" data-number="2.3.1">
+<h3 data-number="2.3.1" class="anchored" data-anchor-id="data"><span class="header-section-number">2.3.1</span> Data</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"input/data/Conclat_data.rds"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Seleccionar variables</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># numericas</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pol_confidence"</span>,<span class="st">"autonomia_control"</span>,<span class="st">"edad"</span>,<span class="st">"pol_talk_1to5"</span>,<span class="st">"political_skills2"</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># categoricas</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sexo"</span>,<span class="st">"nedu"</span>,<span class="st">"sector"</span>,<span class="st">"af_sindical"</span>,<span class="st">"left_party_id"</span>,<span class="st">"tamanio_local"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir a tipo factor y numérico</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>vars_numericas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pol_confidence"</span>,<span class="st">"autonomia_control"</span>,<span class="st">"edad"</span>,<span class="st">"pol_talk_1to5"</span>,<span class="st">"political_skills2"</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>vars_categoricas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sexo"</span>,<span class="st">"nedu"</span>,<span class="st">"sector"</span>,<span class="st">"af_sindical"</span>,<span class="st">"left_party_id"</span>,<span class="st">"tamanio_local"</span>)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>data[vars_numericas] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data[vars_numericas], as.numeric)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>data[vars_categoricas] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data[vars_categoricas], as.factor)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Etiquetar variables </span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">set_label</span>(data, <span class="at">label =</span> <span class="fu">c</span>(</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">pol_confidence =</span> <span class="st">"Political confidence"</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">autonomia_control =</span> <span class="st">"Job control-autonomy"</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">edad =</span> <span class="st">"Age"</span>,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">pol_talk_1to5 =</span> <span class="st">"Political discussion"</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">political_skills2 =</span> <span class="st">"Political skills"</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">sexo =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">nedu =</span> <span class="st">"Educational level"</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">sector =</span> <span class="st">"Sector (1 = Private)"</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">af_sindical =</span> <span class="st">"Union membership"</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">left_party_id =</span> <span class="st">"Left-wing party Identification"</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">tamanio_local =</span> <span class="st">"Workplace size"</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="table" class="level3" data-number="2.3.2">
+<h3 data-number="2.3.2" class="anchored" data-anchor-id="table"><span class="header-section-number">2.3.2</span> Table</h3>
+<div class="cell tbl-cap-location-top">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear tabla resumen para todas las variables seleccionadas</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> <span class="fu">dfSummary</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  data,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">round.digits =</span> <span class="dv">2</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">plain.ascii =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">style =</span> <span class="st">"multiline"</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">tmp.img.dir =</span> <span class="st">"/tmp"</span>,       <span class="co"># Necesario para gráficos mini en HTML</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">graph.magnif =</span> <span class="fl">0.75</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">headings =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">varnumbers =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">labels.col =</span> <span class="cn">TRUE</span>,          <span class="co"># Mostrar etiquetas en vez de nombres</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">na.col =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">graph.col =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">valid.col =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.widths =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>, <span class="dv">10</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Eliminar columna de nombre técnico si quieres</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>df_summary<span class="sc">$</span>Variable <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Imprimir</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_summary)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="tbl-summary-todas" class="anchored">
+<table class="table table-sm table-striped small">
+<caption>Tabla&nbsp;2.1: Descriptive summary of the variables of interest</caption>
+<colgroup>
+<col style="width: 30%">
+<col style="width: 30%">
+<col style="width: 20%">
+<col style="width: 10%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Label</th>
+<th style="text-align: left;">Stats / Values</th>
+<th style="text-align: left;">Freqs (% of Valid)</th>
+<th style="text-align: left;">Valid</th>
+<th style="text-align: left;">Missing</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Political confidence</td>
+<td style="text-align: left;">Mean (sd) : 1.93 (1.06)<br>
+min &lt; med &lt; max:<br>
+1 &lt; 1.5 &lt; 5<br>
+IQR (CV) : 1.5 (0.55)</td>
+<td style="text-align: left;">1.00 : 841 (41.0%)<br>
+1.50 : 339 (16.5%)<br>
+2.00 : 196 ( 9.6%)<br>
+2.50 : 169 ( 8.2%)<br>
+3.00 : 187 ( 9.1%)<br>
+3.50 : 156 ( 7.6%)<br>
+4.00 : 105 ( 5.1%)<br>
+4.50 : 46 ( 2.2%)<br>
+5.00 : 11 ( 0.5%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Job control-autonomy</td>
+<td style="text-align: left;">Mean (sd) : 2.28 (0.87)<br>
+min &lt; med &lt; max:<br>
+1 &lt; 2.2 &lt; 5<br>
+IQR (CV) : 1.4 (0.38)</td>
+<td style="text-align: left;">21 distinct values</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Age</td>
+<td style="text-align: left;">Mean (sd) : 38.83 (12.04)<br>
+min &lt; med &lt; max:<br>
+18 &lt; 37.5 &lt; 81<br>
+IQR (CV) : 19 (0.31)</td>
+<td style="text-align: left;">57 distinct values</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Political discussion</td>
+<td style="text-align: left;">Mean (sd) : 2.17 (1.22)<br>
+min &lt; med &lt; max:<br>
+1 &lt; 2 &lt; 5<br>
+IQR (CV) : 2 (0.56)</td>
+<td style="text-align: left;">1 : 841 (41.0%)<br>
+2 : 437 (21.3%)<br>
+3 : 452 (22.0%)<br>
+4 : 215 (10.5%)<br>
+5 : 105 ( 5.1%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Political skills</td>
+<td style="text-align: left;">Mean (sd) : 2.83 (1.06)<br>
+min &lt; med &lt; max:<br>
+1 &lt; 3 &lt; 5<br>
+IQR (CV) : 1.5 (0.38)</td>
+<td style="text-align: left;">1.00 : 245 (12.0%)<br>
+1.50 : 69 ( 3.4%)<br>
+2.00 : 351 (17.1%)<br>
+2.50 : 183 ( 8.9%)<br>
+3.00 : 521 (25.4%)<br>
+3.50 : 179 ( 8.7%)<br>
+4.00 : 371 (18.1%)<br>
+4.50 : 55 ( 2.7%)<br>
+5.00 : 76 ( 3.7%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Gender</td>
+<td style="text-align: left;">1. 1<br>
+2. 2</td>
+<td style="text-align: left;">967 (47.2%)<br>
+1083 (52.8%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Educational level</td>
+<td style="text-align: left;">1. 1. Hasta Básica completa<br>
+2. 2. Hasta Media completa<br>
+3. 3. Hasta Universitaria in<br>
+4. 4. Universitaria completa</td>
+<td style="text-align: left;">181 ( 8.8%)<br>
+818 (39.9%)<br>
+594 (29.0%)<br>
+457 (22.3%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sector (1 = Private)</td>
+<td style="text-align: left;">1. 0<br>
+2. 1</td>
+<td style="text-align: left;">588 (28.7%)<br>
+1462 (71.3%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Union membership</td>
+<td style="text-align: left;">1. 0<br>
+2. 1</td>
+<td style="text-align: left;">1718 (83.8%)<br>
+332 (16.2%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Left-wing party Identification</td>
+<td style="text-align: left;">1. 0<br>
+2. 1</td>
+<td style="text-align: left;">1875 (91.5%)<br>
+175 ( 8.5%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Workplace size</td>
+<td style="text-align: left;">1. 1-9<br>
+2. 10-49<br>
+3. 50-199<br>
+4. 200 o más</td>
+<td style="text-align: left;">956 (46.6%)<br>
+629 (30.7%)<br>
+332 (16.2%)<br>
+133 ( 6.5%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Guardar en HTML</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(df_summary, <span class="at">file =</span> <span class="st">"output/tabla_resumen.html"</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre><code>Output file written: C:\Users\danie\Documents\fondecyt\ilpc-sase-2025\output\tabla_resumen.html</code></pre>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
