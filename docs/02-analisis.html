@@ -286,12 +286,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># numericas</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pol_confidence"</span>,<span class="st">"autonomia_control"</span>,<span class="st">"edad"</span>,<span class="st">"pol_talk_1to5"</span>,<span class="st">"political_skills2"</span>,</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># categoricas</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sexo"</span>,<span class="st">"nedu"</span>,<span class="st">"sector"</span>,<span class="st">"af_sindical"</span>,<span class="st">"left_party_id"</span>,<span class="st">"tamanio_local"</span>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"sexo"</span>,<span class="st">"nedu"</span>,<span class="st">"sector"</span>,<span class="st">"af_sindical"</span>,<span class="st">"left_party_id"</span>,<span class="st">"tamanio_local"</span>,<span class="st">"part_partidos_active"</span>)</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Convertir a tipo factor y numérico</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>vars_numericas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"pol_confidence"</span>,<span class="st">"autonomia_control"</span>,<span class="st">"edad"</span>,<span class="st">"pol_talk_1to5"</span>,<span class="st">"political_skills2"</span>)</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>vars_categoricas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sexo"</span>,<span class="st">"nedu"</span>,<span class="st">"sector"</span>,<span class="st">"af_sindical"</span>,<span class="st">"left_party_id"</span>,<span class="st">"tamanio_local"</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>vars_categoricas <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"sexo"</span>,<span class="st">"nedu"</span>,<span class="st">"sector"</span>,<span class="st">"af_sindical"</span>,<span class="st">"left_party_id"</span>,<span class="st">"tamanio_local"</span>,<span class="st">"part_partidos_active"</span>)</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>data[vars_numericas] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data[vars_numericas], as.numeric)</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>data[vars_categoricas] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(data[vars_categoricas], as.factor)</span>
@@ -308,8 +308,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">sector =</span> <span class="st">"Sector (1 = Private)"</span>,</span>
 <span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">af_sindical =</span> <span class="st">"Union membership"</span>,</span>
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">left_party_id =</span> <span class="st">"Left-wing party Identification"</span>,</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">tamanio_local =</span> <span class="st">"Workplace size"</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">tamanio_local =</span> <span class="st">"Workplace size"</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="at">part_partidos_active =</span> <span class="st">"Political participation"</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="table" class="level3" data-number="2.3.2">
@@ -506,6 +507,17 @@ IQR (CV) : 1.5 (0.38)</td>
 629 (30.7%)<br>
 332 (16.2%)<br>
 133 ( 6.5%)</td>
+<td style="text-align: left;">2050<br>
+(100.0%)</td>
+<td style="text-align: left;">0<br>
+(0.0%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Political participation</td>
+<td style="text-align: left;">1. 0<br>
+2. 1</td>
+<td style="text-align: left;">1959 (95.6%)<br>
+91 ( 4.4%)</td>
 <td style="text-align: left;">2050<br>
 (100.0%)</td>
 <td style="text-align: left;">0<br>

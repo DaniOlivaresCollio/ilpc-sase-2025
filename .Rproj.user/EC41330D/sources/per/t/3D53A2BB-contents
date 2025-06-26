@@ -114,12 +114,12 @@ data <- data %>%
     # numericas
     "pol_confidence","autonomia_control","edad","pol_talk_1to5","political_skills2",
     # categoricas
-    "sexo","nedu","sector","af_sindical","left_party_id","tamanio_local")
+    "sexo","nedu","sector","af_sindical","left_party_id","tamanio_local","part_partidos_active")
 
 # Convertir a tipo factor y numérico
 vars_numericas <- c("pol_confidence","autonomia_control","edad","pol_talk_1to5","political_skills2")
 
-vars_categoricas <- c("sexo","nedu","sector","af_sindical","left_party_id","tamanio_local")
+vars_categoricas <- c("sexo","nedu","sector","af_sindical","left_party_id","tamanio_local","part_partidos_active")
 
 data[vars_numericas] <- lapply(data[vars_numericas], as.numeric)
 data[vars_categoricas] <- lapply(data[vars_categoricas], as.factor)
@@ -136,7 +136,8 @@ data <- set_label(data, label = c(
   sector = "Sector (1 = Private)",
   af_sindical = "Union membership",
   left_party_id = "Left-wing party Identification",
-  tamanio_local = "Workplace size"
+  tamanio_local = "Workplace size",
+  part_partidos_active = "Political participation"
 ))
 ```
 
