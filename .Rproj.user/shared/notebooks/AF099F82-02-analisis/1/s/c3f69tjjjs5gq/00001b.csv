@@ -1,3 +1,0 @@
-"0",""
-"0","# Guardar como imagen PNG"
-"0","ggsave(""output/union_vs_jobcontrol.png"", plot = p, width = 7, height = 5, dpi = 300)"

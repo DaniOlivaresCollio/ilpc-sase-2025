@@ -38,7 +38,7 @@ data <- data %>%
 correlacion <- cor(data$job_control, data$union_power, use = "complete.obs")
 
 # Crear el gráfico
-p <- ggplot(data, aes(x = job_control, y = union_power)) +
+p <- ggplot(data, aes(x = union_power, y = job_control)) +
   geom_point(size = 2) +
   geom_smooth(method = "lm", se = FALSE, color = "blue", linewidth = 0.6) +  # línea de tendencia
   geom_text(aes(label = name), vjust = -1.1, size = 3) +  # etiquetas con los países
@@ -49,16 +49,17 @@ p <- ggplot(data, aes(x = job_control, y = union_power)) +
     plot.caption = element_text(hjust = 0, size = 8, face = "italic")  # estilo del pie
   ) +
   labs(
-    x = "Job control-autonomy",
-    y = "Labor Union Power", 
-    caption = "Note: Pearson's r = 0.458. 
-    \nSource: Own elaboration based on data from OECD/AIAS ICTWSS (2015), except for the case of Chile, where the data on \ncollective bargaining coverage was obtained from Durán and Gamonal (2019).
-    "
+    x = "Labor Union Power",
+    y = "Job control/autonomy"
   )
 
 p 
 ```
 
+Pearson's r = 0.458. 
+
+Source: Own elaboration based on data from OECD/AIAS ICTWSS (2015), except for the case of Chile, where the data on collective bargaining coverage was obtained from Durán and Gamonal (2019).
+    
 **Labor Union Power**: This index was calculated as the average between the union density rate and the collective bargaining coverage rate.
 
 **Job control-autonomy**: This scale was constructed based on the simple sum of four variables:
