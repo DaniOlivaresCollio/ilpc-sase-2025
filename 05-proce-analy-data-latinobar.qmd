@@ -1,0 +1,37 @@
+# Proc y Análisis Data Latinobarómetro
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+rm(list=ls())
+options(scipen = 999)
+
+library(pacman)
+p_load(bookdown,
+       dplyr,
+       ggplot2,
+       haven,
+       knitr,
+       readr,
+       readxl,
+       sjlabelled,
+       summarytools,
+       tidyverse
+       )
+```
+
+
+## Plot Latinobarómetro
+
+### Cargar datos
+
+```{r}
+
+```
+
+### Plot
+
+```{r}
+
+```
+
+Latinobarómetro - mucho o algo de confianza - 2010 en adelante - todos los países - buscar resultados compilados latinobarometro
+

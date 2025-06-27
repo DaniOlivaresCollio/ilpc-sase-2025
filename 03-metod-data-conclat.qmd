@@ -1,0 +1,48 @@
+# Variables Data Conclat
+
+## Dependent variable
+
+We measured *political participation* through the variable **c11_02**. *I’m going to read you a list of voluntary organizations. For each one, could you tell me whether you are an active member, an inactive member, or not a member of that organization? Political party*. The variable was coded "Active" = 1, and "Inactive" or "Not a member" = 0.
+
+## Independent variables
+
+The first independent variable is *workplace autonomy*, which corresponds to the average of items **b06**. *Now, thinking about your current job, please tell me how much influence you have over the following aspects:*
+
+-   **b06_01**. *The methods or ways in which you carry out your tasks during the workday.*
+-   **b06_02**. *The policies your company adopts regarding your working conditions.*
+-   **b06_03**. *The time you start and finish your workday.*
+-   **b06_04**. *The time you are allowed to take a break.*
+-   **b06_05**. *The possibility of taking one or two hours off per week to attend to personal or family matters.*
+
+Each item uses a response scale ranging from "No influence" = 1 to "A lot of influence" = 5.
+
+The second independent variable is *union membership*. This was measured through the variable **b21**. *Are you affiliated with a labor union (either company or inter-company) or a public employees’ association?*, coded as "Union members" = 1, and "Not member" = 0.
+
+## Mediating variables
+
+We use three mediating variables. The first is *political confidence*, which corresponds to the average of the following items **c10**. *How often do you do each of the following activities?*
+
+-   **c10_01**. *Talks about politics with friends.*
+-   **c10_01**. *Tries to convince someone of your political views.*
+
+Each item uses a response scale ranging from "Never" = 1 to "Very frequently" = 5.
+
+The second mediating variable is *political skills*, which corresponds to the average of the following items **c12**. *Imagine that in your community or neighborhood there is a problem with the electricity supply (the power has been out for three days), and the neighbors want to meet to solve the problem. Now I would like you to answer the following:*
+
+-   **c12_01**. *I would feel comfortable organizing and leading the meeting with my neighbors.*
+-   **c12_02**. *I would feel comfortable leading some form of protest so that the authorities listen to our demands.*
+
+Each item uses a response scale ranging from "Strongly disagree" = 1 to "Strongly agree" = 5.
+
+The third mediating variable is *identification with political parties*, measured through the item **c09**. *Which of the following political parties best represents your interests, beliefs, and values?*. The variable was coded as "Left-wing parties" = 1, which includes Communist Party, Socialist Party, Frente Amplio, Partido Humanista; and 0 = "Does not identify with a party" or "Identifies with right-wing parties". The parties classified as left-wing are those with a presence in the labor union sphere.
+
+## Controls
+
+Our analyses included the following sociodemographic controls:
+
+-   gender (1 = "Female");
+-   age (as a numeric variable);
+-   education level, measured in four groups: 1. Lower (up to completed primary education), 2. Middle (up to completed secondary education), 3. High (incomplete university education), 4. Upper level (completed university education or higher).
+-   sector (1 = private sector; 0 = public sector);
+-   political interest, measured by the item **c10_01**. *How often do you do each of the following activities? Talks about politics with friends* (1 = "At least once", 0 = "Never");
+-   workplace size, measured in four groups: 1. 1 to 9 employees, 2. 10 to 49 employees, 3. 50 to 199 employees, 4. 200 employees or more.

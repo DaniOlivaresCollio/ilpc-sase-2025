@@ -1,0 +1,192 @@
+# Análisis
+
+```{r,echo=FALSE,warning=FALSE,message=FALSE}
+rm(list=ls())
+options(scipen = 999)
+
+library(pacman)
+p_load(bookdown,
+       dplyr,
+       ggplot2,
+       haven,
+       knitr,
+       readr,
+       readxl,
+       sjlabelled,
+       summarytools,
+       tidyverse
+       )
+```
+
+## Plot Job Control y Labor Union Power
+
+### Cargar datos
+
+```{r datos,message=FALSE,warning=FALSE}
+data <- read_excel("input/data/ISSP2015_Data.xlsx")
+```
+
+```{r}
+data <- data %>% 
+  select(c_alphan, name = Name , union_power = `Union power`, job_control = `Job control` )
+```
+
+### Plot
+
+```{r,message=FALSE,warning=FALSE}
+# Calcular la correlación de Pearson
+correlacion <- cor(data$job_control, data$union_power, use = "complete.obs")
+
+# Crear el gráfico
+p <- ggplot(data, aes(x = union_power, y = job_control)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", se = FALSE, color = "blue", linewidth = 0.6) +  # línea de tendencia
+  geom_text(aes(label = name), vjust = -1.1, size = 3) +  # etiquetas con los países
+  geom_point(data = subset(data, name == "Chile"), color = "red", size = 3) +  # destacar Chile
+  theme_minimal() +
+  theme(
+    panel.border = element_rect(colour = "black", fill = NA, linewidth = 0.5),  # borde del gráfico
+    plot.caption = element_text(hjust = 0, size = 8, face = "italic")  # estilo del pie
+  ) +
+  labs(
+    x = "Labor Union Power",
+    y = "Job control/autonomy"
+  )
+
+p 
+```
+
+Pearson's r = 0.458. 
+
+Source: Own elaboration based on data from OECD/AIAS ICTWSS (2015), except for the case of Chile, where the data on collective bargaining coverage was obtained from Durán and Gamonal (2019).
+    
+**Labor Union Power**: This index was calculated as the average between the union density rate and the collective bargaining coverage rate.
+
+**Job control-autonomy**: This scale was constructed based on the simple sum of four variables:
+        
+1. Please indicate to what extent you agree or disagree with the following statement about your job: I can work independently (1. Strongly agree... 5. Strongly disagree);
+
+2. Which of the following statements best describes how your work schedule is decided?
+
+    - My employer decides when I start and finish work, and I cannot change it myself
+
+    - I can decide my start and finish time within certain limits
+
+    - I am completely free to decide when I start and finish work
+
+3. Which of the following statements best describes how your daily workday is organized?
+
+    - I am free to decide how my daily workday is organized
+
+    - I can decide how my workday is organized within certain limits
+
+    - I am not free to decide how my daily workday is organized
+
+4. How difficult would it be for you to take one or two hours off during working hours to attend to personal or family matters? (1. Not difficult at all... 5. Very difficult).
+
+All these variables were recoded and transformed into a score from 0 to 4, where higher scores indicate greater perceived autonomy/control. The items were then summed, and the final scale was transformed into a 0-to-100 score. The scale is unidimensional (Principal Axis Factor Analysis: Eigenvalue = 1.45; 39% of explained variance) and internally consistent (Cronbach’s Alpha = 0.70).
+
+```{r,message=FALSE,warning=FALSE}
+# Guardar como imagen PNG
+ggsave("output/union_vs_jobcontrol.png", plot = p, width = 7, height = 5, dpi = 300)
+```
+
+## Plot Latinobarómetro
+
+### Cargar datos
+
+```{r}
+
+```
+
+### Plot
+
+```{r}
+
+```
+
+
+Latinobarómetro
+- mucho o algo de confianza 
+- 2010 en adelante
+- todos los países 
+- buscar resultados compilados latinobarometro
+
+## Tabla
+
+### Cargar datos
+
+```{r}
+data <- readRDS("input/data/Conclat_data.rds")
+```
+
+```{r}
+# Seleccionar variables
+data <- data %>% 
+  select(
+    # numericas
+    "pol_confidence","autonomia_control","edad","pol_talk_1to5","political_skills2",
+    # categoricas
+    "sexo","nedu","sector","af_sindical","left_party_id","tamanio_local","part_partidos_active")
+
+# Convertir a tipo factor y numérico
+vars_numericas <- c("pol_confidence","autonomia_control","edad","pol_talk_1to5","political_skills2")
+
+vars_categoricas <- c("sexo","nedu","sector","af_sindical","left_party_id","tamanio_local","part_partidos_active")
+
+data[vars_numericas] <- lapply(data[vars_numericas], as.numeric)
+data[vars_categoricas] <- lapply(data[vars_categoricas], as.factor)
+
+# Etiquetar variables 
+data <- set_label(data, label = c(
+  pol_confidence = "Political confidence",
+  autonomia_control = "Job control-autonomy",
+  edad = "Age",
+  pol_talk_1to5 = "Political discussion",
+  political_skills2 = "Political skills",
+  sexo = "Gender",
+  nedu = "Educational level",
+  sector = "Sector (1 = Private)",
+  af_sindical = "Union membership",
+  left_party_id = "Left-wing party Identification",
+  tamanio_local = "Workplace size",
+  part_partidos_active = "Political participation"
+))
+```
+
+### Table
+
+```{r}
+#| label: tbl-summary-todas
+#| tbl-cap: "Descriptive summary of the variables of interest"
+#| tbl-cap-location: top
+#| results: asis
+#| echo: true
+
+# Crear tabla resumen para todas las variables seleccionadas
+df_summary <- dfSummary(
+  data,
+  round.digits = 2,
+  plain.ascii = FALSE,
+  style = "multiline",
+  tmp.img.dir = "/tmp",       # Necesario para gráficos mini en HTML
+  graph.magnif = 0.75,
+  headings = FALSE,
+  varnumbers = FALSE,
+  labels.col = TRUE,          # Mostrar etiquetas en vez de nombres
+  na.col = TRUE,
+  graph.col = FALSE,
+  valid.col = TRUE,
+  col.widths = c(20, 10, 10, 10, 10)
+)
+
+# Eliminar columna de nombre técnico si quieres
+df_summary$Variable <- NULL
+
+# Imprimir
+print(df_summary)
+
+# Guardar en HTML
+print(df_summary, file = "output/tabla_resumen.html")
+```
+

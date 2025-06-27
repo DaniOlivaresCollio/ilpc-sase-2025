@@ -1,0 +1,16 @@
+{
+  "hash": "e15286b254ca343f38f3ce87521ae2de",
+  "result": {
+    "markdown": "# Proc y Análisis Data Latinobarómetro\n\n\n::: {.cell}\n\n:::\n\n\n\n## Plot Latinobarómetro\n\n### Cargar datos\n\n\n::: {.cell}\n\n:::\n\n\n### Plot\n\n\n::: {.cell}\n\n:::\n\n\nLatinobarómetro - mucho o algo de confianza - 2010 en adelante - todos los países - buscar resultados compilados latinobarometro\n\n",
+    "supporting": [
+      "05-proce-analy-data-latinobar_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

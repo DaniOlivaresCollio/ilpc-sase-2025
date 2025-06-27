@@ -13,5 +13,20 @@
   },
   "03-metodologia.qmd": {
     "03-metodologia.html": "af40476a"
+  },
+  "01-proce-data-conclat.qmd": {
+    "01-proce-data-conclat.html": "5d80a04c"
+  },
+  "02-analy-data-conclat.qmd": {
+    "02-analy-data-conclat.html": "d6534805"
+  },
+  "03-metod-data-conclat.qmd": {
+    "03-metod-data-conclat.html": "77641e46"
+  },
+  "04-proce-analy-data-ictwss.qmd": {
+    "04-proce-analy-data-ictwss.html": "49047fcc"
+  },
+  "05-proce-analy-data-latinobar.qmd": {
+    "05-proce-analy-data-latinobar.html": "c739b472"
   }
 }
