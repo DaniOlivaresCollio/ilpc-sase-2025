@@ -1,2 +1,0 @@
-"0","data <- data %>% "
-"0","  select(c_alphan, name = Name , union_power = `Union power`, job_control = `Job control` )"

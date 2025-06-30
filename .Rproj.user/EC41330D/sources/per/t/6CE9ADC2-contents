@@ -405,17 +405,16 @@ porcentaje_confianza <- resultado_bruto %>%
     confianza = `I(trust_ppol_rec == 1)TRUE`,
     se = `se.I(trust_ppol_rec == 1)TRUE`,
     porcentaje = confianza * 100
-  )
+  ) %>%
+  filter(!pais %in% c("España", "Rep. Dominicana"))  # Filtrar países no deseados
 ```
 
 ```{r}
 ggplot(porcentaje_confianza, aes(x = anio, y = porcentaje, color = pais)) +
   geom_line() +
   geom_point() +
-  labs(title = "Confianza en partidos políticos",
-       subtitle = "Porcentaje de personas que confían (trust_ppol_rec == 1)",
-       x = "Año", y = "Porcentaje",
-       color = "País") +
+  labs(title = "Trust in political parties by country",
+       x = "Year", y = "Percentage", color = "País") +
   theme_minimal()
 
 ```
@@ -426,8 +425,8 @@ ggplot(porcentaje_confianza, aes(x = anio, y = porcentaje)) +
   geom_line() +
   geom_point() +
   facet_wrap(~ pais) +
-  labs(title = "Confianza en partidos políticos por país",
-       x = "Año", y = "Porcentaje") +
+  labs(title = "Trust in political parties by country",
+       x = "Year", y = "Percentage") +
   theme_minimal()
 ```
 
