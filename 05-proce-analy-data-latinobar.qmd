@@ -410,17 +410,6 @@ porcentaje_confianza <- resultado_bruto %>%
 ```
 
 ```{r}
-ggplot(porcentaje_confianza, aes(x = anio, y = porcentaje, color = pais)) +
-  geom_line() +
-  geom_point() +
-  labs(title = "Trust in political parties by country",
-       x = "Year", y = "Percentage", color = "País") +
-  theme_minimal()
-
-```
-
-
-```{r}
 ggplot(porcentaje_confianza, aes(x = anio, y = porcentaje)) +
   geom_line() +
   geom_point() +
@@ -431,4 +420,27 @@ ggplot(porcentaje_confianza, aes(x = anio, y = porcentaje)) +
 ```
 
 
+```{r}
+ggplot(porcentaje_confianza, aes(x = anio, y = porcentaje)) +
+  geom_line() +
+  geom_point() +
+  facet_wrap(~ pais, ncol = 3) +  # 3 columnas, filas automáticas
+  labs(x = "Year", y = "Percentage") +
+  theme_minimal()
+```
+
+
+```{r}
+ggsave("output/graph_trust_political_parties.png", width = 10, height = 15)
+```
+
+```{r}
+ggplot(porcentaje_confianza, aes(x = anio, y = porcentaje, color = pais)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Trust in political parties by country",
+       x = "Year", y = "Percentage", color = "País") +
+  theme_minimal()
+
+```
 

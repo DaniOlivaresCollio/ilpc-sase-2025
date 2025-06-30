@@ -3,7 +3,7 @@
     "path": "C:/Users/danie/Documents/fondecyt/ilpc-sase-2025/05-proce-analy-data-latinobar.qmd",
     "project_path": "05-proce-analy-data-latinobar.qmd",
     "type": "quarto_markdown",
-    "hash": "2319756600",
+    "hash": "3604445435",
     "contents": "",
     "dirty": false,
     "created": 1751051962275.0,
@@ -17,15 +17,15 @@
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
         "rmdVisualModeLocation": "2:0",
-        "cursorPosition": "417,0",
-        "scrollLine": "410"
+        "cursorPosition": "439,16",
+        "scrollLine": "420"
     },
     "folds": "",
-    "lastKnownWriteTime": 1751291653,
+    "lastKnownWriteTime": 1751292683,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1751291653145,
+    "last_content_update": 1751292683507,
     "read_only": false,
     "read_only_alternatives": []
 }

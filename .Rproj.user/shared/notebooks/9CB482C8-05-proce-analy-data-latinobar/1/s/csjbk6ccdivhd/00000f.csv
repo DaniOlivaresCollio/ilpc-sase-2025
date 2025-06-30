@@ -1,0 +1,4 @@
+"0","# Crear diseño de encuesta con ponderador"
+"0","design <- svydesign(ids = ~1, data = data, weights = ~exp)"
+"2","Error in (function (object, ...)  : missing values in `weights'
+"
