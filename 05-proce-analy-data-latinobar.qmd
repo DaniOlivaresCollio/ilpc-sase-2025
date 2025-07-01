@@ -353,7 +353,7 @@ data <- data %>%
   mutate(pais = car::recode(pais, 
                             c("32 = 'Argentina';
                                68 = 'Bolivia';
-                               76 = 'Brasil';
+                               76 = 'Brazil';
                                152 = 'Chile';
                                170 = 'Colombia';
                                188 = 'Costa Rica';
@@ -362,11 +362,11 @@ data <- data %>%
                                222 = 'El Salvador';
                                320 = 'Guatemala';
                                340 = 'Honduras';
-                               484 = 'México';
+                               484 = 'Mexico';
                                558 = 'Nicaragua';
-                               591 = 'Panamá';
+                               591 = 'Panama';
                                600 = 'Paraguay';
-                               604 = 'Perú';
+                               604 = 'Peru';
                                724 = 'España';
                                858 = 'Uruguay';
                                862 = 'Venezuela'"), as.factor = T),
@@ -424,14 +424,17 @@ ggplot(porcentaje_confianza, aes(x = anio, y = porcentaje)) +
 ggplot(porcentaje_confianza, aes(x = anio, y = porcentaje)) +
   geom_line() +
   geom_point() +
-  facet_wrap(~ pais, ncol = 3) +  # 3 columnas, filas automáticas
+  facet_wrap(~ pais, ncol = 3) +  
   labs(x = "Year", y = "Percentage") +
-  theme_minimal()
+  theme_minimal() +
+  theme(strip.text = element_text(size = 14, face = "bold"),
+        axis.title.x = element_text(size = 14, face = "bold"),   
+        axis.title.y = element_text(size = 14, face = "bold"))
 ```
 
 
 ```{r}
-ggsave("output/graph_trust_political_parties.png", width = 10, height = 15)
+ggsave("output/graph_trust_political_parties.png", width = 10, height = 12)
 ```
 
 ```{r}

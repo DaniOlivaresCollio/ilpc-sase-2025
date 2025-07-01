@@ -521,7 +521,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pais =</span> car<span class="sc">::</span><span class="fu">recode</span>(pais, </span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">c</span>(<span class="st">"32 = 'Argentina';</span></span>
 <span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="st">                               68 = 'Bolivia';</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="st">                               76 = 'Brasil';</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="st">                               76 = 'Brazil';</span></span>
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="st">                               152 = 'Chile';</span></span>
 <span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="st">                               170 = 'Colombia';</span></span>
 <span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="st">                               188 = 'Costa Rica';</span></span>
@@ -530,11 +530,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="st">                               222 = 'El Salvador';</span></span>
 <span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="st">                               320 = 'Guatemala';</span></span>
 <span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="st">                               340 = 'Honduras';</span></span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="st">                               484 = 'México';</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="st">                               484 = 'Mexico';</span></span>
 <span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="st">                               558 = 'Nicaragua';</span></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="st">                               591 = 'Panamá';</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="st">                               591 = 'Panama';</span></span>
 <span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a><span class="st">                               600 = 'Paraguay';</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="st">                               604 = 'Perú';</span></span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="st">                               604 = 'Peru';</span></span>
 <span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="st">                               724 = 'España';</span></span>
 <span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="st">                               858 = 'Uruguay';</span></span>
 <span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="st">                               862 = 'Venezuela'"</span>), <span class="at">as.factor =</span> T),</span>
@@ -596,15 +596,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(porcentaje_confianza, <span class="fu">aes</span>(<span class="at">x =</span> anio, <span class="at">y =</span> porcentaje)) <span class="sc">+</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> pais, <span class="at">ncol =</span> <span class="dv">3</span>) <span class="sc">+</span>  <span class="co"># 3 columnas, filas automáticas</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> pais, <span class="at">ncol =</span> <span class="dv">3</span>) <span class="sc">+</span>  </span>
 <span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Year"</span>, <span class="at">y =</span> <span class="st">"Percentage"</span>) <span class="sc">+</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">"bold"</span>))</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="05-proce-analy-data-latinobar_files/figure-html/unnamed-chunk-30-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/graph_trust_political_parties.png"</span>, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">15</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"output/graph_trust_political_parties.png"</span>, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">12</span>)</span></code><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(porcentaje_confianza, <span class="fu">aes</span>(<span class="at">x =</span> anio, <span class="at">y =</span> porcentaje, <span class="at">color =</span> pais)) <span class="sc">+</span></span>

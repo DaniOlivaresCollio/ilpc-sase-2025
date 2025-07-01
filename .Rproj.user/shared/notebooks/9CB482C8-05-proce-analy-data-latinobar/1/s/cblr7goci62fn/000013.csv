@@ -2,6 +2,6 @@
 "0","  geom_line() +"
 "0","  geom_point() +"
 "0","  facet_wrap(~ pais) +"
-"0","  labs(title = ""Confianza en partidos políticos por país"","
-"0","       x = ""Año"", y = ""Porcentaje"") +"
+"0","  labs(title = ""Trust in political parties by country"","
+"0","       x = ""Year"", y = ""Percentage"") +"
 "0","  theme_minimal()"
