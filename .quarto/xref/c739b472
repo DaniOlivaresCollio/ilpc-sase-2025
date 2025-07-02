@@ -1,1 +1,1 @@
-{"headings":["cargar-datos","procesar","seleccionar-variables","unificar","recodificar","plot"],"entries":[],"options":{"chapters":true}}
+{"entries":[],"options":{"chapters":true},"headings":["cargar-datos","procesar","seleccionar-y-renombrar-variables","limpiar","unir","reordenar","limpiar-entorno","recodificar","graficar","base-para-gráfico","diseño-survey","calcular-proporción-confianza","plot"]}

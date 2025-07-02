@@ -1,0 +1,1 @@
+"0","rm(list = setdiff(ls(), ""latinobar_full"")) # Elimina todo lo que esté en ls() excepto lo que se llama latinobar_full"

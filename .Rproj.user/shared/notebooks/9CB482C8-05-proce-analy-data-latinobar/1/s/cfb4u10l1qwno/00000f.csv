@@ -1,7 +1,0 @@
-"0","# 2013"
-"0","l2013 = l2013 %>% "
-"0","  select(pais = idenpa,"
-"0","         ano = numinves,"
-"0","         id = numentre,"
-"0","         exp = wt, "
-"0","         trust_ppol = P26TGB_G)"

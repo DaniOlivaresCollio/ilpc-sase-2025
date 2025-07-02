@@ -1,7 +1,0 @@
-"0","# 2000"
-"0","l2000 = l2000 %>% "
-"0","  select(pais = idenpa,"
-"0","         ano = numinves,"
-"0","         id = numentre,"
-"0","         exp = wt,"
-"0","         trust_ppol = P35ST_G)"

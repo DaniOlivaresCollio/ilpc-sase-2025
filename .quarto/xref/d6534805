@@ -1,1 +1,1 @@
-{"options":{"chapters":true},"entries":[{"key":"tbl-summary-todas","caption":"Descriptive summary of the variables of interest","order":{"number":1,"section":[2,2,0,0,0,0,0]}}],"headings":["cargar-datos","table"]}
+{"headings":["cargar-datos","table"],"options":{"chapters":true},"entries":[{"caption":"Descriptive summary of the variables of interest","order":{"number":1,"section":[2,2,0,0,0,0,0]},"key":"tbl-summary-todas"}]}

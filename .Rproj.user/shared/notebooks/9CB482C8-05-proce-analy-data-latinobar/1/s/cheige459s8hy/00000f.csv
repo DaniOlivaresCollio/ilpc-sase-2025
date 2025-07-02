@@ -1,0 +1,8 @@
+"0","# Eliminar NA y crear base nueva"
+"0","latinobar_confianza <- latinobar_full %>%"
+"0","  filter(!is.na(trust_ppol_rec))%>%                                             # Solo casos válidos para confianza"
+"0","  mutate("
+"0","    pais = as.character(pais),                                                  # Asegura que no haya factores con etiquetas"
+"0","    anio = as.numeric(anio),                                                    # Por si quedó con etiquetas"
+"0","    trust_ppol_rec = as.numeric(trust_ppol_rec)                                 # Asegura formato 0/1"
+"0","  )"

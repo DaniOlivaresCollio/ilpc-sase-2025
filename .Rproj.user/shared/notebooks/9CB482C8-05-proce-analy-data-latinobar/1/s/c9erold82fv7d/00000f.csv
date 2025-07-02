@@ -1,7 +1,0 @@
-"0","# 2018"
-"0","l2018 = l2018 %>% "
-"0","  select(pais = IDENPA,"
-"0","         ano = NUMINVES,"
-"0","         id = NUMENTRE,"
-"0","         exp = WT, "
-"0","         trust_ppol = P15STGBSC.G) "

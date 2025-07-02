@@ -1,7 +1,0 @@
-"0","# 1996"
-"0","l1996 = l1996 %>% "
-"0","  select(pais,"
-"0","         ano = numero,"
-"0","         id = enc,"
-"0","         exp = wt,"
-"0","         trust_ppol = p33j)"
