@@ -792,8 +792,8 @@ frq(data$a06)
 data <- data %>% 
   mutate(
     boleta = case_when(
-      a06 %in% c(1, 2) ~ 1,
-      a06 %in% c(3, -888, -999) ~ 0,
+      a06 %in% c(1) ~ 1,
+      a06 %in% c(2, 3, -888, -999) ~ 0,
       .default = NA_real_
     )) %>% 
   set_variable_labels(boleta = "Issues receipts/invoices (1 = yes)") %>% 
