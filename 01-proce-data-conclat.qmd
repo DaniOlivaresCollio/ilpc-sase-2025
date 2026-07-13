@@ -66,7 +66,8 @@ data <- data %>%
          a15,
          a25,a25_esp,a25_esp_rec,
          a26,
-         a27)# %>% 
+         a27,
+         a06, a18)# %>% 
   #sjlabelled::set_na(.,na=c(-999,-888,-777))
 ```
 
@@ -781,6 +782,49 @@ data <- data %>%
   set_variable_labels(class_position = "Posición de clase")
 
 frq(data$class_position)
+```
+
+### boleta
+
+```{r}
+frq(data$a06)
+
+data <- data %>% 
+  mutate(
+    boleta = case_when(
+      a06 %in% c(1, 2) ~ 1,
+      a06 %in% c(3, -888, -999) ~ 0,
+      .default = NA_real_
+    )) %>% 
+  set_variable_labels(boleta = "Issues receipts/invoices (1 = yes)") %>% 
+  set_value_labels(boleta = c(
+    "Yes" = 1,
+    "No" = 0
+  ))
+
+frq(data$boleta)
+```
+
+### contrato
+
+```{r}
+frq(data$a18)
+
+data <- data %>% 
+  mutate(
+    contrato = case_when(
+      a18 == 1 ~ 1, 
+      a18 %in% c(2, 3, 4, -999) ~ 0,
+      .default = NA_real_
+    )
+  ) %>% 
+  set_variable_labels(contrato = "Has a signed written employment contract (1 = yes)") %>% 
+  set_value_labels(contrato = c(
+    "Yes" = 1,
+    "No" = 0
+  ))
+
+frq(data$contrato)
 ```
 
 ## Guardar datos
